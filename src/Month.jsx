@@ -5,7 +5,7 @@ import Day from "./Day";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 
-const Month = ({ name, days, rightArrowClick, leftArrowClick }) => {
+const Month = ({ month, rightArrowClick, leftArrowClick, handleHighlited }) => {
   return (
     <Box sx={{ flexGrow: 1, width: "30%", backgroundColor: "#31303060" }}>
       <Box
@@ -17,12 +17,12 @@ const Month = ({ name, days, rightArrowClick, leftArrowClick }) => {
         }}
       >
         <ArrowLeftIcon onClick={leftArrowClick} />
-        {name} <ArrowRightIcon onClick={rightArrowClick} />
+        {month.name} <ArrowRightIcon onClick={rightArrowClick} />
       </Box>
       <Grid container spacing={1} columns={7}>
-        {days.map((day) => (
-          <Grid size={1} key={`${name}-${day.num}`}>
-            <Day day={day} />
+        {month.days.map((day) => (
+          <Grid size={1} key={`${month.name}-${day.num}`}>
+            <Day day={day} handleHighlited={handleHighlited} />
           </Grid>
         ))}
       </Grid>
