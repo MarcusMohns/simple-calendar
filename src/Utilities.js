@@ -1,4 +1,4 @@
-export const months = [
+export const MONTHS = [
   { name: "January", days: 31 },
   { name: "February", days: 28 }, // add leap year thing i guess ^^ https://www.timeanddate.com/calendar/months/
   { name: "March", days: 31 },
