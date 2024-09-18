@@ -7,7 +7,7 @@ const Day = ({ day, handleHighlighted, isToday }) => {
       variant="contained"
       size="large"
       outline="red"
-      onClick={() => handleHighlighted(day.num)}
+      onClick={() => handleHighlighted(day)}
       sx={{
         background: day.highlighted ? "#434446" : "#36393e",
         backgroundColor: isToday ? "#202020" : null,
