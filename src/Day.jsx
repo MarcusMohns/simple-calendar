@@ -1,13 +1,13 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const Day = ({ day, handleHighlited, isToday }) => {
+const Day = ({ day, handleHighlighted, isToday }) => {
   return (
     <Button
       variant="contained"
       size="large"
       outline="red"
-      onClick={() => handleHighlited(day.num)}
+      onClick={() => handleHighlighted(day.num)}
       sx={{
         background: day.highlighted ? "#434446" : "#36393e",
         backgroundColor: isToday ? "#202020" : null,

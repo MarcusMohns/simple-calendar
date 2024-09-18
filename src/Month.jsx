@@ -10,7 +10,7 @@ const Month = ({
   month,
   rightArrowClick,
   leftArrowClick,
-  handleHighlited,
+  handleHighlighted,
   currDay,
 }) => {
   return (
@@ -42,7 +42,7 @@ const Month = ({
           <Grid size={1} key={`${month.name}-${day.num}`}>
             <Day
               day={day}
-              handleHighlited={handleHighlited}
+              handleHighlighted={handleHighlighted}
               isToday={day.num === currDay}
             />
           </Grid>

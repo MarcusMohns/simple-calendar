@@ -1,22 +1,26 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Month from "./Month";
-import { MONTHS } from "./Utilities";
 import { useState } from "react";
+import Box from "@mui/material/Box";
+import { MONTHS } from "./Utilities";
+import Month from "./Month";
+import TextSection from "./TextSection";
 
 const d = new Date();
 const currMonth = d.getMonth();
 const currDay = d.getDate();
 
 const Calendar = () => {
-  const [month, setMonth] = useState(MONTHS[currMonth]);
+  const [calendar, setCalendar] = useState(MONTHS);
+  const [month, setMonth] = useState(calendar[currMonth]);
+  const [selectedDay, setSelectedDay] = useState("");
 
-  const handleHighlited = (num) => {
-    const newDays = month.days.map((day) =>
-      day.num === num
-        ? { ...day, highlighted: true }
-        : { ...day, highlighted: false }
-    );
+  const handleHighlighted = (num) => {
+    const newDays = month.days.map((day) => {
+      if (day.num === num) {
+        setSelectedDay(day);
+        return { ...day, highlighted: true };
+      } else return { ...day, highlighted: false };
+    });
     setMonth((oldMonth) => ({ ...oldMonth, days: newDays }));
   };
 
@@ -52,9 +56,10 @@ const Calendar = () => {
         month={month}
         rightArrowClick={rightArrowClick}
         leftArrowClick={leftArrowClick}
-        handleHighlited={handleHighlited}
+        handleHighlighted={handleHighlighted}
         currDay={currDay}
       />
+      <TextSection currDay={currDay} selectedDay={selectedDay} />
     </Box>
   );
 };
