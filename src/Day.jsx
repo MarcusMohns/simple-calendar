@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 
-const Day = ({ day, handleHighlited }) => {
+const Day = ({ day, handleHighlited, isToday }) => {
   return (
     <Button
       variant="contained"
@@ -9,10 +9,10 @@ const Day = ({ day, handleHighlited }) => {
       outline="red"
       onClick={() => handleHighlited(day.num)}
       sx={{
-        background: "#36393e",
-        border: day.highlighted ? "1px solid black" : "1px solid transparent",
+        background: day.highlighted ? "#434446" : "#36393e",
+        backgroundColor: isToday ? "#202020" : null,
         "&:hover": {
-          background: "#36393e",
+          backgroundColor: isToday ? null : "#434446",
         },
         width: "100%",
       }}

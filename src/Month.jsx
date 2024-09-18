@@ -6,7 +6,13 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { Divider } from "@mui/material";
 
-const Month = ({ month, rightArrowClick, leftArrowClick, handleHighlited }) => {
+const Month = ({
+  month,
+  rightArrowClick,
+  leftArrowClick,
+  handleHighlited,
+  currDay,
+}) => {
   return (
     <Box sx={{ flexGrow: 1, maxWidth: "50%" }}>
       <Divider sx={{ borderColor: "#8f8f8f" }} />
@@ -25,7 +31,11 @@ const Month = ({ month, rightArrowClick, leftArrowClick, handleHighlited }) => {
       <Grid container spacing={1} columns={7}>
         {month.days.map((day) => (
           <Grid size={1} key={`${month.name}-${day.num}`}>
-            <Day day={day} handleHighlited={handleHighlited} />
+            <Day
+              day={day}
+              handleHighlited={handleHighlited}
+              isToday={day.num === currDay}
+            />
           </Grid>
         ))}
       </Grid>
