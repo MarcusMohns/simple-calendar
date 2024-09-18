@@ -6,39 +6,50 @@ import Month from "./Month";
 import TextSection from "./TextSection";
 
 const d = new Date();
-const currMonth = d.getMonth();
 const currDay = d.getDate();
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState(MONTHS);
-  const [month, setMonth] = useState(calendar[currMonth]);
-  const [selectedDay, setSelectedDay] = useState("");
+  const [selectedMonthIdx, setSelectedMonthIdx] = useState(d.getMonth());
+  const [selectedDay, setSelectedDay] = useState(
+    calendar[selectedMonthIdx].days[currDay]
+  );
 
-  const handleHighlighted = (num) => {
-    const newDays = month.days.map((day) => {
-      if (day.num === num) {
-        setSelectedDay(day);
-        return { ...day, highlighted: true };
-      } else return { ...day, highlighted: false };
-    });
-    setMonth((oldMonth) => ({ ...oldMonth, days: newDays }));
+  const handleHighlighted = (dayObj) => {
+    const oldDays = [...calendar[selectedMonthIdx].days];
+    const newDays = oldDays.map((day) =>
+      day.num === dayObj.num
+        ? { ...day, highlighted: true }
+        : { ...day, highlighted: false }
+    );
+    setCalendar((oldCalendar) =>
+      oldCalendar.map((month) => {
+        return month.id === selectedMonthIdx
+          ? { ...month, days: newDays }
+          : month;
+      })
+    );
+
+    setSelectedDay(dayObj);
+  };
+
+  const handleTextChange = (e, dayObj) => {
+    setSelectedDay({ ...dayObj, text: e.target.value });
   };
 
   const rightArrowClick = () => {
-    if (month.id < 11) {
-      const nextMonthNum = month.id + 1;
-      setMonth(MONTHS[nextMonthNum]);
+    if (selectedMonthIdx < 11) {
+      setSelectedMonthIdx((oldNum) => oldNum + 1);
     } else {
-      setMonth(MONTHS[0]);
+      setSelectedMonthIdx(0);
     }
   };
 
   const leftArrowClick = () => {
-    if (month.id > 0) {
-      const nextMonthNum = month.id - 1;
-      setMonth(MONTHS[nextMonthNum]);
+    if (selectedMonthIdx > 0) {
+      setSelectedMonthIdx((oldNum) => oldNum - 1);
     } else {
-      setMonth(MONTHS[11]);
+      setSelectedMonthIdx(11);
     }
   };
 
@@ -53,13 +64,17 @@ const Calendar = () => {
       }}
     >
       <Month
-        month={month}
+        month={calendar[selectedMonthIdx]}
         rightArrowClick={rightArrowClick}
         leftArrowClick={leftArrowClick}
         handleHighlighted={handleHighlighted}
         currDay={currDay}
       />
-      <TextSection currDay={currDay} selectedDay={selectedDay} />
+      <TextSection
+        currDay={currDay}
+        selectedDay={selectedDay}
+        handleTextChange={handleTextChange}
+      />
     </Box>
   );
 };
