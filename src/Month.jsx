@@ -4,10 +4,13 @@ import Grid from "@mui/material/Grid2";
 import Day from "./Day";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import { Divider } from "@mui/material";
 
 const Month = ({ month, rightArrowClick, leftArrowClick, handleHighlited }) => {
   return (
-    <Box sx={{ flexGrow: 1, width: "30%", backgroundColor: "#31303060" }}>
+    <Box sx={{ flexGrow: 1, maxWidth: "50%" }}>
+      <Divider sx={{ borderColor: "#8f8f8f" }} />
+
       <Box
         sx={{
           display: "flex",

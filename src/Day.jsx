@@ -5,11 +5,17 @@ const Day = ({ day, handleHighlited }) => {
   return (
     <Button
       variant="contained"
-      color="success"
       size="large"
       outline="red"
       onClick={() => handleHighlited(day.num)}
-      sx={{ border: day.highlighted ? "1px solid black" : "1px solid white" }}
+      sx={{
+        background: "#36393e",
+        border: day.highlighted ? "1px solid black" : "1px solid transparent",
+        "&:hover": {
+          background: "#36393e",
+        },
+        width: "100%",
+      }}
     >
       {day.num}
     </Button>

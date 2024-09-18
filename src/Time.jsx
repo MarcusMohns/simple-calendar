@@ -1,6 +1,5 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import { MONTHS, DAYS } from "./Utilities";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -25,10 +24,17 @@ const Time = () => {
   }, []);
 
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+      }}
+    >
       <Typography variant="h2">
         {hours}:{minutes}:{seconds}
-        <Divider variant="outset" />
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         {DAYS[weekDay]} the {day} of {MONTHS[month].name}

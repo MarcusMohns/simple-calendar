@@ -47,7 +47,6 @@ const Calendar = () => {
         alignItems: "center",
         justifyContent: "center",
         flexGrow: 1,
-        // backgroundColor: "black",
       }}
     >
       <Month
