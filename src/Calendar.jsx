@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Month from "./Month";
 import { MONTHS } from "./Utilities";
 import { useState } from "react";
-import { arrayOfDays } from "./Utilities";
 
 const d = new Date();
 const currMonth = d.getMonth();
@@ -54,6 +53,7 @@ const Calendar = () => {
         rightArrowClick={rightArrowClick}
         leftArrowClick={leftArrowClick}
         handleHighlited={handleHighlited}
+        currDay={currDay}
       />
     </Box>
   );

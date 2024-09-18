@@ -25,8 +25,17 @@ const Month = ({
           fontSize: "2em",
         }}
       >
-        <ArrowLeftIcon onClick={leftArrowClick} />
-        {month.name} <ArrowRightIcon onClick={rightArrowClick} />
+        <ArrowLeftIcon
+          onClick={leftArrowClick}
+          fontSize="large"
+          sx={{ cursor: "pointer" }}
+        />
+        <Box sx={{ width: "200px", textAlign: "center" }}>{month.name}</Box>
+        <ArrowRightIcon
+          onClick={rightArrowClick}
+          fontSize="large"
+          sx={{ cursor: "pointer" }}
+        />
       </Box>
       <Grid container spacing={1} columns={7}>
         {month.days.map((day) => (

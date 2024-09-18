@@ -37,7 +37,7 @@ const Time = () => {
         {hours}:{minutes}:{seconds}
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        {DAYS[weekDay]} the {day} of {MONTHS[month].name}
+        {DAYS[weekDay]} the {day} of {MONTHS[month].name} {year}
       </Typography>
     </Box>
   );
