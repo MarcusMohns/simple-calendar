@@ -5,6 +5,7 @@ import Day from "./Day";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { Divider } from "@mui/material";
+import { DAYS } from "./Utilities";
 
 const Month = ({
   month,
@@ -38,6 +39,12 @@ const Month = ({
         />
       </Box>
       <Grid container spacing={1} columns={7}>
+        {DAYS.map((day) => (
+          <Grid size={1} key={day} sx={{ textAlign: "center" }}>
+            {day.slice(0, 3)}
+          </Grid>
+        ))}
+
         {month.days.map((day) => (
           <Grid size={1} key={`${month.name}-${day.num}`}>
             <Day

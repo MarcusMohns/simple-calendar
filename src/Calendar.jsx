@@ -34,7 +34,6 @@ const Calendar = () => {
   };
 
   const handleTextChange = (e, dayObj) => {
-    console.log(e);
     setSelectedDay({ ...dayObj, text: e.target.value });
   };
 

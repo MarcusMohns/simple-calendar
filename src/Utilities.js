@@ -1,6 +1,5 @@
 export const arrayOfDays = (len) => {
   let accumulator = 0;
-  console.log("ARRAY OF DAYS IS BEING RUN...");
   return Array.from({ length: len }, () => {
     accumulator += 1;
     return { num: accumulator, text: "", highlighted: false };
