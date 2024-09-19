@@ -8,8 +8,8 @@ import { Divider } from "@mui/material";
 
 const Month = ({
   month,
-  rightArrowClick,
-  leftArrowClick,
+  nextMonth,
+  previousMonth,
   handleHighlighted,
   currDay,
 }) => {
@@ -26,13 +26,13 @@ const Month = ({
         }}
       >
         <ArrowLeftIcon
-          onClick={leftArrowClick}
+          onClick={previousMonth}
           fontSize="large"
           sx={{ cursor: "pointer" }}
         />
         <Box sx={{ width: "200px", textAlign: "center" }}>{month.name}</Box>
         <ArrowRightIcon
-          onClick={rightArrowClick}
+          onClick={nextMonth}
           fontSize="large"
           sx={{ cursor: "pointer" }}
         />

@@ -34,23 +34,30 @@ const Calendar = () => {
   };
 
   const handleTextChange = (e, dayObj) => {
+    console.log(e);
     setSelectedDay({ ...dayObj, text: e.target.value });
   };
 
-  const rightArrowClick = () => {
-    if (selectedMonthIdx < 11) {
-      setSelectedMonthIdx((oldNum) => oldNum + 1);
-    } else {
-      setSelectedMonthIdx(0);
-    }
+  const saveText = () => {
+    const oldDay = { ...calendar[selectedMonthIdx].days[selectedDay.num - 1] };
+    const newDay = { ...oldDay, text: selectedDay.text };
+    setCalendar((oldCalendar) => [
+      ...oldCalendar,
+      (oldCalendar[selectedMonthIdx].days[selectedDay.num - 1].text =
+        newDay.text),
+    ]);
   };
 
-  const leftArrowClick = () => {
-    if (selectedMonthIdx > 0) {
-      setSelectedMonthIdx((oldNum) => oldNum - 1);
-    } else {
-      setSelectedMonthIdx(11);
-    }
+  const nextMonth = () => {
+    selectedMonthIdx < 11
+      ? setSelectedMonthIdx((oldNum) => oldNum + 1)
+      : setSelectedMonthIdx(0);
+  };
+
+  const previousMonth = () => {
+    selectedMonthIdx > 0
+      ? setSelectedMonthIdx((oldNum) => oldNum - 1)
+      : setSelectedMonthIdx(11);
   };
 
   return (
@@ -65,8 +72,8 @@ const Calendar = () => {
     >
       <Month
         month={calendar[selectedMonthIdx]}
-        rightArrowClick={rightArrowClick}
-        leftArrowClick={leftArrowClick}
+        nextMonth={nextMonth}
+        previousMonth={previousMonth}
         handleHighlighted={handleHighlighted}
         currDay={currDay}
       />
@@ -74,6 +81,7 @@ const Calendar = () => {
         currDay={currDay}
         selectedDay={selectedDay}
         handleTextChange={handleTextChange}
+        saveText={saveText}
       />
     </Box>
   );
