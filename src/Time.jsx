@@ -12,8 +12,10 @@ const Time = () => {
   const day = time.getDate();
   const weekDay = time.getDay();
   const hours = time.getHours();
-  const minutes = time.getMinutes();
-  const seconds = time.getSeconds();
+  const minutes = () =>
+    time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
+  const seconds = () =>
+    time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds();
 
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000);
@@ -34,7 +36,7 @@ const Time = () => {
       }}
     >
       <Typography variant="h2">
-        {hours}:{minutes}:{seconds}
+        {hours}:{minutes()}:{seconds()}
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         {DAYS[weekDay]} the {day} of {MONTHS[month].name} {year}
