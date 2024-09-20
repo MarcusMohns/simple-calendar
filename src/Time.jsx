@@ -10,7 +10,7 @@ const Time = () => {
   const year = time.getFullYear();
   const month = time.getMonth();
   const day = time.getDate();
-  const weekDay = time.getDay();
+  const weekDay = time.getDay() - 1;
   const hours = time.getHours();
   const minutes = () =>
     time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
