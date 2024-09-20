@@ -1,7 +1,19 @@
+export const DAYS = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
 export const arrayOfDays = (len) => {
   let accumulator = 0;
+  const d = new Date("2000-01-01");
   return Array.from({ length: len }, () => {
     accumulator += 1;
+    console.log(d.getDay());
     return { num: accumulator, text: "", highlighted: false };
   });
 };
@@ -19,14 +31,4 @@ export const MONTHS = [
   { name: "October", days: arrayOfDays(31), id: 9 },
   { name: "November", days: arrayOfDays(30), id: 10 },
   { name: "December", days: arrayOfDays(31), id: 11 },
-];
-
-export const DAYS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
 ];

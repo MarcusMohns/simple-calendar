@@ -33,13 +33,9 @@ const Calendar = () => {
     setSelectedDay(dayObj);
   };
 
-  const handleTextChange = (e, dayObj) => {
-    setSelectedDay({ ...dayObj, text: e.target.value });
-  };
-
-  const saveText = () => {
+  const saveText = (newText) => {
     const oldDay = { ...calendar[selectedMonthIdx].days[selectedDay.num - 1] };
-    const newDay = { ...oldDay, text: selectedDay.text };
+    const newDay = { ...oldDay, text: newText };
     setCalendar((oldCalendar) => [
       ...oldCalendar,
       (oldCalendar[selectedMonthIdx].days[selectedDay.num - 1].text =
@@ -79,7 +75,6 @@ const Calendar = () => {
       <TextSection
         currDay={currDay}
         selectedDay={selectedDay}
-        handleTextChange={handleTextChange}
         saveText={saveText}
       />
     </Box>

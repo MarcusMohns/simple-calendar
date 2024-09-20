@@ -1,10 +1,11 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl } from "@mui/material";
+import { useState } from "react";
 
-// add own text input useState maybe so entire app doenst rerender 1k tiems
+const TextSection = ({ saveText }) => {
+  const [text, setText] = useState("");
 
-const TextSection = ({ currDay, selectedDay, handleTextChange, saveText }) => {
   return (
     <FormControl
       sx={{
@@ -21,8 +22,8 @@ const TextSection = ({ currDay, selectedDay, handleTextChange, saveText }) => {
         id="outlined-basic"
         label="Add an event or reminder"
         variant="filled"
-        onChange={(e) => handleTextChange(e, selectedDay)}
-        value={selectedDay.text}
+        onChange={(e) => setText(e.target.value)}
+        value={text}
         margin="normal"
         fullWidth
         color="white"
@@ -31,8 +32,8 @@ const TextSection = ({ currDay, selectedDay, handleTextChange, saveText }) => {
           label: { color: "#999" },
         }}
       />
-      {selectedDay.text}
-      <button onClick={() => saveText(selectedDay)}> SAVE </button>
+      {text}
+      <button onClick={() => saveText(text)}> SAVE </button>
     </FormControl>
   );
 };
