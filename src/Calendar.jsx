@@ -7,6 +7,7 @@ import TextSection from "./TextSection";
 
 const d = new Date();
 const currDay = d.getDate();
+const currMonth = d.getMonth();
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState(MONTHS);
@@ -71,6 +72,7 @@ const Calendar = () => {
         previousMonth={previousMonth}
         handleHighlighted={handleHighlighted}
         currDay={currDay}
+        currMonth={currMonth}
       />
       <TextSection selectedDay={selectedDay} saveText={saveText} />
     </Box>
