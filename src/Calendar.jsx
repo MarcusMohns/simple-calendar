@@ -18,7 +18,7 @@ const Calendar = () => {
   const handleHighlighted = (dayObj) => {
     const oldDays = [...calendar[selectedMonthIdx].days];
     const newDays = oldDays.map((day) =>
-      day.num === dayObj.num
+      day.num === dayObj.num && day.month === dayObj.month
         ? { ...day, highlighted: true }
         : { ...day, highlighted: false }
     );
@@ -72,11 +72,7 @@ const Calendar = () => {
         handleHighlighted={handleHighlighted}
         currDay={currDay}
       />
-      <TextSection
-        currDay={currDay}
-        selectedDay={selectedDay}
-        saveText={saveText}
-      />
+      <TextSection selectedDay={selectedDay} saveText={saveText} />
     </Box>
   );
 };
