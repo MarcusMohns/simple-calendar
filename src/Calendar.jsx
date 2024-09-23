@@ -7,7 +7,7 @@ import TextSection from "./TextSection";
 
 const d = new Date();
 const currDay = d.getDate();
-const currMonth = d.getMonth();
+const currMonth = d.getMonth() + 1;
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState(MONTHS);
@@ -17,6 +17,7 @@ const Calendar = () => {
   );
 
   const handleHighlighted = (dayObj) => {
+    console.log(dayObj);
     const oldDays = [...calendar[selectedMonthIdx].days];
     const newDays = oldDays.map((day) =>
       day.num === dayObj.num && day.month === dayObj.month
