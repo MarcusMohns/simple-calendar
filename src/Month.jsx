@@ -47,7 +47,7 @@ const Month = ({
         ))}
 
         {month.days.map((day) => (
-          <Grid size={1} key={`${day.month}-${day.num}`}>
+          <Grid size={1} key={`${day.month}-${day.num}-${day.day}`}>
             <Day
               day={day}
               handleHighlighted={handleHighlighted}

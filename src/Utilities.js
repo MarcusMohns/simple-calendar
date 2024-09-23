@@ -44,38 +44,39 @@ export const arrayOfDays = (year, month) => {
         text: "",
         highlighted: false,
         day: DAYS[
-          new Date(yearInt, monthInt, prevMonthLastDate - i + 1).getDay()
+          new Date(yearInt, monthInt - 1, prevMonthLastDate - i + 1).getDay()
         ],
-        month: monthInt,
+        month: monthInt - 1,
         currentMonth: false,
       },
     ];
   }
   // add the dates of the current month
   for (let i = 1; i <= lastDate; i++) {
+    // console.log(new Date(yearInt, monthInt, i).getDay());
     dates = [
       ...dates,
       {
         num: i,
         text: "",
         highlighted: false,
-        day: DAYS[new Date(yearInt, monthInt + 1, i).getDay()],
-        month: monthInt + 1,
+        day: DAYS[new Date(yearInt, monthInt, i - 1).getDay()],
+        month: monthInt,
         currentMonth: true,
       },
     ];
   }
 
   // Add the first dates of the next month
-  for (let i = dayEnd; i < 6; i++) {
+  for (let i = dayEnd; i <= 6; i++) {
     dates = [
       ...dates,
       {
         num: i - dayEnd + 1,
         text: "",
         highlighted: false,
-        day: DAYS[new Date(yearInt, monthInt + 2, i - dayEnd + 4).getDay()],
-        month: monthInt + 2,
+        day: DAYS[new Date(yearInt, monthInt + 1, i - dayEnd).getDay()],
+        month: monthInt + 1,
         currentMonth: false,
       },
     ];
