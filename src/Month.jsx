@@ -32,7 +32,9 @@ const Month = ({
           fontSize="large"
           sx={{ cursor: "pointer" }}
         />
-        <Box sx={{ width: "200px", textAlign: "center" }}>{month.name}</Box>
+        <Box sx={{ width: "200px", textAlign: "center" }}>
+          {month.name} - {month.year}
+        </Box>
         <ArrowRightIcon
           onClick={nextMonth}
           fontSize="large"

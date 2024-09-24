@@ -7,7 +7,7 @@ import TextSection from "./TextSection";
 
 const d = new Date();
 const currDay = d.getDate();
-const currMonth = d.getMonth() + 1;
+const currMonth = d.getMonth();
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState(MONTHS);
@@ -17,7 +17,6 @@ const Calendar = () => {
   );
 
   const handleHighlighted = (dayObj) => {
-    console.log(dayObj);
     const oldDays = [...calendar[selectedMonthIdx].days];
     const newDays = oldDays.map((day) =>
       day.num === dayObj.num && day.month === dayObj.month
@@ -48,7 +47,8 @@ const Calendar = () => {
   const nextMonth = () => {
     selectedMonthIdx < 11
       ? setSelectedMonthIdx((oldNum) => oldNum + 1)
-      : setSelectedMonthIdx(0);
+      : // Generate new year... in state?
+        setSelectedMonthIdx(0);
   };
 
   const previousMonth = () => {
