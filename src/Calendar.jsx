@@ -20,34 +20,45 @@ const Calendar = () => {
     const oldDays = [...calendar[selectedMonthIdx].days];
     const newDays = oldDays.map((day) =>
       day.num === dayObj.num && day.month === dayObj.month
-        ? { ...day, highlighted: true }
+        ? // set text to local storage right..? or do we have a state...
+          { ...day, highlighted: true }
         : { ...day, highlighted: false }
     );
-    setCalendar((oldCalendar) =>
-      oldCalendar.map((month) => {
-        return month.id === selectedMonthIdx
-          ? { ...month, days: newDays }
-          : month;
-      })
-    );
 
+    setCalendar((oldCalendar) =>
+      oldCalendar.map((month) =>
+        month.id === selectedMonthIdx ? { ...month, days: newDays } : month
+      )
+    );
     setSelectedDay(dayObj);
   };
 
   const saveText = (newText) => {
-    const oldDay = { ...calendar[selectedMonthIdx].days[selectedDay.num - 1] };
-    const newDay = { ...oldDay, text: newText };
-    setCalendar((oldCalendar) => [
-      ...oldCalendar,
-      (oldCalendar[selectedMonthIdx].days[selectedDay.num - 1].text =
-        newDay.text),
-    ]);
+    const oldDaysOfMonth = [...calendar[selectedMonthIdx].days];
+    const newDaysOfMonth = oldDaysOfMonth.map((day) =>
+      day.num === selectedDay.num && day.month === selectedDay.month
+        ? { ...day, text: newText }
+        : day
+    );
+
+    setCalendar((oldCalendar) =>
+      oldCalendar.map((oldMonth) =>
+        oldMonth.id === selectedMonthIdx
+          ? { ...oldMonth, days: newDaysOfMonth }
+          : oldMonth
+      )
+    );
+
+    localStorage.setItem(
+      `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`,
+      newText
+    );
   };
 
   const nextMonth = () => {
     selectedMonthIdx < 11
       ? setSelectedMonthIdx((oldNum) => oldNum + 1)
-      : // Generate new year... in state?
+      : // Generate new year using localStorage...
         setSelectedMonthIdx(0);
   };
 

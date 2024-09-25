@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { FormControl } from "@mui/material";
 import { useState } from "react";
 
-const TextSection = ({ saveText }) => {
+const TextSection = ({ selectedDay, saveText }) => {
   const [text, setText] = useState("");
 
   return (
@@ -32,7 +32,7 @@ const TextSection = ({ saveText }) => {
           label: { color: "#999" },
         }}
       />
-      {text}
+      {selectedDay.text}
       <button onClick={() => saveText(text)}> SAVE </button>
     </FormControl>
   );

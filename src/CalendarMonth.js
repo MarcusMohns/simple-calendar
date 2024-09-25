@@ -28,12 +28,13 @@ export const CalendarMonth = (year, month) => {
       {
         num: prevMonthLastDate - i + 1,
         text: "",
-        highlighted: false,
         day: DAYS[
           new Date(yearInt, monthInt - 1, prevMonthLastDate - i).getDay()
         ],
         month: monthInt - 1,
+        year: yearInt,
         currentMonth: false,
+        highlighted: false,
       },
     ];
   }
@@ -44,10 +45,11 @@ export const CalendarMonth = (year, month) => {
       {
         num: i,
         text: "",
-        highlighted: false,
         day: DAYS[new Date(yearInt, monthInt, i - 1).getDay()],
         month: monthInt,
+        year: yearInt,
         currentMonth: true,
+        highlighted: false,
       },
     ];
   }
@@ -59,10 +61,11 @@ export const CalendarMonth = (year, month) => {
       {
         num: i,
         text: "",
-        highlighted: false,
         day: DAYS[new Date(yearInt, monthInt + 1, i - 1).getDay()],
         month: monthInt + 1,
+        year: yearInt,
         currentMonth: false,
+        highlighted: false,
       },
     ];
   }
