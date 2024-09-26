@@ -11,7 +11,7 @@ import "@fontsource/roboto/700.css";
 const GlobalStyles = {
   backgroundColor: "#36393e",
   color: "#fff",
-  height: "100vh",
+  minHeight: "100vh",
 };
 
 function App() {
