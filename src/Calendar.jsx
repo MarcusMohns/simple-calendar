@@ -20,8 +20,7 @@ const Calendar = () => {
     const oldDays = [...calendar[selectedMonthIdx].days];
     const newDays = oldDays.map((day) =>
       day.num === dayObj.num && day.month === dayObj.month
-        ? // set text to local storage right..? or do we have a state...
-          { ...day, highlighted: true }
+        ? { ...day, highlighted: true }
         : { ...day, highlighted: false }
     );
 
@@ -35,11 +34,14 @@ const Calendar = () => {
 
   const saveText = (newText) => {
     const oldDaysOfMonth = [...calendar[selectedMonthIdx].days];
-    const newDaysOfMonth = oldDaysOfMonth.map((day) =>
-      day.num === selectedDay.num && day.month === selectedDay.month
-        ? { ...day, text: newText }
-        : day
-    );
+    const newDaysOfMonth = oldDaysOfMonth.map((day) => {
+      if (day.num === selectedDay.num && day.month === selectedDay.month) {
+        setSelectedDay({ ...day, text: newText });
+        return { ...day, text: newText };
+      } else {
+        return day;
+      }
+    });
 
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
