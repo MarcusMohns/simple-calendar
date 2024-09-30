@@ -39,7 +39,7 @@ const StyledTextField = ({ setText, text, label, icon }) => {
     >
       <FormControl sx={{ width: "100%" }}>
         <TextField
-          id="outlined-basic"
+          id={`${label}`}
           label={label}
           variant="outlined"
           autoComplete="off"

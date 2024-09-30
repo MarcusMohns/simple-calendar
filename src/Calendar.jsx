@@ -30,6 +30,8 @@ const Calendar = () => {
       )
     );
     setSelectedDay(dayObj);
+
+    // IF DAYOBJ CALENDAR EVENT -> SET DISPLAY STATE TO IT.... I GUESS ?
   };
 
   const saveText = (newText) => {
