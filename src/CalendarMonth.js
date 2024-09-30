@@ -27,7 +27,7 @@ export const CalendarMonth = (year, month) => {
       ...dates,
       {
         num: prevMonthLastDate - i + 1,
-        text: "",
+        appointments: [],
         day: DAYS[
           new Date(yearInt, monthInt - 1, prevMonthLastDate - i).getDay()
         ],
@@ -44,7 +44,7 @@ export const CalendarMonth = (year, month) => {
       ...dates,
       {
         num: i,
-        text: "",
+        appointments: [],
         day: DAYS[new Date(yearInt, monthInt, i - 1).getDay()],
         month: monthInt,
         year: yearInt,
@@ -60,7 +60,7 @@ export const CalendarMonth = (year, month) => {
       ...dates,
       {
         num: i,
-        text: "",
+        appointments: [],
         day: DAYS[new Date(yearInt, monthInt + 1, i - 1).getDay()],
         month: monthInt + 1,
         year: yearInt,

@@ -10,16 +10,20 @@ import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import Button from "@mui/material/Button";
 
-const TextSection = ({ selectedDay, saveText }) => {
+const TextSection = ({ selectedDay, saveAppointment }) => {
   const [text, setText] = useState("");
-  const [time, setTime] = useState(dayjs("2022-04-17T12:00"));
+  const [time, setTime] = useState(dayjs());
   const [location, setLocation] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveText(text);
+    saveAppointment({ text: text, time: time, location: location });
     setText("");
     setLocation("");
+  };
+
+  const handleSetTime = (e) => {
+    setTime(e);
   };
 
   return (
@@ -32,8 +36,14 @@ const TextSection = ({ selectedDay, saveText }) => {
         p: 2,
       }}
     >
+      {/* Generate form state instead not selectedDay */}
       <Box>
-        DISPLAY! {text} - {time.hour()} : {time.minute()}
+        DISPLAY!{" "}
+        {selectedDay.appointments.map((appointment) => (
+          <div>
+            {appointment.text} - {appointment.location}
+          </div>
+        ))}
       </Box>
       <StyledTextField
         handleSubmit={handleSubmit}
@@ -50,14 +60,15 @@ const TextSection = ({ selectedDay, saveText }) => {
           icon="location"
           label={"Add a location"}
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
           <TimePicker
             sx={{
               input: { color: "white" },
               svg: { color: "white" },
             }}
             value={time}
-            onChange={setTime}
+            name="time"
+            onChange={handleSetTime}
             referenceDate={dayjs("2022-04-17")}
             viewRenderers={{
               hours: renderTimeViewClock,

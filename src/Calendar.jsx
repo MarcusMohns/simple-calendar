@@ -34,12 +34,15 @@ const Calendar = () => {
     // IF DAYOBJ CALENDAR EVENT -> SET DISPLAY STATE TO IT.... I GUESS ?
   };
 
-  const saveText = (newText) => {
+  const saveAppointment = (newAppointment) => {
     const oldDaysOfMonth = [...calendar[selectedMonthIdx].days];
     const newDaysOfMonth = oldDaysOfMonth.map((day) => {
       if (day.num === selectedDay.num && day.month === selectedDay.month) {
-        setSelectedDay({ ...day, text: newText });
-        return { ...day, text: newText };
+        setSelectedDay({
+          ...day,
+          appointments: [...day.appointments, newAppointment],
+        });
+        return { ...day, appointments: [...day.appointments, newAppointment] };
       } else {
         return day;
       }
@@ -55,7 +58,7 @@ const Calendar = () => {
 
     localStorage.setItem(
       `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`,
-      newText
+      newAppointment
     );
   };
 
@@ -90,7 +93,10 @@ const Calendar = () => {
         currDay={currDay}
         currMonth={currMonth}
       />
-      <TextSection selectedDay={selectedDay} saveText={saveText} />
+      <TextSection
+        selectedDay={selectedDay}
+        saveAppointment={saveAppointment}
+      />
     </Box>
   );
 };
