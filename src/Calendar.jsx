@@ -96,11 +96,11 @@ const Calendar = () => {
         currDay={currDay}
         currMonth={currMonth}
       />
-      <Appointments appointments={selectedDay.appointments} />
       <TextSection
         selectedDay={selectedDay}
         saveAppointment={saveAppointment}
       />
+      <Appointments appointments={selectedDay.appointments} />
     </Box>
   );
 };
