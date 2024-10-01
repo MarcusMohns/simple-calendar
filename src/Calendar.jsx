@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import { MONTHS } from "./Utilities";
 import Month from "./Month";
 import TextSection from "./TextSection";
+import Appointments from "./Appointments";
 
 const d = new Date();
 const currDay = d.getDate();
@@ -32,6 +33,8 @@ const Calendar = () => {
     setSelectedDay(dayObj);
 
     // IF DAYOBJ CALENDAR EVENT -> SET DISPLAY STATE TO IT.... I GUESS ?
+
+    console.log(calendar);
   };
 
   const saveAppointment = (newAppointment) => {
@@ -93,6 +96,7 @@ const Calendar = () => {
         currDay={currDay}
         currMonth={currMonth}
       />
+      <Appointments appointments={selectedDay.appointments} />
       <TextSection
         selectedDay={selectedDay}
         saveAppointment={saveAppointment}

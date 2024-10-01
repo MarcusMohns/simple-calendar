@@ -17,7 +17,11 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    saveAppointment({ text: text, time: time, location: location });
+    saveAppointment({
+      text: text,
+      time: time.format("hh:mm A"),
+      location: location,
+    });
     setText("");
     setLocation("");
   };
@@ -37,14 +41,6 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
       }}
     >
       {/* Generate form state instead not selectedDay */}
-      <Box>
-        DISPLAY!{" "}
-        {selectedDay.appointments.map((appointment) => (
-          <div>
-            {appointment.text} - {appointment.location}
-          </div>
-        ))}
-      </Box>
       <StyledTextField
         handleSubmit={handleSubmit}
         setText={setText}
@@ -62,9 +58,27 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
           <TimePicker
+            label="From"
             sx={{
               input: { color: "white" },
               svg: { color: "white" },
+              label: { color: "white" },
+            }}
+            value={time}
+            name="time"
+            onChange={handleSetTime}
+            referenceDate={dayjs("2022-04-17")}
+            viewRenderers={{
+              hours: renderTimeViewClock,
+              minutes: renderTimeViewClock,
+            }}
+          />
+          <TimePicker
+            label="To"
+            sx={{
+              input: { color: "white" },
+              svg: { color: "white" },
+              label: { color: "white" },
             }}
             value={time}
             name="time"
