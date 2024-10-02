@@ -31,10 +31,6 @@ const Calendar = () => {
       )
     );
     setSelectedDay(dayObj);
-
-    // IF DAYOBJ CALENDAR EVENT -> SET DISPLAY STATE TO IT.... I GUESS ?
-
-    console.log(calendar);
   };
 
   const saveAppointment = (newAppointment) => {

@@ -1,15 +1,31 @@
 import * as React from "react";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
-import WorkIcon from "@mui/icons-material/Work";
-import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import { Stack } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 
-const Appointment = ({ text, time, location }) => {
-  console.log(time);
+const Appointment = ({ text, time, location, id }) => {
+  // Icons
+  const StyledDeleteIcon = (
+    <Tooltip title="Delete" placement="right">
+      <IconButton edge="end" aria-label="delete">
+        <DeleteIcon />
+      </IconButton>
+    </Tooltip>
+  );
+  const StyledListItemAvatar = (
+    <ListItemAvatar>
+      <Avatar>
+        <ImageIcon />
+      </Avatar>
+    </ListItemAvatar>
+  );
+
   return (
     <ListItem
       sx={{
@@ -18,14 +34,11 @@ const Appointment = ({ text, time, location }) => {
         borderRadius: "2px",
         backgroundColor: "#00000021",
       }}
+      secondaryAction={StyledDeleteIcon}
     >
+      {StyledListItemAvatar}
       <ListItemText primary={time} secondary={time} />
       <ListItemText primary={text} secondary={location} />
-      <ListItemAvatar>
-        <Avatar>
-          <ImageIcon />
-        </Avatar>
-      </ListItemAvatar>
     </ListItem>
   );
 };

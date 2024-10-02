@@ -9,6 +9,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers";
 import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import Button from "@mui/material/Button";
+import { v4 as uuidv4 } from "uuid";
 
 const TextSection = ({ selectedDay, saveAppointment }) => {
   const [text, setText] = useState("");
@@ -21,6 +22,7 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
       text: text,
       time: time.format("hh:mm A"),
       location: location,
+      id: uuidv4(),
     });
     setText("");
     setLocation("");
@@ -40,7 +42,6 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
         p: 2,
       }}
     >
-      {/* Generate form state instead not selectedDay */}
       <StyledTextField
         handleSubmit={handleSubmit}
         setText={setText}
