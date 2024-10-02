@@ -58,12 +58,6 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
           <TimePicker
-            label="From"
-            sx={{
-              input: { color: "white" },
-              svg: { color: "white" },
-              label: { color: "white" },
-            }}
             value={time}
             name="time"
             onChange={handleSetTime}
@@ -75,11 +69,6 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
           />
           <TimePicker
             label="To"
-            sx={{
-              input: { color: "white" },
-              svg: { color: "white" },
-              label: { color: "white" },
-            }}
             value={time}
             name="time"
             onChange={handleSetTime}

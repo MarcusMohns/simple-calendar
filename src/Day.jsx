@@ -9,17 +9,9 @@ const Day = ({ day, handleHighlighted, isToday }) => {
       outline="red"
       onClick={() => handleHighlighted(day)}
       sx={{
-        color: day.currentMonth ? "#fff" : "#bbbbbb",
-        background: day.highlighted
-          ? "#505153"
-          : day.currentMonth
-          ? "#36393e"
-          : "#353636",
-        backgroundColor: isToday ? "#202020" : null,
-
-        "&:hover": {
-          backgroundColor: isToday ? null : "#434446",
-        },
+        background: day.highlighted ? "#505153" : "inherit",
+        backgroundColor: isToday ? "#212121" : null,
+        opacity: day.currentMonth ? 1 : 0.5,
         width: "100%",
       }}
     >

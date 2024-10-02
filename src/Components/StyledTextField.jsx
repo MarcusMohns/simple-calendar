@@ -13,14 +13,14 @@ const StyledTextField = ({ setText, text, label, icon }) => {
   const SendTooltipIcon = () =>
     icon === "location" ? (
       <Tooltip title="Location" placement="right" TransitionComponent={Zoom}>
-        <IconButton sx={{ color: "white", cursor: "pointer" }}>
+        <IconButton sx={{ cursor: "pointer" }}>
           <PlaceIcon />
         </IconButton>
       </Tooltip>
     ) : (
       <>
         <Tooltip title="Event" placement="right" TransitionComponent={Zoom}>
-          <IconButton sx={{ color: "white", cursor: "pointer" }}>
+          <IconButton sx={{ cursor: "pointer" }}>
             <EventIcon />
           </IconButton>
         </Tooltip>
@@ -33,7 +33,6 @@ const StyledTextField = ({ setText, text, label, icon }) => {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        color: "white",
         width: "100%",
       }}
     >
@@ -45,10 +44,7 @@ const StyledTextField = ({ setText, text, label, icon }) => {
           autoComplete="off"
           onChange={(e) => setText(e.target.value)}
           value={text}
-          color="white"
           sx={{
-            input: { color: "white" },
-            label: { color: "#999" },
             button: { paddingRight: "0px" },
             width: "100%",
             marginLeft: "5px",

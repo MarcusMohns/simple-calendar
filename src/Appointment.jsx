@@ -13,7 +13,6 @@ const Appointment = ({ text, time, location }) => {
   return (
     <ListItem
       sx={{
-        color: "white",
         padding: 1,
         margin: "10px 0",
         borderRadius: "2px",

@@ -6,7 +6,6 @@ const Appointments = ({ appointments }) => {
   return (
     <List
       sx={{
-        color: "white",
         width: "50%",
         padding: 1,
         margin: 2,
