@@ -1,13 +1,21 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: 10,
+    top: 10,
+  },
+}));
 
 const Day = ({ day, handleHighlighted, isToday }) => {
   return (
-    <Badge
+    <StyledBadge
       color="primary"
       badgeContent={day.appointments.length}
-      overlap="circular"
+      sx={{ width: "90%" }}
     >
       <Button
         variant="contained"
@@ -23,7 +31,7 @@ const Day = ({ day, handleHighlighted, isToday }) => {
       >
         {day.num}
       </Button>
-    </Badge>
+    </StyledBadge>
   );
 };
 434446;
