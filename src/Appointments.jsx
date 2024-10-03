@@ -3,7 +3,7 @@ import Appointment from "./Appointment";
 import List from "@mui/material/List";
 import { v4 as uuidv4 } from "uuid";
 
-const Appointments = ({ appointments }) => {
+const Appointments = ({ appointments, deleteAppointment }) => {
   return (
     <List
       sx={{
@@ -19,6 +19,7 @@ const Appointments = ({ appointments }) => {
           fromTime={appointment.fromTime}
           toTime={appointment.toTime}
           location={appointment.location}
+          deleteAppointment={deleteAppointment}
           id={appointment.id}
           key={appointment.id}
         />

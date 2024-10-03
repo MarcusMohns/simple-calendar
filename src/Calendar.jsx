@@ -46,7 +46,6 @@ const Calendar = () => {
         return day;
       }
     });
-
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         oldMonth.id === selectedMonthIdx
@@ -54,11 +53,14 @@ const Calendar = () => {
           : oldMonth
       )
     );
-
     localStorage.setItem(
       `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`,
       newAppointment
     );
+  };
+
+  const deleteAppointment = (id) => {
+    console.log(id);
   };
 
   const nextMonth = () => {
@@ -92,11 +94,11 @@ const Calendar = () => {
         currDay={currDay}
         currMonth={currMonth}
       />
-      <TextSection
-        selectedDay={selectedDay}
-        saveAppointment={saveAppointment}
+      <TextSection saveAppointment={saveAppointment} />
+      <Appointments
+        appointments={selectedDay.appointments}
+        deleteAppointment={deleteAppointment}
       />
-      <Appointments appointments={selectedDay.appointments} />
     </Box>
   );
 };

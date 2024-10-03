@@ -11,7 +11,7 @@ import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import Button from "@mui/material/Button";
 import { v4 as uuidv4 } from "uuid";
 
-const TextSection = ({ selectedDay, saveAppointment }) => {
+const TextSection = ({ saveAppointment }) => {
   const [text, setText] = useState("");
   const [fromTime, setFromTime] = useState(dayjs());
   const [toTime, setToTime] = useState(dayjs());
