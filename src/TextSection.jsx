@@ -13,23 +13,21 @@ import { v4 as uuidv4 } from "uuid";
 
 const TextSection = ({ selectedDay, saveAppointment }) => {
   const [text, setText] = useState("");
-  const [time, setTime] = useState(dayjs());
+  const [fromTime, setFromTime] = useState(dayjs());
+  const [toTime, setToTime] = useState(dayjs());
   const [location, setLocation] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     saveAppointment({
       text: text,
-      time: time.format("hh:mm A"),
+      toTime: toTime.format("HH:MM"),
+      fromTime: fromTime.format("HH:MM"),
       location: location,
       id: uuidv4(),
     });
     setText("");
     setLocation("");
-  };
-
-  const handleSetTime = (e) => {
-    setTime(e);
   };
 
   return (
@@ -59,29 +57,37 @@ const TextSection = ({ selectedDay, saveAppointment }) => {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
           <TimePicker
-            value={time}
+            label="From"
+            value={fromTime}
             name="time"
-            onChange={handleSetTime}
+            onChange={(e) => setFromTime(e)}
             referenceDate={dayjs("2022-04-17")}
             viewRenderers={{
               hours: renderTimeViewClock,
               minutes: renderTimeViewClock,
             }}
+            ampm={false}
           />
           <TimePicker
             label="To"
-            value={time}
+            value={toTime}
             name="time"
-            onChange={handleSetTime}
+            onChange={(e) => setToTime(e)}
             referenceDate={dayjs("2022-04-17")}
             viewRenderers={{
               hours: renderTimeViewClock,
               minutes: renderTimeViewClock,
             }}
+            ampm={false}
           />
         </LocalizationProvider>
       </Stack>
-      <Button variant="contained" sx={{ width: "25%" }} onClick={handleSubmit}>
+      <Button
+        variant="contained"
+        color="secondary"
+        sx={{ width: "25%" }}
+        onClick={handleSubmit}
+      >
         add
       </Button>
     </Box>

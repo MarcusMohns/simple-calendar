@@ -9,12 +9,12 @@ import IconButton from "@mui/material/IconButton";
 import { Stack } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 
-const Appointment = ({ text, time, location, id }) => {
+const Appointment = ({ text, fromTime, toTime, location, id }) => {
   // Icons
   const StyledDeleteIcon = (
     <Tooltip title="Delete" placement="right">
       <IconButton edge="end" aria-label="delete">
-        <DeleteIcon />
+        <DeleteIcon color="error" />
       </IconButton>
     </Tooltip>
   );
@@ -37,7 +37,7 @@ const Appointment = ({ text, time, location, id }) => {
       secondaryAction={StyledDeleteIcon}
     >
       {StyledListItemAvatar}
-      <ListItemText primary={time} secondary={time} />
+      <ListItemText primary={fromTime} secondary={toTime} />
       <ListItemText primary={text} secondary={location} />
     </ListItem>
   );

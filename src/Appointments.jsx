@@ -16,7 +16,8 @@ const Appointments = ({ appointments }) => {
       {appointments.map((appointment) => (
         <Appointment
           text={appointment.text}
-          time={appointment.time}
+          fromTime={appointment.fromTime}
+          toTime={appointment.toTime}
           location={appointment.location}
           id={appointment.id}
           key={appointment.id}
