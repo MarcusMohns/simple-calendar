@@ -17,9 +17,10 @@ const Calendar = () => {
     calendar[selectedMonthIdx].days[currDay]
   );
 
+  const oldDaysOfMonth = [...calendar[selectedMonthIdx].days];
+
   const handleHighlighted = (dayObj) => {
-    const oldDays = [...calendar[selectedMonthIdx].days];
-    const newDays = oldDays.map((day) =>
+    const newDaysOfMonth = oldDaysOfMonth.map((day) =>
       day.num === dayObj.num && day.month === dayObj.month
         ? { ...day, highlighted: true }
         : { ...day, highlighted: false }
@@ -27,14 +28,15 @@ const Calendar = () => {
 
     setCalendar((oldCalendar) =>
       oldCalendar.map((month) =>
-        month.id === selectedMonthIdx ? { ...month, days: newDays } : month
+        month.id === selectedMonthIdx
+          ? { ...month, days: newDaysOfMonth }
+          : month
       )
     );
     setSelectedDay(dayObj);
   };
 
   const saveAppointment = (newAppointment) => {
-    const oldDaysOfMonth = [...calendar[selectedMonthIdx].days];
     const newDaysOfMonth = oldDaysOfMonth.map((day) => {
       if (day.num === selectedDay.num && day.month === selectedDay.month) {
         setSelectedDay({
@@ -60,7 +62,32 @@ const Calendar = () => {
   };
 
   const deleteAppointment = (id) => {
-    console.log(id);
+    const newDaysOfMonth = oldDaysOfMonth.map((day) => {
+      if (day.num === selectedDay.num) {
+        setSelectedDay({
+          ...day,
+          appointments: day.appointments.filter(
+            (appointment) => appointment.id !== id
+          ),
+        });
+        return {
+          ...day,
+          appointments: day.appointments.filter(
+            (appointment) => appointment.id !== id
+          ),
+        };
+      } else {
+        return day;
+      }
+    });
+
+    setCalendar((oldCalendar) =>
+      oldCalendar.map((oldMonth) =>
+        oldMonth.id === selectedMonthIdx
+          ? { ...oldMonth, days: newDaysOfMonth }
+          : oldMonth
+      )
+    );
   };
 
   const nextMonth = () => {

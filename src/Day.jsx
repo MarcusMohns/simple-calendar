@@ -34,5 +34,4 @@ const Day = ({ day, handleHighlighted, isToday }) => {
     </StyledBadge>
   );
 };
-434446;
 export default Day;
