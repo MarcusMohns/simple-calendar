@@ -14,12 +14,18 @@ const themeOptions = createTheme({
     mode: "dark",
     primary: {
       main: "#616161",
+      light: "#fff",
     },
     secondary: {
-      main: "#f50057",
+      main: "#009688",
+      light: "#fff",
+    },
+    error: {
+      main: "#e0605e",
     },
     background: {
       default: "#333333",
+      light: "#fff",
     },
   },
 });
