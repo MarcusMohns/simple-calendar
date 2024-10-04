@@ -55,10 +55,14 @@ const Calendar = () => {
           : oldMonth
       )
     );
-    localStorage.setItem(
-      `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`,
-      newAppointment
-    );
+
+    const storageKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
+
+    const localMemory = [JSON.parse(localStorage.getItem(storageKey))]; // needs to be array
+    console.log(localMemory);
+    const updatedMemory = [...localMemory, newAppointment]; // for this to work
+
+    localStorage.setItem(storageKey, JSON.stringify(updatedMemory));
   };
 
   const deleteAppointment = (id) => {
