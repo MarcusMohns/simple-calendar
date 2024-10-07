@@ -38,13 +38,12 @@ const Calendar = () => {
 
   const saveAppointment = (newAppointment) => {
     const newDaysOfMonth = oldDaysOfMonth.map((day) => {
-      const appointments = [...day.appointments, newAppointment];
       if (day.num === selectedDay.num && day.month === selectedDay.month) {
         setSelectedDay({
           ...day,
-          appointments,
+          appointments: [...day.appointments, newAppointment],
         });
-        return { ...day, appointments };
+        return { ...day, appointments: [...day.appointments, newAppointment] };
       } else {
         return day;
       }
@@ -57,39 +56,35 @@ const Calendar = () => {
       )
     );
 
-    console.log(selectedDay);
+    const itemKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
+    const oldMemory = JSON.parse(localStorage.getItem(itemKey));
+    const newMemory =
+      oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
 
-    const storageKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
-
-    const localMemory = JSON.parse(localStorage.getItem(storageKey)); // needs to be array
-    const updatedMemory =
-      localMemory !== null
-        ? [...localMemory, newAppointment]
-        : [newAppointment]; // for this to work
-
-    localStorage.setItem(storageKey, JSON.stringify(updatedMemory));
+    localStorage.setItem(itemKey, JSON.stringify(newMemory));
   };
 
   const deleteAppointment = (id) => {
+    // Create updated array without appointment with id.
     const newDaysOfMonth = oldDaysOfMonth.map((day) => {
+      const newAppointments = day.appointments.filter(
+        (appointment) => appointment.id !== id
+      );
+      // Update Selected Day
       if (day.num === selectedDay.num) {
         setSelectedDay({
           ...day,
-          appointments: day.appointments.filter(
-            (appointment) => appointment.id !== id
-          ),
+          appointments: newAppointments,
         });
         return {
           ...day,
-          appointments: day.appointments.filter(
-            (appointment) => appointment.id !== id
-          ),
+          appointments: newAppointments,
         };
       } else {
         return day;
       }
     });
-
+    // Update Calendar
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         oldMonth.id === selectedMonthIdx
@@ -97,6 +92,15 @@ const Calendar = () => {
           : oldMonth
       )
     );
+
+    // Update local storage
+    const itemKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
+    const oldMemory = JSON.parse(localStorage.getItem(itemKey));
+    const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
+    // Remove item from memory if newMemory is empty
+    newMemory.length
+      ? localStorage.setItem(itemKey, JSON.stringify(newMemory))
+      : localStorage.removeItem(itemKey);
   };
 
   const nextMonth = () => {
