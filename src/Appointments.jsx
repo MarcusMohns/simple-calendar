@@ -1,7 +1,6 @@
 import React from "react";
 import Appointment from "./Appointment";
 import List from "@mui/material/List";
-import { v4 as uuidv4 } from "uuid";
 
 const Appointments = ({ appointments, deleteAppointment }) => {
   return (
