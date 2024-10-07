@@ -38,12 +38,13 @@ const Calendar = () => {
 
   const saveAppointment = (newAppointment) => {
     const newDaysOfMonth = oldDaysOfMonth.map((day) => {
+      const appointments = [...day.appointments, newAppointment];
       if (day.num === selectedDay.num && day.month === selectedDay.month) {
         setSelectedDay({
           ...day,
-          appointments: [...day.appointments, newAppointment],
+          appointments,
         });
-        return { ...day, appointments: [...day.appointments, newAppointment] };
+        return { ...day, appointments };
       } else {
         return day;
       }
@@ -56,11 +57,15 @@ const Calendar = () => {
       )
     );
 
+    console.log(selectedDay);
+
     const storageKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
 
-    const localMemory = [JSON.parse(localStorage.getItem(storageKey))]; // needs to be array
-    console.log(localMemory);
-    const updatedMemory = [...localMemory, newAppointment]; // for this to work
+    const localMemory = JSON.parse(localStorage.getItem(storageKey)); // needs to be array
+    const updatedMemory =
+      localMemory !== null
+        ? [...localMemory, newAppointment]
+        : [newAppointment]; // for this to work
 
     localStorage.setItem(storageKey, JSON.stringify(updatedMemory));
   };

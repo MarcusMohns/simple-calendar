@@ -29,7 +29,7 @@ export const CalendarMonth = (year, month) => {
         `${prevMonthLastDate - i + 1}/${monthInt - 1}/${yearInt}`
       )
     );
-    const localMemory = data !== null ? [data] : [];
+    const localMemory = data !== null ? data : [];
 
     dates = [
       ...dates,
@@ -52,7 +52,7 @@ export const CalendarMonth = (year, month) => {
     const data = JSON.parse(
       localStorage.getItem(`${i}/${monthInt}/${yearInt}`)
     );
-    const localMemory = data !== null ? [data] : [];
+    const localMemory = data !== null ? data : [];
 
     dates = [
       ...dates,
@@ -74,7 +74,7 @@ export const CalendarMonth = (year, month) => {
     const data = JSON.parse(
       localStorage.getItem(`${i}/${monthInt + 1}/${yearInt}`)
     );
-    const localMemory = data !== null ? [data] : [];
+    const localMemory = data !== null ? data : [];
     dates = [
       ...dates,
       {
