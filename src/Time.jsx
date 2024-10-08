@@ -3,14 +3,15 @@ import Typography from "@mui/material/Typography";
 import { MONTHS, DAYS } from "./Utilities";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import DayDateDisplay from "./Components/DayDateDisplay";
 
 const Time = () => {
   const [time, setTime] = useState(new Date());
 
   const year = time.getFullYear();
   const month = time.getMonth();
-  const day = time.getDate();
-  const weekDay = time.getDay() - 1;
+  const date = time.getDate();
+  const day = DAYS[time.getDay() - 1];
   const hours = time.getHours();
   const minutes = () =>
     time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
@@ -39,7 +40,7 @@ const Time = () => {
         {hours}:{minutes()}:{seconds()}
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-        {DAYS[weekDay]} the {day} of {MONTHS[month].name} {year}
+        <DayDateDisplay day={day} date={date} month={month} year={year} />
       </Typography>
     </Box>
   );

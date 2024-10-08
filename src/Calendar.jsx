@@ -5,6 +5,8 @@ import { MONTHS } from "./Utilities";
 import Month from "./Month";
 import TextSection from "./TextSection";
 import Appointments from "./Appointments";
+import DayDateDisplay from "./Components/DayDateDisplay";
+import Typography from "@mui/material/Typography";
 
 const d = new Date();
 const currDay = d.getDate();
@@ -55,6 +57,8 @@ const Calendar = () => {
           : oldMonth
       )
     );
+
+    console.log(selectedDay);
 
     const itemKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
@@ -135,6 +139,18 @@ const Calendar = () => {
         currMonth={currMonth}
       />
       <TextSection saveAppointment={saveAppointment} />
+      <Typography
+        variant="subtitle1"
+        sx={{ width: "50%", borderTop: "1px solid grey", pt: 4 }}
+      >
+        <DayDateDisplay
+          day={selectedDay.day}
+          date={selectedDay.num}
+          month={selectedDay.month}
+          year={selectedDay.year}
+        />
+      </Typography>
+
       <Appointments
         appointments={selectedDay.appointments}
         deleteAppointment={deleteAppointment}
