@@ -9,20 +9,23 @@ const Appointments = ({ appointments, deleteAppointment }) => {
         width: "50%",
         padding: 1,
         margin: 2,
-        borderTop: "1px solid grey",
       }}
     >
-      {appointments.map((appointment) => (
-        <Appointment
-          text={appointment.text}
-          fromTime={appointment.fromTime}
-          toTime={appointment.toTime}
-          location={appointment.location}
-          deleteAppointment={deleteAppointment}
-          id={appointment.id}
-          key={appointment.id}
-        />
-      ))}
+      {appointments.length ? (
+        appointments.map((appointment) => (
+          <Appointment
+            text={appointment.text}
+            fromTime={appointment.fromTime}
+            toTime={appointment.toTime}
+            location={appointment.location}
+            deleteAppointment={deleteAppointment}
+            id={appointment.id}
+            key={appointment.id}
+          />
+        ))
+      ) : (
+        <div>No events or appointments</div>
+      )}
     </List>
   );
 };
