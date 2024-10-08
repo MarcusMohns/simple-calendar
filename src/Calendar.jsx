@@ -1,12 +1,16 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import Box from "@mui/material/Box";
 import { MONTHS } from "./Utilities";
-import Month from "./Month";
+// import Month from "./Month";
 import TextSection from "./TextSection";
-import Appointments from "./Appointments";
+// import Appointments from "./Appointments";
 import DayDateDisplay from "./Components/DayDateDisplay";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const Appointments = lazy(() => import("./Appointments"));
+const Month = lazy(() => import("./Month"));
 
 const d = new Date();
 const currDay = d.getDate();
@@ -130,14 +134,16 @@ const Calendar = () => {
         flexGrow: 1,
       }}
     >
-      <Month
-        month={calendar[selectedMonthIdx]}
-        nextMonth={nextMonth}
-        previousMonth={previousMonth}
-        handleHighlighted={handleHighlighted}
-        currDay={currDay}
-        currMonth={currMonth}
-      />
+      <Suspense fallback={<CircularProgress color="success" />}>
+        <Month
+          month={calendar[selectedMonthIdx]}
+          nextMonth={nextMonth}
+          previousMonth={previousMonth}
+          handleHighlighted={handleHighlighted}
+          currDay={currDay}
+          currMonth={currMonth}
+        />
+      </Suspense>
       <TextSection saveAppointment={saveAppointment} />
       <Typography
         variant="subtitle1"
@@ -150,11 +156,12 @@ const Calendar = () => {
           year={selectedDay.year}
         />
       </Typography>
-
-      <Appointments
-        appointments={selectedDay.appointments}
-        deleteAppointment={deleteAppointment}
-      />
+      <Suspense fallback={<CircularProgress color="success" />}>
+        <Appointments
+          appointments={selectedDay.appointments}
+          deleteAppointment={deleteAppointment}
+        />
+      </Suspense>
     </Box>
   );
 };
