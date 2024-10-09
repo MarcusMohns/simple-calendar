@@ -132,6 +132,7 @@ const Calendar = () => {
         alignItems: "center",
         justifyContent: "center",
         flexGrow: 1,
+        m: 2,
       }}
     >
       <Suspense fallback={<CircularProgress color="success" />}>
@@ -147,7 +148,11 @@ const Calendar = () => {
       <TextSection saveAppointment={saveAppointment} />
       <Typography
         variant="subtitle1"
-        sx={{ width: "50%", borderTop: "1px solid grey", pt: 4 }}
+        sx={{
+          width: { xs: "100%", lg: "50%" },
+          borderTop: "1px solid grey",
+          pt: 3,
+        }}
       >
         <DayDateDisplay
           day={selectedDay.day}

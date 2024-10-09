@@ -15,7 +15,7 @@ const Day = ({ day, handleHighlighted, isToday }) => {
     <StyledBadge
       color="secondary"
       badgeContent={day.appointments.length}
-      sx={{ width: "90%" }}
+      sx={{ width: "100%" }}
     >
       <Button
         variant="contained"

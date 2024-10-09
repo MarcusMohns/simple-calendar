@@ -41,7 +41,7 @@ const Appointment = ({
     <ListItem
       sx={{
         padding: 1,
-        margin: "10px 0",
+        mt: 1,
         borderRadius: "2px",
         backgroundColor: "#00000021",
       }}

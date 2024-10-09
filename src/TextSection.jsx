@@ -41,7 +41,7 @@ const TextSection = ({ saveAppointment }) => {
         component: "form",
         display: "flex",
         flexDirection: "column",
-        width: "52%",
+        width: { xs: "100%", lg: "50%" },
         m: 2,
         p: 2,
       }}

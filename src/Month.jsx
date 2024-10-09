@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid2";
 import Day from "./Day";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import { Divider } from "@mui/material";
 import { DAYS } from "./Utilities";
 
 const Month = ({
@@ -16,9 +15,7 @@ const Month = ({
   currMonth,
 }) => {
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: "50%" }}>
-      <Divider sx={{ borderColor: "#8f8f8f" }} />
-
+    <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", lg: "50%" } }}>
       <Box
         sx={{
           display: "flex",

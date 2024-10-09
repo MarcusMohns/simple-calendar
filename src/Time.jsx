@@ -39,7 +39,7 @@ const Time = () => {
       <Typography variant="h2">
         {hours}:{minutes()}:{seconds()}
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography variant="subtitle1">
         <DayDateDisplay day={day} date={date} month={month} year={year} />
       </Typography>
     </Box>
