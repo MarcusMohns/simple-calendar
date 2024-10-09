@@ -9,7 +9,7 @@ import SendIcon from "@mui/icons-material/Send";
 import PlaceIcon from "@mui/icons-material/Place";
 import EventIcon from "@mui/icons-material/Event";
 
-const StyledTextField = ({ setText, text, label, icon }) => {
+const StyledTextField = ({ setText, text, label, icon, error, setError }) => {
   const SendTooltipIcon = () =>
     icon === "location" ? (
       <Tooltip title="Location" placement="right" TransitionComponent={Zoom}>
@@ -38,11 +38,12 @@ const StyledTextField = ({ setText, text, label, icon }) => {
     >
       <FormControl sx={{ width: "100%" }}>
         <TextField
+          error={error}
           id={`${label}`}
           label={label}
           variant="outlined"
           autoComplete="off"
-          onChange={(e) => setText(e.target.value)}
+          onChange={(e) => (setText(e.target.value), error && setError(false))}
           value={text}
           sx={{
             button: { paddingRight: "0px" },
@@ -54,6 +55,8 @@ const StyledTextField = ({ setText, text, label, icon }) => {
               endAdornment: <SendTooltipIcon />,
             },
           }}
+          helperText={error ? "Required" : " "}
+          noValidate
         />
       </FormControl>
     </Box>

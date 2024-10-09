@@ -16,23 +16,29 @@ const TextSection = ({ saveAppointment }) => {
   const [fromTime, setFromTime] = useState(dayjs());
   const [toTime, setToTime] = useState(dayjs());
   const [location, setLocation] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    saveAppointment({
-      text: text,
-      toTime: toTime.format("HH:MM"),
-      fromTime: fromTime.format("HH:MM"),
-      location: location,
-      id: uuidv4(),
-    });
-    setText("");
-    setLocation("");
+    if (text.length) {
+      saveAppointment({
+        text: text,
+        toTime: toTime.format("HH:MM"),
+        fromTime: fromTime.format("HH:MM"),
+        location: location,
+        id: uuidv4(),
+      });
+      setText("");
+      setLocation("");
+      setError(false);
+    } else {
+      setError(true);
+    }
   };
 
   return (
     <Box
       sx={{
+        component: "form",
         display: "flex",
         flexDirection: "column",
         width: "52%",
@@ -46,6 +52,8 @@ const TextSection = ({ saveAppointment }) => {
         text={text}
         icon=""
         label={"Add an event or reminder"}
+        error={error}
+        setError={setError}
       />
       <Stack spacing={5} direction="row" sx={{ width: "100%", my: 2 }}>
         <StyledTextField
@@ -54,6 +62,7 @@ const TextSection = ({ saveAppointment }) => {
           text={location}
           icon="location"
           label={"Add a location"}
+          error={false}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
           <TimePicker
