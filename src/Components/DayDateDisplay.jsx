@@ -2,7 +2,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import { MONTHS } from "../Utilities";
 
-const DayDateDisplay = ({ day, date, month, year }) => {
+const DayDateDisplay = ({ day = 1, date = 1, month = 1, year = 2000 }) => {
   return (
     <Box>
       {day}, {MONTHS[month].name} {date}, {year}

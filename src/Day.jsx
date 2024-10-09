@@ -13,7 +13,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 const Day = ({ day, handleHighlighted, isToday }) => {
   return (
     <StyledBadge
-      color="primary"
+      color="secondary"
       badgeContent={day.appointments.length}
       sx={{ width: "90%" }}
     >
@@ -23,10 +23,14 @@ const Day = ({ day, handleHighlighted, isToday }) => {
         outline="red"
         onClick={() => handleHighlighted(day)}
         sx={{
-          background: day.highlighted ? "#505153" : "inherit",
-          backgroundColor: isToday ? "#212121" : null,
+          background: day.highlighted ? "#212121" : "#2b2b2b",
+          backgroundColor: isToday ? "#505050" : null,
           opacity: day.currentMonth ? 1 : 0.5,
           width: "100%",
+          color: day.currentMonth ? "#fff" : "#999999",
+          border: day.highlighted
+            ? "5px solid #494949"
+            : "5px solid transparent",
         }}
       >
         {day.num}
