@@ -1,4 +1,3 @@
-import { MONTHS } from "./Utilities";
 import { DAYS } from "./Utilities";
 
 export const CalendarMonth = (year, month) => {

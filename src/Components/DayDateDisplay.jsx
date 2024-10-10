@@ -5,7 +5,7 @@ import { MONTHS } from "../Utilities";
 const DayDateDisplay = ({ day = 1, date = 1, month = 1, year = 2000 }) => {
   return (
     <Box>
-      {day}, {MONTHS[month].name} {date}, {year}
+      {day}, {MONTHS[month]} {date}, {year}
     </Box>
   );
 };

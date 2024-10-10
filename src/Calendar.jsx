@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useState, Suspense, lazy } from "react";
 import Box from "@mui/material/Box";
-import { MONTHS } from "./Utilities";
-// import Month from "./Month";
+import { CalendarYear } from "./Utilities";
 import TextSection from "./TextSection";
-// import Appointments from "./Appointments";
+
 import DayDateDisplay from "./Components/DayDateDisplay";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -15,9 +14,9 @@ const Month = lazy(() => import("./Month"));
 const d = new Date();
 const currDay = d.getDate();
 const currMonth = d.getMonth();
-
+const currYear = d.getFullYear();
 const Calendar = () => {
-  const [calendar, setCalendar] = useState(MONTHS);
+  const [calendar, setCalendar] = useState(CalendarYear(currYear));
   const [selectedMonthIdx, setSelectedMonthIdx] = useState(d.getMonth());
   const [selectedDay, setSelectedDay] = useState(
     calendar[selectedMonthIdx].days[currDay]
@@ -61,8 +60,6 @@ const Calendar = () => {
           : oldMonth
       )
     );
-
-    console.log(selectedDay);
 
     const itemKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
@@ -112,6 +109,10 @@ const Calendar = () => {
   };
 
   const nextMonth = () => {
+    if (selectedMonthIdx < 11) {
+      setSelectedMonthIdx((oldNum) => oldNum + 1);
+      setCalendar(CalendarYear(2023));
+    }
     selectedMonthIdx < 11
       ? setSelectedMonthIdx((oldNum) => oldNum + 1)
       : // Generate new year using localStorage...

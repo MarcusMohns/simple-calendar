@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { MONTHS, DAYS } from "./Utilities";
+import { DAYS } from "./Utilities";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import DayDateDisplay from "./Components/DayDateDisplay";
