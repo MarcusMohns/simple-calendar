@@ -55,7 +55,11 @@ const TextSection = ({ saveAppointment }) => {
         error={error}
         setError={setError}
       />
-      <Stack spacing={5} direction="row" sx={{ width: "100%", my: 2 }}>
+      <Stack
+        spacing={{ xs: 1, md: 5 }}
+        direction="row"
+        sx={{ width: "100%", my: 1 }}
+      >
         <StyledTextField
           handleSubmit={handleSubmit}
           setText={setLocation}
