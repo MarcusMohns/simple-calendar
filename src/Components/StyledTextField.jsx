@@ -1,15 +1,32 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl } from "@mui/material";
+import { useState } from "react";
 import { Box } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
 import SendIcon from "@mui/icons-material/Send";
 import PlaceIcon from "@mui/icons-material/Place";
 import EventIcon from "@mui/icons-material/Event";
 
-const StyledTextField = ({ setText, text, label, icon, error, setError }) => {
+const StyledTextField = ({
+  setText,
+  text,
+  textImage,
+  setTextImage,
+  label,
+  icon,
+  error,
+  setError,
+}) => {
+  const handleChange = (event) => {
+    setTextImage(event.target.value);
+  };
+
   const SendTooltipIcon = () =>
     icon === "location" ? (
       <Tooltip title="Location" placement="right" TransitionComponent={Zoom}>
@@ -19,11 +36,25 @@ const StyledTextField = ({ setText, text, label, icon, error, setError }) => {
       </Tooltip>
     ) : (
       <>
-        <Tooltip title="Event" placement="right" TransitionComponent={Zoom}>
-          <IconButton sx={{ cursor: "pointer" }}>
-            <EventIcon />
-          </IconButton>
-        </Tooltip>
+        <FormControl>
+          <Select
+            id="simple-select"
+            value={textImage}
+            onChange={handleChange}
+            variant="standard"
+            sx={{ display: "block" }}
+          >
+            <MenuItem value={0}>
+              <SendIcon />
+            </MenuItem>
+            <MenuItem value={1}>
+              <PlaceIcon />
+            </MenuItem>
+            <MenuItem value={2}>
+              <EventIcon />
+            </MenuItem>
+          </Select>
+        </FormControl>
       </>
     );
   return (

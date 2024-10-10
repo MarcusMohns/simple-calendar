@@ -15,6 +15,7 @@ const Appointments = ({ appointments, deleteAppointment }) => {
         appointments.map((appointment) => (
           <Appointment
             text={appointment.text}
+            textImage={appointment.textImage}
             fromTime={appointment.fromTime}
             toTime={appointment.toTime}
             location={appointment.location}

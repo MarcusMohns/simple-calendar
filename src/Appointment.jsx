@@ -3,14 +3,19 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
-import { Stack } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
+
+import SendIcon from "@mui/icons-material/Send";
+import PlaceIcon from "@mui/icons-material/Place";
+import EventIcon from "@mui/icons-material/Event";
+
+const ICONS = [<SendIcon />, <PlaceIcon />, <EventIcon />];
 
 const Appointment = ({
   text,
+  textImage,
   fromTime,
   toTime,
   location,
@@ -31,9 +36,7 @@ const Appointment = ({
   );
   const StyledListItemAvatar = (
     <ListItemAvatar>
-      <Avatar>
-        <ImageIcon />
-      </Avatar>
+      <Avatar>{ICONS[textImage]}</Avatar>
     </ListItemAvatar>
   );
 

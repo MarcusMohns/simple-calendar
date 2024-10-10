@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const TextSection = ({ saveAppointment }) => {
   const [text, setText] = useState("");
+  const [textImage, setTextImage] = useState(1);
   const [fromTime, setFromTime] = useState(dayjs());
   const [toTime, setToTime] = useState(dayjs());
   const [location, setLocation] = useState("");
@@ -22,6 +23,7 @@ const TextSection = ({ saveAppointment }) => {
     if (text.length) {
       saveAppointment({
         text: text,
+        textImage: textImage,
         toTime: toTime.format("HH:MM"),
         fromTime: fromTime.format("HH:MM"),
         location: location,
@@ -47,9 +49,10 @@ const TextSection = ({ saveAppointment }) => {
       }}
     >
       <StyledTextField
-        handleSubmit={handleSubmit}
-        setText={setText}
         text={text}
+        setText={setText}
+        textImage={textImage}
+        setTextImage={setTextImage}
         icon=""
         label={"Add an event or reminder"}
         error={error}
@@ -61,9 +64,8 @@ const TextSection = ({ saveAppointment }) => {
         sx={{ width: "100%", my: 1 }}
       >
         <StyledTextField
-          handleSubmit={handleSubmit}
-          setText={setLocation}
           text={location}
+          setText={setLocation}
           icon="location"
           label={"Add a location"}
           error={false}
