@@ -24,10 +24,11 @@ export const MONTHS = [
   "December",
 ];
 
-export const CalendarYear = (year = 2000) =>
-  MONTHS.map((month, index) => ({
+export const CalendarYear = (year) => {
+  return MONTHS.map((month, index) => ({
     name: month,
     days: CalendarMonth(year, index),
     id: index,
     year: year,
   }));
+};
