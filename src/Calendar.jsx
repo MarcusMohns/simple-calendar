@@ -15,8 +15,11 @@ const d = new Date();
 const currDay = d.getDate();
 const currMonth = d.getMonth();
 const currYear = d.getFullYear();
+const currCalendar = CalendarYear(currYear);
+
 const Calendar = () => {
-  const [calendar, setCalendar] = useState(CalendarYear(currYear));
+  const [calendar, setCalendar] = useState(currCalendar);
+  const [selectedYear, setSelectedYear] = useState(currYear);
   const [selectedMonthIdx, setSelectedMonthIdx] = useState(d.getMonth());
   const [selectedDay, setSelectedDay] = useState(
     calendar[selectedMonthIdx].days[currDay]
@@ -111,18 +114,22 @@ const Calendar = () => {
   const nextMonth = () => {
     if (selectedMonthIdx < 11) {
       setSelectedMonthIdx((oldNum) => oldNum + 1);
-      setCalendar(CalendarYear(2023));
+    } else {
+      setSelectedMonthIdx(0);
+      console.log(selectedYear);
+      setSelectedYear((oldNum) => oldNum + 1); // SELECTED YEAR SLOW AS FUCK TO UPDATE SO GENERATES A STATE OF THE PREVIOUS(CURRENT) YEAR..
+      console.log(selectedYear);
+      setCalendar(CalendarYear(selectedYear + 1));
     }
-    selectedMonthIdx < 11
-      ? setSelectedMonthIdx((oldNum) => oldNum + 1)
-      : // Generate new year using localStorage...
-        setSelectedMonthIdx(0);
   };
 
   const previousMonth = () => {
-    selectedMonthIdx > 0
-      ? setSelectedMonthIdx((oldNum) => oldNum - 1)
-      : setSelectedMonthIdx(11);
+    if (selectedMonthIdx > 0) {
+      setSelectedMonthIdx((oldNum) => oldNum - 1);
+    } else {
+      setSelectedMonthIdx(11);
+      setSelectedYear((oldNum) => oldNum - 1);
+    }
   };
 
   return (
