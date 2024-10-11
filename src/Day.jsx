@@ -19,7 +19,6 @@ const Day = ({ day, handleHighlighted, isToday }) => {
     >
       <Button
         variant="contained"
-        outline="red"
         onClick={() => handleHighlighted(day)}
         sx={{
           minWidth: { xs: "40px", lg: "56px" },

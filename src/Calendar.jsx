@@ -20,12 +20,12 @@ const currCalendar = CalendarYear(currYear);
 const Calendar = () => {
   const [calendar, setCalendar] = useState(currCalendar);
   const [selectedYear, setSelectedYear] = useState(currYear);
-  const [selectedMonthIdx, setSelectedMonthIdx] = useState(d.getMonth());
+  const [selectedMonth, setSelectedMonth] = useState(d.getMonth());
   const [selectedDay, setSelectedDay] = useState(
-    calendar[selectedMonthIdx].days[currDay]
+    calendar[selectedMonth].days[currDay]
   );
 
-  const oldDaysOfMonth = [...calendar[selectedMonthIdx].days];
+  const oldDaysOfMonth = [...calendar[selectedMonth].days];
 
   const handleHighlighted = (dayObj) => {
     const newDaysOfMonth = oldDaysOfMonth.map((day) =>
@@ -36,9 +36,7 @@ const Calendar = () => {
 
     setCalendar((oldCalendar) =>
       oldCalendar.map((month) =>
-        month.id === selectedMonthIdx
-          ? { ...month, days: newDaysOfMonth }
-          : month
+        month.id === selectedMonth ? { ...month, days: newDaysOfMonth } : month
       )
     );
     setSelectedDay(dayObj);
@@ -58,7 +56,7 @@ const Calendar = () => {
     });
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        oldMonth.id === selectedMonthIdx
+        oldMonth.id === selectedMonth
           ? { ...oldMonth, days: newDaysOfMonth }
           : oldMonth
       )
@@ -95,7 +93,7 @@ const Calendar = () => {
     // Update Calendar
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        oldMonth.id === selectedMonthIdx
+        oldMonth.id === selectedMonth
           ? { ...oldMonth, days: newDaysOfMonth }
           : oldMonth
       )
@@ -112,23 +110,26 @@ const Calendar = () => {
   };
 
   const nextMonth = () => {
-    if (selectedMonthIdx < 11) {
-      setSelectedMonthIdx((oldNum) => oldNum + 1);
+    const nextYear = selectedYear + 1;
+
+    if (selectedMonth < 11) {
+      setSelectedMonth((sm) => sm + 1);
     } else {
-      setSelectedMonthIdx(0);
-      console.log(selectedYear);
-      setSelectedYear((oldNum) => oldNum + 1); // SELECTED YEAR SLOW AS FUCK TO UPDATE SO GENERATES A STATE OF THE PREVIOUS(CURRENT) YEAR..
-      console.log(selectedYear);
-      setCalendar(CalendarYear(selectedYear + 1));
+      setSelectedMonth(0);
+      setSelectedYear((sy) => sy + 1);
+      setCalendar(CalendarYear(nextYear));
     }
   };
 
   const previousMonth = () => {
-    if (selectedMonthIdx > 0) {
-      setSelectedMonthIdx((oldNum) => oldNum - 1);
+    const previousYear = selectedYear - 1;
+
+    if (selectedMonth > 0) {
+      setSelectedMonth((smi) => smi - 1);
     } else {
-      setSelectedMonthIdx(11);
-      setSelectedYear((oldNum) => oldNum - 1);
+      setSelectedMonth(11);
+      setSelectedYear((sy) => sy - 1);
+      setCalendar(CalendarYear(previousYear));
     }
   };
 
@@ -145,7 +146,7 @@ const Calendar = () => {
     >
       <Suspense fallback={<CircularProgress color="success" />}>
         <Month
-          month={calendar[selectedMonthIdx]}
+          month={calendar[selectedMonth]}
           nextMonth={nextMonth}
           previousMonth={previousMonth}
           handleHighlighted={handleHighlighted}
