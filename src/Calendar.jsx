@@ -19,13 +19,13 @@ const currCalendar = CalendarYear(currYear);
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState(currCalendar);
-  const [selectedYear, setSelectedYear] = useState(currYear);
-  const [selectedMonth, setSelectedMonth] = useState(d.getMonth());
-  const [selectedDay, setSelectedDay] = useState(
-    calendar[selectedMonth].days[currDay]
-  );
+  const [selectedDate, setSelectedDate] = useState({
+    day: calendar[currMonth].days[currDay],
+    month: currMonth,
+    year: currYear,
+  });
 
-  const oldDaysOfMonth = [...calendar[selectedMonth].days];
+  const oldDaysOfMonth = [...calendar[selectedDate.month].days];
 
   const handleHighlighted = (dayObj) => {
     const newDaysOfMonth = oldDaysOfMonth.map((day) =>
@@ -36,18 +36,26 @@ const Calendar = () => {
 
     setCalendar((oldCalendar) =>
       oldCalendar.map((month) =>
-        month.id === selectedMonth ? { ...month, days: newDaysOfMonth } : month
+        month.id === selectedDate.month
+          ? { ...month, days: newDaysOfMonth }
+          : month
       )
     );
-    setSelectedDay(dayObj);
+    setSelectedDate({
+      ...selectedDate,
+      day: dayObj,
+    });
   };
 
   const saveAppointment = (newAppointment) => {
     const newDaysOfMonth = oldDaysOfMonth.map((day) => {
-      if (day.num === selectedDay.num && day.month === selectedDay.month) {
-        setSelectedDay({
-          ...day,
-          appointments: [...day.appointments, newAppointment],
+      if (
+        day.num === selectedDate.day.num &&
+        day.month === selectedDate.month
+      ) {
+        setSelectedDate({
+          ...selectedDate,
+          day: { ...day, appointments: [...day.appointments, newAppointment] },
         });
         return { ...day, appointments: [...day.appointments, newAppointment] };
       } else {
@@ -56,13 +64,13 @@ const Calendar = () => {
     });
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        oldMonth.id === selectedMonth
+        oldMonth.id === selectedDate.month
           ? { ...oldMonth, days: newDaysOfMonth }
           : oldMonth
       )
     );
 
-    const itemKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
+    const itemKey = `${selectedDate.day.num}/${selectedDate.month}/${selectedDate.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory =
       oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
@@ -77,10 +85,10 @@ const Calendar = () => {
         (appointment) => appointment.id !== id
       );
       // Update Selected Day
-      if (day.num === selectedDay.num) {
-        setSelectedDay({
-          ...day,
-          appointments: newAppointments,
+      if (day.num === selectedDate.day.num) {
+        setSelectedDate({
+          ...selectedDate,
+          day: { ...day, appointments: newAppointments },
         });
         return {
           ...day,
@@ -93,14 +101,14 @@ const Calendar = () => {
     // Update Calendar
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        oldMonth.id === selectedMonth
+        oldMonth.id === selectedDate.month
           ? { ...oldMonth, days: newDaysOfMonth }
           : oldMonth
       )
     );
 
     // Update local storage
-    const itemKey = `${selectedDay.num}/${selectedDay.month}/${selectedDay.year}`;
+    const itemKey = `${selectedDate.day.num}/${selectedDate.month}/${selectedDate.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
     // Remove item from memory if newMemory is empty
@@ -110,25 +118,31 @@ const Calendar = () => {
   };
 
   const nextMonth = () => {
-    const nextYear = selectedYear + 1;
-
-    if (selectedMonth < 11) {
-      setSelectedMonth((sm) => sm + 1);
+    const nextYear = selectedDate.year + 1;
+    if (selectedDate.month < 11) {
+      setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
     } else {
-      setSelectedMonth(0);
-      setSelectedYear((sy) => sy + 1);
+      setSelectedDate({
+        ...selectedDate,
+        month: 0,
+        year: nextYear,
+      });
+
       setCalendar(CalendarYear(nextYear));
     }
   };
 
   const previousMonth = () => {
-    const previousYear = selectedYear - 1;
-
-    if (selectedMonth > 0) {
-      setSelectedMonth((smi) => smi - 1);
+    const previousYear = selectedDate.year - 1;
+    if (selectedDate.month > 0) {
+      setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
     } else {
-      setSelectedMonth(11);
-      setSelectedYear((sy) => sy - 1);
+      setSelectedDate({
+        ...selectedDate,
+        month: 11,
+        year: previousYear,
+      });
+
       setCalendar(CalendarYear(previousYear));
     }
   };
@@ -146,7 +160,7 @@ const Calendar = () => {
     >
       <Suspense fallback={<CircularProgress color="success" />}>
         <Month
-          month={calendar[selectedMonth]}
+          month={calendar[selectedDate.month]}
           nextMonth={nextMonth}
           previousMonth={previousMonth}
           handleHighlighted={handleHighlighted}
@@ -164,15 +178,15 @@ const Calendar = () => {
         }}
       >
         <DayDateDisplay
-          day={selectedDay.day}
-          date={selectedDay.num}
-          month={selectedDay.month}
-          year={selectedDay.year}
+          day={selectedDate.day.day}
+          date={selectedDate.day.num}
+          month={selectedDate.day.month}
+          year={selectedDate.day.year}
         />
       </Typography>
       <Suspense fallback={<CircularProgress color="success" />}>
         <Appointments
-          appointments={selectedDay.appointments}
+          appointments={selectedDate.day.appointments}
           deleteAppointment={deleteAppointment}
         />
       </Suspense>
