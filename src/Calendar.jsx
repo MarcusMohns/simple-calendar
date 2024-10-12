@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import Box from "@mui/material/Box";
 import { CalendarYear } from "./Utilities";
 import TextSection from "./TextSection";
@@ -118,34 +118,32 @@ const Calendar = () => {
   };
 
   const nextMonth = () => {
-    const nextYear = selectedDate.year + 1;
     if (selectedDate.month < 11) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
     } else {
       setSelectedDate({
         ...selectedDate,
         month: 0,
-        year: nextYear,
+        year: selectedDate.year + 1,
       });
-
-      setCalendar(CalendarYear(nextYear));
     }
   };
 
   const previousMonth = () => {
-    const previousYear = selectedDate.year - 1;
     if (selectedDate.month > 0) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
     } else {
       setSelectedDate({
         ...selectedDate,
         month: 11,
-        year: previousYear,
+        year: selectedDate.year - 1,
       });
-
-      setCalendar(CalendarYear(previousYear));
     }
   };
+
+  useEffect(() => {
+    setCalendar(CalendarYear(selectedDate.year));
+  }, [selectedDate.year]);
 
   return (
     <Box
