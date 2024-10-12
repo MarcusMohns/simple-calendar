@@ -11,7 +11,7 @@ const Time = () => {
   const year = time.getFullYear();
   const month = time.getMonth();
   const date = time.getDate();
-  const day = DAYS[time.getDay() - 1];
+  const day = DAYS[time.getDay()];
   const hours = time.getHours();
   const minutes = () =>
     time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
