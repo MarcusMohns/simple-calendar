@@ -14,21 +14,25 @@ const Appointments = ({ appointments, deleteAppointment }) => {
         margin: 2,
       }}
     >
-      <TransitionGroup>
-        {appointments.map((appointment) => (
-          <Collapse key={appointment.id}>
-            <Appointment
-              text={appointment.text}
-              textImage={appointment.textImage}
-              fromTime={appointment.fromTime}
-              toTime={appointment.toTime}
-              location={appointment.location}
-              deleteAppointment={deleteAppointment}
-              id={appointment.id}
-            />
-          </Collapse>
-        ))}
-      </TransitionGroup>
+      {appointments.length ? (
+        <TransitionGroup>
+          {appointments.map((appointment) => (
+            <Collapse key={appointment.id}>
+              <Appointment
+                text={appointment.text}
+                textImage={appointment.textImage}
+                fromTime={appointment.fromTime}
+                toTime={appointment.toTime}
+                location={appointment.location}
+                deleteAppointment={deleteAppointment}
+                id={appointment.id}
+              />
+            </Collapse>
+          ))}
+        </TransitionGroup>
+      ) : (
+        <div>No appointments or events</div>
+      )}
     </List>
   );
 };
