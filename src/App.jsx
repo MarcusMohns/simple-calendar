@@ -2,7 +2,6 @@ import "./App.css";
 import Calendar from "./Calendar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Box } from "@mui/material";
 import Time from "./Time";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
