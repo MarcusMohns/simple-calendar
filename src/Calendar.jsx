@@ -164,6 +164,7 @@ const Calendar = () => {
           handleHighlighted={handleHighlighted}
           currDay={currDay}
           currMonth={currMonth}
+          currYear={currYear}
         />
       </Suspense>
       <TextSection saveAppointment={saveAppointment} />

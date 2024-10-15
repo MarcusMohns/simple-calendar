@@ -13,6 +13,7 @@ const Month = ({
   handleHighlighted,
   currDay,
   currMonth,
+  currYear,
 }) => {
   return (
     <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", lg: "50%" } }}>
@@ -59,7 +60,11 @@ const Month = ({
             <Day
               day={day}
               handleHighlighted={handleHighlighted}
-              isToday={day.num === currDay && day.month === currMonth}
+              isToday={
+                day.num === currDay &&
+                day.month === currMonth &&
+                day.year === currYear
+              }
             />
           </Grid>
         ))}
