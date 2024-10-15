@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { DAYS } from "./Utilities";
+import { WEEK } from "./Utilities";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import DayDateDisplay from "./Components/DayDateDisplay";
@@ -11,7 +11,7 @@ const Time = () => {
   const year = time.getFullYear();
   const month = time.getMonth();
   const date = time.getDate();
-  const day = DAYS[time.getDay()];
+  const day = WEEK[time.getDay()];
   const hours = time.getHours();
   const minutes = () =>
     time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();

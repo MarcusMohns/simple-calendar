@@ -1,5 +1,15 @@
 import CalendarMonth from "./CalendarMonth.js";
 export const DAYS = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+
+export const WEEK = [
   "Sunday",
   "Monday",
   "Tuesday",
