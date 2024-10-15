@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import { Stack } from "@mui/material";
 import StyledTextField from "./Components/StyledTextField";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TimePicker } from "@mui/x-date-pickers";

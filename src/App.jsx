@@ -1,4 +1,3 @@
-import "./App.css";
 import Calendar from "./Calendar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";

@@ -4,16 +4,14 @@ export const CalendarMonth = (year, month) => {
   const date = new Date(year, month);
 
   let dates = [];
-  const monthInt = parseInt(month);
-  const yearInt = parseInt(year);
 
   // Get the last date of the month
-  let lastDate = new Date(yearInt, monthInt + 1, 0).getDate();
+  let lastDate = new Date(year, month + 1, 0).getDate();
 
   // Get first day of the next month
-  let nextMonthFirstDay = new Date(yearInt, monthInt + 1, 1).getDay();
+  let nextMonthFirstDay = new Date(year, month + 1, 1).getDay();
   // Get the last date of the previous month
-  let prevMonthLastDate = new Date(yearInt, monthInt, 0).getDate();
+  let prevMonthLastDate = new Date(year, month, 0).getDate();
 
   const daysUntilSunday = 1 + ((0 + (7 - nextMonthFirstDay)) % 7);
   const daysSinceMonday = Math.abs(
@@ -24,9 +22,7 @@ export const CalendarMonth = (year, month) => {
   for (let i = daysSinceMonday; i > 0; i--) {
     // Get correct appointments from localStorage
     const data = JSON.parse(
-      localStorage.getItem(
-        `${prevMonthLastDate - i + 1}/${monthInt - 1}/${yearInt}`
-      )
+      localStorage.getItem(`${prevMonthLastDate - i + 1}/${month - 1}/${year}`)
     );
     const localMemory = data !== null ? data : [];
 
@@ -35,11 +31,9 @@ export const CalendarMonth = (year, month) => {
       {
         num: prevMonthLastDate - i + 1,
         appointments: localMemory,
-        day: DAYS[
-          new Date(yearInt, monthInt - 1, prevMonthLastDate - i).getDay()
-        ],
-        month: monthInt - 1,
-        year: yearInt,
+        day: DAYS[new Date(year, month - 1, prevMonthLastDate - i).getDay()],
+        month: month - 1,
+        year: year,
         currentMonth: false,
         highlighted: false,
       },
@@ -48,9 +42,7 @@ export const CalendarMonth = (year, month) => {
   // add the dates of the current month
   for (let i = 1; i <= lastDate; i++) {
     // Get correct appointments from localStorage
-    const data = JSON.parse(
-      localStorage.getItem(`${i}/${monthInt}/${yearInt}`)
-    );
+    const data = JSON.parse(localStorage.getItem(`${i}/${month}/${year}`));
     const localMemory = data !== null ? data : [];
 
     dates = [
@@ -58,9 +50,9 @@ export const CalendarMonth = (year, month) => {
       {
         num: i,
         appointments: localMemory,
-        day: DAYS[new Date(yearInt, monthInt, i - 1).getDay()],
-        month: monthInt,
-        year: yearInt,
+        day: DAYS[new Date(year, month, i - 1).getDay()],
+        month: month,
+        year: year,
         currentMonth: true,
         highlighted: false,
       },
@@ -70,18 +62,16 @@ export const CalendarMonth = (year, month) => {
   // Add the first dates of the next month
   for (let i = 1; i <= daysUntilSunday; i++) {
     // Get correct appointments from localStorage
-    const data = JSON.parse(
-      localStorage.getItem(`${i}/${monthInt + 1}/${yearInt}`)
-    );
+    const data = JSON.parse(localStorage.getItem(`${i}/${month + 1}/${year}`));
     const localMemory = data !== null ? data : [];
     dates = [
       ...dates,
       {
         num: i,
         appointments: localMemory,
-        day: DAYS[new Date(yearInt, monthInt + 1, i - 1).getDay()],
-        month: monthInt + 1,
-        year: yearInt,
+        day: DAYS[new Date(year, month + 1, i - 1).getDay()],
+        month: month + 1,
+        year: year,
         currentMonth: false,
         highlighted: false,
       },

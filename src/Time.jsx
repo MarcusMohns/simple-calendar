@@ -8,19 +8,15 @@ import DayDateDisplay from "./Components/DayDateDisplay";
 const Time = () => {
   const [time, setTime] = useState(new Date());
 
-  const year = time.getFullYear();
-  const month = time.getMonth();
-  const date = time.getDate();
-  const day = WEEK[time.getDay()];
-  const hours = time.getHours();
+  // format minutes & seconds "01->09" instead of "1-9"
   const minutes = () =>
     time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
   const seconds = () =>
     time.getSeconds() < 10 ? "0" + time.getSeconds() : time.getSeconds();
 
   useEffect(() => {
+    // Every second update state with new Date();
     const interval = setInterval(() => setTime(new Date()), 1000);
-
     return () => {
       clearInterval(interval);
     };
@@ -32,15 +28,19 @@ const Time = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
         width: "100%",
       }}
     >
       <Typography variant="h2">
-        {hours}:{minutes()}:{seconds()}
+        {time.getHours()}:{minutes()}:{seconds()}
       </Typography>
       <Typography variant="subtitle1">
-        <DayDateDisplay day={day} date={date} month={month} year={year} />
+        <DayDateDisplay
+          day={WEEK[time.getDay()]}
+          date={time.getDate()}
+          month={time.getMonth()}
+          year={time.getFullYear()}
+        />
       </Typography>
     </Box>
   );
