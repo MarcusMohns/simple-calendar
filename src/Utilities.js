@@ -1,4 +1,3 @@
-import CalendarMonth from "./CalendarMonth.js";
 export const DAYS = [
   "Monday",
   "Tuesday",
@@ -34,8 +33,6 @@ export const MONTHS = [
   "November",
   "December",
 ];
-
-import { DAYS } from "./Utilities";
 
 export const CalendarMonth = (year, month) => {
   const date = new Date(year, month);
