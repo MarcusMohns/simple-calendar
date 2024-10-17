@@ -168,6 +168,8 @@ const Calendar = () => {
       <Suspense fallback={<CircularProgress color="success" />}>
         <Month
           month={calendar[selectedDate.month]}
+          selectedMonth={selectedDate.month}
+          setSelectedDate={setSelectedDate}
           nextMonth={nextMonth}
           previousMonth={previousMonth}
           handleHighlighted={handleHighlighted}

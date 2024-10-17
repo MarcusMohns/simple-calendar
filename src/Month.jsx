@@ -5,11 +5,14 @@ import Day from "./Day";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { DAYS } from "./Utilities";
+import SelectMonth from "./Components/SelectMonth";
 
 const Month = ({
   month,
   nextMonth,
   previousMonth,
+  selectedMonth,
+  setSelectedDate,
   handleHighlighted,
   currDay,
   currMonth,
@@ -17,33 +20,13 @@ const Month = ({
 }) => {
   return (
     <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", lg: "50%" } }}>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "2em",
-        }}
-      >
-        <ArrowLeftIcon
-          onClick={previousMonth}
-          fontSize="large"
-          sx={{ cursor: "pointer" }}
-        />
-        <Box
-          sx={{
-            minWidth: "250px",
-            textAlign: "center",
-          }}
-        >
-          {month.name} {month.year}
-        </Box>
-        <ArrowRightIcon
-          onClick={nextMonth}
-          fontSize="large"
-          sx={{ cursor: "pointer" }}
-        />
-      </Box>
+      <SelectMonth
+        selectedMonth={selectedMonth}
+        setSelectedDate={setSelectedDate}
+        month={month}
+        nextMonth={nextMonth}
+        previousMonth={previousMonth}
+      />
       <Grid container spacing={1} columns={7}>
         {DAYS.map((day) => (
           <Grid size={1} key={day} sx={{ textAlign: "center" }}>
