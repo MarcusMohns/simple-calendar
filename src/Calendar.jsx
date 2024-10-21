@@ -3,7 +3,8 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import Box from "@mui/material/Box";
 import { CalendarYear } from "./Utilities";
 import TextSection from "./TextSection";
-
+import SelectMonth from "./Components/SelectMonth";
+import SelectYear from "./Components/SelectYear";
 import DayDateDisplay from "./Components/DayDateDisplay";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -165,6 +166,14 @@ const Calendar = () => {
         m: 2,
       }}
     >
+      <SelectMonth
+        selectedMonth={selectedDate.month}
+        setSelectedDate={setSelectedDate}
+        month={calendar[selectedDate.month]}
+        nextMonth={nextMonth}
+        previousMonth={previousMonth}
+      />
+      <SelectYear selectedYear={selectedDate.year} />
       <Suspense fallback={<CircularProgress color="success" />}>
         <Month
           month={calendar[selectedDate.month]}

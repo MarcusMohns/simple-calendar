@@ -20,13 +20,6 @@ const Month = ({
 }) => {
   return (
     <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", lg: "50%" } }}>
-      <SelectMonth
-        selectedMonth={selectedMonth}
-        setSelectedDate={setSelectedDate}
-        month={month}
-        nextMonth={nextMonth}
-        previousMonth={previousMonth}
-      />
       <Grid container spacing={1} columns={7}>
         {DAYS.map((day) => (
           <Grid size={1} key={day} sx={{ textAlign: "center" }}>
