@@ -8,6 +8,7 @@ import SelectYear from "./Components/SelectYear";
 import DayDateDisplay from "./Components/DayDateDisplay";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
+import Stack from "@mui/material/Stack";
 
 const Appointments = lazy(() => import("./Appointments"));
 const Month = lazy(() => import("./Month"));
@@ -166,14 +167,19 @@ const Calendar = () => {
         m: 2,
       }}
     >
-      <SelectMonth
-        selectedMonth={selectedDate.month}
-        setSelectedDate={setSelectedDate}
-        month={calendar[selectedDate.month]}
-        nextMonth={nextMonth}
-        previousMonth={previousMonth}
-      />
-      <SelectYear selectedYear={selectedDate.year} />
+      <Stack direction="row" spacing={2}>
+        <SelectMonth
+          selectedMonth={selectedDate.month}
+          setSelectedDate={setSelectedDate}
+          month={calendar[selectedDate.month]}
+          nextMonth={nextMonth}
+          previousMonth={previousMonth}
+        />
+        <SelectYear
+          selectedYear={selectedDate.year}
+          setSelectedDate={setSelectedDate}
+        />
+      </Stack>
       <Suspense fallback={<CircularProgress color="success" />}>
         <Month
           month={calendar[selectedDate.month]}

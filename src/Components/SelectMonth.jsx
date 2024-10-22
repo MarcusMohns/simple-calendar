@@ -44,7 +44,7 @@ const SelectMonth = ({
           textAlign: "center",
         }}
       >
-        <FormControl fullWidth>
+        <FormControl fullWidth variant="filled">
           <InputLabel id="month-select-label">Month</InputLabel>
           <Select
             labelId="month-select-label"

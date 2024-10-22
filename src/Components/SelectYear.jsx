@@ -10,44 +10,44 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { MONTHS } from "../Utilities";
 
-const SelectYear = ({
-  month,
-  nextMonth,
-  previousMonth,
-  selectedYear,
-  selectedMonth,
-  setSelectedDate,
-  handleHighlighted,
-  currDay,
-  currMonth,
-  currYear,
-}) => {
+const SelectYear = ({ selectedYear, setSelectedDate }) => {
   const handleChange = (event) => {
-    setSelectedDate((oldDate) => ({ ...oldDate, month: event.target.value }));
+    setSelectedDate((oldDate) => ({ ...oldDate, year: event.target.value }));
   };
 
+  const menuItems = [];
+
+  for (let i = selectedYear - 100; i < selectedYear + 100; i++) {
+    menuItems.push(
+      <MenuItem value={i} key={i}>
+        {i}
+      </MenuItem>
+    );
+  }
+
   return (
-    <Box
-      sx={{
-        minWidth: "250px",
-        textAlign: "center",
-      }}
-    >
-      <FormControl fullWidth>
-        <TextField
-          id="outlined-read-only-input"
-          label="Year"
-          defaultValue={selectedYear}
-          value={selectedYear}
-          type="number"
-          slotProps={{
-            input: {
-              readOnly: true,
+    <FormControl fullWidth variant="filled">
+      <InputLabel id="year-select-label">Year</InputLabel>
+      <Select
+        sx={{ maxHeight: "200px" }}
+        id="year-select-label"
+        label="Year"
+        type="number"
+        value={selectedYear}
+        onChange={handleChange}
+        MenuProps={{
+          sx: {
+            "& .MuiMenu-paper": {
+              maxHeight: 500,
+              backgroundColor: "dark.primary",
+              color: "text.light",
             },
-          }}
-        />
-      </FormControl>
-    </Box>
+          },
+        }}
+      >
+        {menuItems}
+      </Select>
+    </FormControl>
   );
 };
 
