@@ -167,7 +167,7 @@ const Calendar = () => {
         m: 2,
       }}
     >
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2} sx={{ m: 2 }}>
         <SelectMonth
           selectedMonth={selectedDate.month}
           setSelectedDate={setSelectedDate}

@@ -47,6 +47,7 @@ const SelectMonth = ({
         <FormControl fullWidth variant="filled">
           <InputLabel id="month-select-label">Month</InputLabel>
           <Select
+            sx={{ fontSize: "1em" }}
             labelId="month-select-label"
             value={selectedMonth}
             label="Month"

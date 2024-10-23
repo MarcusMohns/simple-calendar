@@ -26,10 +26,10 @@ const SelectYear = ({ selectedYear, setSelectedDate }) => {
   }
 
   return (
-    <FormControl fullWidth variant="filled">
+    <FormControl fullWidth variant="filled" sx={{ width: "200px" }}>
       <InputLabel id="year-select-label">Year</InputLabel>
       <Select
-        sx={{ maxHeight: "200px" }}
+        sx={{ maxHeight: "200px", fontSize: "2em" }}
         id="year-select-label"
         label="Year"
         type="number"
@@ -38,9 +38,9 @@ const SelectYear = ({ selectedYear, setSelectedDate }) => {
         MenuProps={{
           sx: {
             "& .MuiMenu-paper": {
+              fontSize: "332rem",
               maxHeight: 500,
-              backgroundColor: "dark.primary",
-              color: "text.light",
+              border: "1px solid grey",
             },
           },
         }}
