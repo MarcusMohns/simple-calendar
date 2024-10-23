@@ -170,7 +170,11 @@ const Calendar = () => {
       <Stack
         direction="row"
         spacing={2}
-        sx={{ m: 2, width: "50%", justifyContent: "space-between" }}
+        sx={{
+          mb: 4,
+          width: { xs: "100%", lg: "50%" },
+          justifyContent: "space-between",
+        }}
       >
         <SelectMonth
           selectedMonth={selectedDate.month}

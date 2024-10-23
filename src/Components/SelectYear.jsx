@@ -5,15 +5,14 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { memo } from "react";
 
-const SelectYear = memo(function SelectYear({ selectedYear, setSelectedDate }) {
+const SelectYear = memo(function Greeting({ selectedYear, setSelectedDate }) {
   const handleChange = (event) => {
     setSelectedDate((oldDate) => ({ ...oldDate, year: event.target.value }));
   };
 
   const menuItems = [];
-
   for (let i = selectedYear - 20; i <= selectedYear + 20; i++) {
-    // Populate menuItems with options, 20 years in the future and 20 years in the past eg 2004->2044
+    // Populate menuItems with select menu options, 20 years in the future and 20 years in the past from selectedYear
     menuItems.push(
       <MenuItem value={i} key={i}>
         {i}
@@ -22,7 +21,11 @@ const SelectYear = memo(function SelectYear({ selectedYear, setSelectedDate }) {
   }
 
   return (
-    <FormControl fullWidth variant="standard" sx={{ width: "150px" }}>
+    <FormControl
+      fullWidth
+      variant="standard"
+      sx={{ width: { xs: "150px", md: "200px" } }}
+    >
       <InputLabel id="year-select-label">Year</InputLabel>
       <Select
         sx={{ fontSize: "2em" }}

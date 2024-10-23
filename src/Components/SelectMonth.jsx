@@ -36,7 +36,10 @@ const SelectMonth = ({
       <FormControl
         fullWidth
         variant="standard"
-        sx={{ minWidth: "200px", textAlign: "center" }}
+        sx={{
+          textAlign: "center",
+          width: { xs: "150px", md: "200px" },
+        }}
       >
         <InputLabel id="month-select-label">Month</InputLabel>
         <Select
