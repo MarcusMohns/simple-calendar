@@ -1,23 +1,19 @@
 import React from "react";
-import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid2";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import { MONTHS } from "../Utilities";
+import { memo } from "react";
 
-const SelectYear = ({ selectedYear, setSelectedDate }) => {
+const SelectYear = memo(function SelectYear({ selectedYear, setSelectedDate }) {
   const handleChange = (event) => {
     setSelectedDate((oldDate) => ({ ...oldDate, year: event.target.value }));
   };
 
   const menuItems = [];
 
-  for (let i = selectedYear - 100; i < selectedYear + 100; i++) {
+  for (let i = selectedYear - 20; i <= selectedYear + 20; i++) {
+    // Populate menuItems with options, 20 years in the future and 20 years in the past eg 2004->2044
     menuItems.push(
       <MenuItem value={i} key={i}>
         {i}
@@ -26,11 +22,11 @@ const SelectYear = ({ selectedYear, setSelectedDate }) => {
   }
 
   return (
-    <FormControl fullWidth variant="filled" sx={{ width: "200px" }}>
+    <FormControl fullWidth variant="standard" sx={{ width: "150px" }}>
       <InputLabel id="year-select-label">Year</InputLabel>
       <Select
-        sx={{ maxHeight: "200px", fontSize: "2em" }}
-        id="year-select-label"
+        sx={{ fontSize: "2em" }}
+        id="year-select"
         label="Year"
         type="number"
         value={selectedYear}
@@ -38,7 +34,6 @@ const SelectYear = ({ selectedYear, setSelectedDate }) => {
         MenuProps={{
           sx: {
             "& .MuiMenu-paper": {
-              fontSize: "332rem",
               maxHeight: 500,
               border: "1px solid grey",
             },
@@ -49,6 +44,5 @@ const SelectYear = ({ selectedYear, setSelectedDate }) => {
       </Select>
     </FormControl>
   );
-};
-
+});
 export default SelectYear;
