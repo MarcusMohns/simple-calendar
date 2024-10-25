@@ -10,8 +10,8 @@ import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 
-const Appointments = lazy(() => import("./Appointments"));
 const Month = lazy(() => import("./Month"));
+const Appointments = lazy(() => import("./Appointments"));
 
 const d = new Date();
 const currDay = d.getDate();
@@ -157,16 +157,7 @@ const Calendar = () => {
   }, [selectedDate.year]);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        flexGrow: 1,
-        m: 2,
-      }}
-    >
+    <>
       <Stack
         direction="row"
         spacing={2}
@@ -188,7 +179,7 @@ const Calendar = () => {
           setSelectedDate={setSelectedDate}
         />
       </Stack>
-      <Suspense fallback={<CircularProgress color="success" />}>
+      <Suspense fallback={<CircularProgress color="secondary" />}>
         <Month
           month={calendar[selectedDate.month]}
           selectedMonth={selectedDate.month}
@@ -217,13 +208,13 @@ const Calendar = () => {
           year={selectedDate.day.year}
         />
       </Typography>
-      <Suspense fallback={<CircularProgress color="success" />}>
+      <Suspense fallback={<CircularProgress color="secondary" />}>
         <Appointments
           appointments={selectedDate.day.appointments}
           deleteAppointment={deleteAppointment}
         />
       </Suspense>
-    </Box>
+    </>
   );
 };
 

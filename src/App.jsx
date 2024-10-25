@@ -1,11 +1,15 @@
-import Calendar from "./Calendar";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Time from "./Time";
+import { Suspense, lazy } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+
+const Time = lazy(() => import("./Time"));
+const Calendar = lazy(() => import("./Calendar"));
 
 const themeOptions = createTheme({
   palette: {
@@ -32,8 +36,21 @@ function App() {
   return (
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
-      <Time />
-      <Calendar />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          flexGrow: 1,
+          m: 2,
+        }}
+      >
+        <Suspense fallback={<CircularProgress color="secondary" />}>
+          <Time />
+          <Calendar />
+        </Suspense>
+      </Box>
     </ThemeProvider>
   );
 }
