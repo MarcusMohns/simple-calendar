@@ -1,6 +1,7 @@
 import React from "react";
 import Appointment from "./Appointment";
 import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 import Collapse from "@mui/material/Collapse";
 import { TransitionGroup } from "react-transition-group";
 
@@ -31,7 +32,7 @@ const Appointments = ({ appointments, deleteAppointment }) => {
           ))}
         </TransitionGroup>
       ) : (
-        <div>No appointments or events</div>
+        <ListItem>No appointments or events</ListItem>
       )}
     </List>
   );

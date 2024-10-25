@@ -7,6 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 
 import SendIcon from "@mui/icons-material/Send";
 import PlaceIcon from "@mui/icons-material/Place";
@@ -36,14 +37,23 @@ const StyledTextField = ({
     ) : (
       <>
         <FormControl>
+          <InputLabel id="event-icon-select-label" sx={{ top: "12px" }}>
+            Icon
+          </InputLabel>
           <Select
-            id="simple-select"
+            margin="none"
+            id="event-icon-select"
+            labelId="event-icon-select-label"
             value={textImage}
             onChange={handleChange}
-            variant="standard"
-            sx={{ display: "block" }}
+            name="event-icon-select"
+            variant="filled"
+            size="small"
+            sx={{
+              display: "block",
+            }}
           >
-            <MenuItem value={0}>
+            <MenuItem value={0} sx={{ paddingRight: "0px" }}>
               <SendIcon />
             </MenuItem>
             <MenuItem value={1}>

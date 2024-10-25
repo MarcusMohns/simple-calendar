@@ -48,6 +48,8 @@ function App() {
       >
         <Suspense fallback={<CircularProgress color="secondary" />}>
           <Time />
+        </Suspense>
+        <Suspense fallback={<CircularProgress color="secondary" />}>
           <Calendar />
         </Suspense>
       </Box>

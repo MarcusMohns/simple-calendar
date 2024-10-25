@@ -29,9 +29,11 @@ const SelectYear = memo(function Greeting({ selectedYear, setSelectedDate }) {
       <InputLabel id="year-select-label">Year</InputLabel>
       <Select
         sx={{ fontSize: "2em" }}
+        labelId="year-select-label"
         id="year-select"
+        name="year-select"
+        className="year-select"
         label="Year"
-        type="number"
         value={selectedYear}
         onChange={handleChange}
         MenuProps={{

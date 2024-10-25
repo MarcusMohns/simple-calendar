@@ -24,10 +24,8 @@ const Day = ({ day, handleHighlighted, isToday }) => {
           minWidth: { xs: "40px", lg: "56px" },
           minHeight: { lg: "58px" },
           width: "100%",
-          // background: day.highlighted ? "#2b2b2b" : "#686868",
           background: "#2b2b2b",
           backgroundColor: isToday ? "#212121" : null,
-          opacity: day.currentMonth ? 1 : 0.5,
           color: day.currentMonth ? "#fff" : "#999999",
           border: day.highlighted
             ? "5px solid #494949"
