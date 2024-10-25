@@ -20,12 +20,13 @@ const TextSection = ({ saveAppointment }) => {
   const [error, setError] = useState(false);
 
   const handleSubmit = (e) => {
+    console.log(toTime.format("HH:mm"));
     if (text.length) {
       saveAppointment({
         text: text,
         textImage: textImage,
-        toTime: toTime.format("HH:MM"),
-        fromTime: fromTime.format("HH:MM"),
+        toTime: toTime.format("HH:mm"),
+        fromTime: fromTime.format("HH:mm"),
         location: location,
         id: uuidv4(),
       });
