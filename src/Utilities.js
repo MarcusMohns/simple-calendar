@@ -114,8 +114,6 @@ export const CalendarMonth = (year, month) => {
   return dates;
 };
 
-export default CalendarMonth;
-
 export const CalendarYear = (year) =>
   MONTHS.map((month, index) => ({
     name: month,
@@ -123,3 +121,5 @@ export const CalendarYear = (year) =>
     id: index,
     year: year,
   }));
+
+export default CalendarMonth;
