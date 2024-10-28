@@ -8,9 +8,23 @@ import Tooltip from "@mui/material/Tooltip";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
-import SendIcon from "@mui/icons-material/Send";
 import PlaceIcon from "@mui/icons-material/Place";
+
 import EventIcon from "@mui/icons-material/Event";
+import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
+
+const ICONS = [
+  <EventIcon />,
+  <AirplanemodeActiveIcon />,
+  <AccessAlarmIcon />,
+  <FitnessCenterIcon />,
+  <ShoppingCartIcon />,
+  <BeachAccessIcon />,
+];
 
 const StyledTextField = ({
   setText,
@@ -52,15 +66,11 @@ const StyledTextField = ({
               display: "block",
             }}
           >
-            <MenuItem value={0} sx={{ paddingRight: "0px" }}>
-              <SendIcon />
-            </MenuItem>
-            <MenuItem value={1}>
-              <PlaceIcon />
-            </MenuItem>
-            <MenuItem value={2}>
-              <EventIcon />
-            </MenuItem>
+            {ICONS.map((icon, idx) => (
+              <MenuItem value={idx} key={`${idx + icon}`}>
+                {icon}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </>
