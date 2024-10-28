@@ -19,8 +19,7 @@ const TextSection = ({ saveAppointment }) => {
   const [location, setLocation] = useState("");
   const [error, setError] = useState(false);
 
-  const handleSubmit = (e) => {
-    console.log(toTime.format("HH:mm"));
+  const handleSubmit = () => {
     if (text.length) {
       saveAppointment({
         text: text,

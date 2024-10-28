@@ -36,8 +36,13 @@ const StyledTextField = ({
   error,
   setError,
 }) => {
-  const handleChange = (event) => {
-    setTextImage(event.target.value);
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+    error && setError(false);
+  };
+
+  const handleSelectChange = (e) => {
+    setTextImage(e.target.value);
   };
 
   const SendTooltipIcon = () =>
@@ -58,7 +63,7 @@ const StyledTextField = ({
             id="event-icon-select"
             labelId="event-icon-select-label"
             value={textImage}
-            onChange={handleChange}
+            onChange={handleSelectChange}
             name="event-icon-select"
             variant="filled"
             size="small"
@@ -92,7 +97,7 @@ const StyledTextField = ({
           label={label}
           variant="outlined"
           autoComplete="off"
-          onChange={(e) => (setText(e.target.value), error && setError(false))}
+          onChange={handleTextChange}
           value={text}
           sx={{
             button: { paddingRight: "0px" },

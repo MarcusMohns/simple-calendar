@@ -53,7 +53,7 @@ const Calendar = () => {
       if (
         // If the current day in interation corresponds with the selected(highlighted) day
         day.num === selectedDate.day.num &&
-        day.month === selectedDate.month
+        day.month === selectedDate.day.month
       ) {
         // Update selectedDate.day state with newAppointment appended
         setSelectedDate({
@@ -65,6 +65,7 @@ const Calendar = () => {
         return day;
       }
     });
+
     // Find month and update month.days to newDaysofMonth
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
@@ -75,7 +76,7 @@ const Calendar = () => {
     );
 
     // Update localStorage
-    const itemKey = `${selectedDate.day.num}/${selectedDate.month}/${selectedDate.year}`;
+    const itemKey = `${selectedDate.day.num}/${selectedDate.day.month}/${selectedDate.day.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory =
       oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
@@ -84,15 +85,16 @@ const Calendar = () => {
   };
 
   const deleteAppointment = (id) => {
+    const oldDaysOfMonth = calendar[selectedDate.day.month].days;
     // Create updated array without appointment with id.
-    const newDaysOfMonth = currDaysOfMonth.map((day) => {
+    const newDaysOfMonth = oldDaysOfMonth.map((day) => {
       const newAppointments = day.appointments.filter(
         (appointment) => appointment.id !== id
       );
       // set selectedDate.day.appointments state to newAppointments
       if (
         day.num === selectedDate.day.num &&
-        day.month === selectedDate.month
+        day.month === selectedDate.day.month
       ) {
         setSelectedDate({
           ...selectedDate,
@@ -107,6 +109,7 @@ const Calendar = () => {
       }
     });
     // Find month and update month.days to newDaysofMonth
+
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         oldMonth.id === selectedDate.month
@@ -116,7 +119,7 @@ const Calendar = () => {
     );
 
     // Update local storage
-    const itemKey = `${selectedDate.day.num}/${selectedDate.month}/${selectedDate.year}`;
+    const itemKey = `${selectedDate.day.num}/${selectedDate.day.month}/${selectedDate.day.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
     // Remove item from memory if newMemory is empty
