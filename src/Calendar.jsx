@@ -90,7 +90,10 @@ const Calendar = () => {
         (appointment) => appointment.id !== id
       );
       // set selectedDate.day.appointments state to newAppointments
-      if (day.num === selectedDate.day.num) {
+      if (
+        day.num === selectedDate.day.num &&
+        day.month === selectedDate.month
+      ) {
         setSelectedDate({
           ...selectedDate,
           day: { ...day, appointments: newAppointments },
@@ -127,7 +130,7 @@ const Calendar = () => {
     if (selectedDate.month < 11) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
     } else {
-      // If December add a year and set to January
+      // If December add a year and set month to January
       setSelectedDate({
         ...selectedDate,
         month: 0,
