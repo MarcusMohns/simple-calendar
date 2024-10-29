@@ -20,6 +20,8 @@ const currCalendar = CalendarYear(currYear);
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState(currCalendar);
+
+  // SelectedDate
   const [selectedDate, setSelectedDate] = useState({
     day: calendar[currMonth].days[currDay],
     month: currMonth,
@@ -29,53 +31,62 @@ const Calendar = () => {
   const currDaysOfMonth = [...calendar[selectedDate.month].days];
 
   const handleHighlighted = (dayObj) => {
-    // Create new array where clicked dayObj has highlighted:true
-    const newDaysOfMonth = currDaysOfMonth.map((day) =>
-      day.num === dayObj.num && day.month === dayObj.month
-        ? { ...day, highlighted: true }
-        : { ...day, highlighted: false }
-    );
-    // Find month in state and set it to newDaysOfMonth
     setCalendar((oldCalendar) =>
       oldCalendar.map((month) =>
         month.id === selectedDate.month
-          ? { ...month, days: newDaysOfMonth }
+          ? {
+              ...month,
+              days: month.days.map((day) =>
+                day.num === dayObj.num && day.month === dayObj.month
+                  ? { ...day, highlighted: true }
+                  : { ...day, highlighted: false }
+              ),
+            }
           : month
       )
     );
-    // set selectedDate.day state to dayObj
     setSelectedDate((oldDate) => ({ ...oldDate, day: dayObj }));
   };
 
   const saveAppointment = (newAppointment) => {
-    const newDaysOfMonth = currDaysOfMonth.map((day) => {
-      // Create new array with the newAppointment added to the correct day
-      if (
-        // If the current day in interation corresponds with the selected(highlighted) day
-        day.num === selectedDate.day.num &&
-        day.month === selectedDate.day.month
-      ) {
-        // Update selectedDate.day state with newAppointment appended
-        setSelectedDate({
-          ...selectedDate,
-          day: { ...day, appointments: [...day.appointments, newAppointment] },
-        });
-        return { ...day, appointments: [...day.appointments, newAppointment] };
-      } else {
-        return day;
-      }
-    });
-
-    // Find month and update month.days to newDaysofMonth
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        oldMonth.id === selectedDate.month
-          ? { ...oldMonth, days: newDaysOfMonth }
+        // Check the highlighted day is part of the current month on screen or an adjacent one.
+        oldMonth.id === selectedDate.day.month || // 10
+        oldMonth.id === selectedDate.day.month + 1 ||
+        oldMonth.id === selectedDate.day.month - 1
+          ? {
+              ...oldMonth,
+              days: oldMonth.days.map((day) => {
+                if (
+                  // Find he correct day to modify
+                  day.num === selectedDate.day.num &&
+                  day.day === selectedDate.day.day
+                ) {
+                  // While we're here at the correct day update SelectDate state with the new day so we can show the new appointment without clicking again.
+                  setSelectedDate({
+                    ...selectedDate,
+                    day: {
+                      ...day,
+                      appointments: [...day.appointments, newAppointment],
+                    },
+                  });
+
+                  // Return the modified day to our oldMonth object with the new appointment
+                  return {
+                    ...day,
+                    appointments: [...day.appointments, newAppointment],
+                  };
+                } else {
+                  return day;
+                }
+              }),
+            }
           : oldMonth
       )
     );
 
-    // Update localStorage
+    // Save to localStorage
     const itemKey = `${selectedDate.day.num}/${selectedDate.day.month}/${selectedDate.day.year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory =
@@ -85,35 +96,36 @@ const Calendar = () => {
   };
 
   const deleteAppointment = (id) => {
-    const oldDaysOfMonth = calendar[selectedDate.day.month].days;
-    // Create updated array without appointment with id.
-    const newDaysOfMonth = oldDaysOfMonth.map((day) => {
-      const newAppointments = day.appointments.filter(
-        (appointment) => appointment.id !== id
-      );
-      // set selectedDate.day.appointments state to newAppointments
-      if (
-        day.num === selectedDate.day.num &&
-        day.month === selectedDate.day.month
-      ) {
-        setSelectedDate({
-          ...selectedDate,
-          day: { ...day, appointments: newAppointments },
-        });
-        return {
-          ...day,
-          appointments: newAppointments,
-        };
-      } else {
-        return day;
-      }
-    });
-    // Find month and update month.days to newDaysofMonth
-
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        oldMonth.id === selectedDate.month
-          ? { ...oldMonth, days: newDaysOfMonth }
+        // Check the highlighted day is part of the current month on screen or an adjacent one.
+        oldMonth.id === selectedDate.day.month || // 10
+        oldMonth.id === selectedDate.day.month + 1 ||
+        oldMonth.id === selectedDate.day.month - 1
+          ? {
+              ...oldMonth,
+              days: oldMonth.days.map((day) => {
+                if (
+                  day.num === selectedDate.day.num &&
+                  day.day === selectedDate.day.day
+                ) {
+                  const newAppointments = day.appointments.filter(
+                    (appointment) => appointment.id !== id
+                  );
+                  setSelectedDate({
+                    ...selectedDate,
+                    day: { ...day, appointments: newAppointments },
+                  });
+
+                  return {
+                    ...day,
+                    appointments: newAppointments,
+                  };
+                } else {
+                  return day;
+                }
+              }),
+            }
           : oldMonth
       )
     );
