@@ -28,30 +28,14 @@ const Calendar = () => {
     year: currYear,
   });
 
-  const currDaysOfMonth = [...calendar[selectedDate.month].days];
-
-  const handleHighlighted = (dayObj) => {
-    setCalendar((oldCalendar) =>
-      oldCalendar.map((month) =>
-        month.id === selectedDate.month
-          ? {
-              ...month,
-              days: month.days.map((day) =>
-                day.num === dayObj.num && day.month === dayObj.month
-                  ? { ...day, highlighted: true }
-                  : { ...day, highlighted: false }
-              ),
-            }
-          : month
-      )
-    );
+  const handleSelected = (dayObj) => {
     setSelectedDate((oldDate) => ({ ...oldDate, day: dayObj }));
   };
 
   const saveAppointment = (newAppointment) => {
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        // Check the highlighted day is part of the current month on screen or an adjacent one.
+        // Check the selected day is part of the current month on screen or an adjacent one.
         oldMonth.id === selectedDate.day.month || // 10
         oldMonth.id === selectedDate.day.month + 1 ||
         oldMonth.id === selectedDate.day.month - 1
@@ -98,7 +82,7 @@ const Calendar = () => {
   const deleteAppointment = (id) => {
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
-        // Check the highlighted day is part of the current month on screen or an adjacent one.
+        // Check the selected day is part of the current month on screen or an adjacent one.
         oldMonth.id === selectedDate.day.month || // 10
         oldMonth.id === selectedDate.day.month + 1 ||
         oldMonth.id === selectedDate.day.month - 1
@@ -199,11 +183,8 @@ const Calendar = () => {
       <Suspense fallback={<CircularProgress color="secondary" />}>
         <Month
           month={calendar[selectedDate.month]}
-          selectedMonth={selectedDate.month}
-          setSelectedDate={setSelectedDate}
-          nextMonth={nextMonth}
-          previousMonth={previousMonth}
-          handleHighlighted={handleHighlighted}
+          selectedDay={selectedDate.day}
+          handleSelected={handleSelected}
           currDay={currDay}
           currMonth={currMonth}
           currYear={currYear}

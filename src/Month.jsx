@@ -2,18 +2,12 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
 import Day from "./Day";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import { DAYS } from "./Utilities";
-import SelectMonth from "./Components/SelectMonth";
 
 const Month = ({
   month,
-  nextMonth,
-  previousMonth,
-  selectedMonth,
-  setSelectedDate,
-  handleHighlighted,
+  selectedDay,
+  handleSelected,
   currDay,
   currMonth,
   currYear,
@@ -35,11 +29,16 @@ const Month = ({
           >
             <Day
               day={day}
-              handleHighlighted={handleHighlighted}
+              handleSelected={handleSelected}
               isToday={
                 day.num === currDay &&
                 day.month === currMonth &&
                 day.year === currYear
+              }
+              isSelected={
+                day.num === selectedDay.num &&
+                day.month === selectedDay.month &&
+                day.year === selectedDay.year
               }
             />
           </Grid>

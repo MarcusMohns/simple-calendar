@@ -35,7 +35,6 @@ export const CalendarMonth = (year, month) => {
         month: month - 1,
         year: year,
         currentMonth: false,
-        highlighted: false,
       },
     ];
   }
@@ -54,7 +53,6 @@ export const CalendarMonth = (year, month) => {
         month: month,
         year: year,
         currentMonth: true,
-        highlighted: false,
       },
     ];
   }
@@ -73,7 +71,6 @@ export const CalendarMonth = (year, month) => {
         month: month + 1,
         year: year,
         currentMonth: false,
-        highlighted: false,
       },
     ];
   }
