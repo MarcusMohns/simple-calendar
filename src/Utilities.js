@@ -54,9 +54,15 @@ export const CalendarMonth = (year, month) => {
 
   // Add the last dates from the previous month
   for (let i = daysSinceMonday; i > 0; i--) {
+    // If January -> the previous months dates are from the previous year
+    const verifiedMonth = month < 1 ? 11 : month - 1;
+    const verifiedYear = month < 1 ? year - 1 : year;
+
     // Get correct appointments from localStorage
     const data = JSON.parse(
-      localStorage.getItem(`${prevMonthLastDate - i + 1}/${month - 1}/${year}`)
+      localStorage.getItem(
+        `${prevMonthLastDate - i + 1}/${verifiedMonth}/${verifiedYear}`
+      )
     );
     const localMemory = data !== null ? data : [];
 
@@ -93,8 +99,14 @@ export const CalendarMonth = (year, month) => {
 
   // Add the first dates of the next month
   for (let i = 1; i <= daysUntilSunday; i++) {
+    // If December -> the previous months dates are from the next year and not the mythical and rare 13th month.
+    const verifiedMonth = month > 10 ? 0 : month + 1;
+    const verifiedYear = month > 10 ? year + 1 : year;
+
     // Get correct appointments from localStorage
-    const data = JSON.parse(localStorage.getItem(`${i}/${month + 1}/${year}`));
+    const data = JSON.parse(
+      localStorage.getItem(`${i}/${verifiedMonth}/${verifiedYear}`)
+    );
     const localMemory = data !== null ? data : [];
     dates = [
       ...dates,

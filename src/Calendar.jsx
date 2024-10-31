@@ -70,8 +70,20 @@ const Calendar = () => {
       )
     );
 
+    // Make sure we don't save the 13th or -1st month
+    let verifiedMonth = selectedDate.day.month;
+    let verifiedYear = selectedDate.day.year;
+
+    if (selectedDate.day.month > 11) {
+      verifiedMonth = 0;
+      verifiedYear = selectedDate.day.year + 1;
+    }
+    if (selectedDate.day.month < 0) {
+      verifiedMonth = 11;
+      verifiedYear = selectedDate.day.year - 1;
+    }
     // Save to localStorage
-    const itemKey = `${selectedDate.day.num}/${selectedDate.day.month}/${selectedDate.day.year}`;
+    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory =
       oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
@@ -83,7 +95,7 @@ const Calendar = () => {
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         // Check the selected day is part of the current month on screen or an adjacent one.
-        oldMonth.id === selectedDate.day.month || // 10
+        oldMonth.id === selectedDate.day.month ||
         oldMonth.id === selectedDate.day.month + 1 ||
         oldMonth.id === selectedDate.day.month - 1
           ? {
@@ -114,8 +126,21 @@ const Calendar = () => {
       )
     );
 
+    // Make sure we don't try to delete an entry from the 13th or -1st month
+    let verifiedMonth = selectedDate.day.month;
+    let verifiedYear = selectedDate.day.year;
+
+    if (selectedDate.day.month > 11) {
+      verifiedMonth = 0;
+      verifiedYear = selectedDate.day.year + 1;
+    }
+    if (selectedDate.day.month < 0) {
+      verifiedMonth = 11;
+      verifiedYear = selectedDate.day.year - 1;
+    }
+
     // Update local storage
-    const itemKey = `${selectedDate.day.num}/${selectedDate.day.month}/${selectedDate.day.year}`;
+    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
     // Remove item from memory if newMemory is empty
