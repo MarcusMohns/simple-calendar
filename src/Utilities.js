@@ -123,6 +123,22 @@ export const CalendarMonth = (year, month) => {
   return dates;
 };
 
+export const verifyMonthAndYear = (month, year) => {
+  let verifiedMonth = month;
+  let verifiedYear = year;
+
+  if (month > 11) {
+    verifiedMonth = 0;
+    verifiedYear = year + 1;
+  }
+  if (month < 0) {
+    verifiedMonth = 11;
+    verifiedYear = year - 1;
+  }
+
+  return [verifiedMonth, verifiedYear];
+};
+
 export const CalendarYear = (year) =>
   MONTHS.map((month, index) => ({
     name: month,

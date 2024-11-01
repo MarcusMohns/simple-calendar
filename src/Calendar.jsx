@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState, useEffect, Suspense, lazy } from "react";
-import { CalendarYear } from "./Utilities";
+import { CalendarYear, verifyMonthAndYear } from "./Utilities";
 import TextSection from "./TextSection";
 import SelectMonth from "./Components/SelectMonth";
 import SelectYear from "./Components/SelectYear";
@@ -71,20 +71,14 @@ const Calendar = () => {
       )
     );
 
-    // Make sure we don't save the 13th or -1st month
-    let verifiedMonth = selectedDate.day.month;
-    let verifiedYear = selectedDate.day.year;
+    // Make sure we don't save to the 13th or -1st month
+    const [month, year] = verifyMonthAndYear(
+      selectedDate.day.month,
+      selectedDate.day.year
+    );
 
-    if (selectedDate.day.month > 11) {
-      verifiedMonth = 0;
-      verifiedYear = selectedDate.day.year + 1;
-    }
-    if (selectedDate.day.month < 0) {
-      verifiedMonth = 11;
-      verifiedYear = selectedDate.day.year - 1;
-    }
     // Save to localStorage
-    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
+    const itemKey = `${selectedDate.day.num}/${month}/${year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory =
       oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
@@ -129,20 +123,12 @@ const Calendar = () => {
     );
 
     // Make sure we don't try to delete an entry from the 13th or -1st month
-    let verifiedMonth = selectedDate.day.month;
-    let verifiedYear = selectedDate.day.year;
-
-    if (selectedDate.day.month > 11) {
-      verifiedMonth = 0;
-      verifiedYear = selectedDate.day.year + 1;
-    }
-    if (selectedDate.day.month < 0) {
-      verifiedMonth = 11;
-      verifiedYear = selectedDate.day.year - 1;
-    }
-
+    const [month, year] = verifyMonthAndYear(
+      selectedDate.day.month,
+      selectedDate.day.year
+    );
     // Update local storage
-    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
+    const itemKey = `${selectedDate.day.num}/${month}/${year}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
     // Remove item from memory if newMemory is empty
@@ -178,6 +164,12 @@ const Calendar = () => {
       });
     }
   };
+
+  // Make sure selectedDate is within 0-11 range for our DayDateDisplay
+  const [verifiedMonth, verifiedYear] = verifyMonthAndYear(
+    selectedDate.day.month,
+    selectedDate.day.year
+  );
 
   useEffect(() => {
     // Generate new CalendarYear when selectedDate.year is changed
@@ -229,8 +221,8 @@ const Calendar = () => {
         <DayDateDisplay
           day={selectedDate.day.day}
           date={selectedDate.day.num}
-          month={selectedDate.day.month}
-          year={selectedDate.day.year}
+          month={verifiedMonth}
+          year={verifiedYear}
         />
       </Typography>
       <Suspense fallback={<CircularProgress color="secondary" />}>
