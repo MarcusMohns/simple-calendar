@@ -137,14 +137,26 @@ const Calendar = () => {
       : localStorage.removeItem(itemKey);
   };
 
+  // Make sure selectedDate is within 0-11 range for our DayDateDisplay
+  const [verifiedMonth, verifiedYear] = verifyMonthAndYear(
+    selectedDate.day.month,
+    selectedDate.day.year
+  );
+
   const nextMonth = () => {
     // If less than December add a month
     if (selectedDate.month < 11) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
     } else {
       // If December add a year and set month to January
+      const monthNum = verifiedYear === selectedDate.day.year ? -1 : 0;
       setSelectedDate({
         ...selectedDate,
+        day: {
+          ...selectedDate.day,
+          month: monthNum,
+          year: selectedDate.year + 1,
+        },
         month: 0,
         year: selectedDate.year + 1,
       });
@@ -157,19 +169,19 @@ const Calendar = () => {
       setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
     } else {
       // If January subtract a year and set to December
+      const monthNum = verifiedYear === selectedDate.day.year ? 12 : 11;
       setSelectedDate({
         ...selectedDate,
+        day: {
+          ...selectedDate.day,
+          month: monthNum,
+          year: selectedDate.year - 1,
+        },
         month: 11,
         year: selectedDate.year - 1,
       });
     }
   };
-
-  // Make sure selectedDate is within 0-11 range for our DayDateDisplay
-  const [verifiedMonth, verifiedYear] = verifyMonthAndYear(
-    selectedDate.day.month,
-    selectedDate.day.year
-  );
 
   useEffect(() => {
     // Generate new CalendarYear when selectedDate.year is changed

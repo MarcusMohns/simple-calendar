@@ -32,20 +32,20 @@ const themeOptions = createTheme({
   },
 });
 
+const styles = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  flexGrow: 1,
+  m: 2,
+};
+
 function App() {
   return (
     <ThemeProvider theme={themeOptions}>
       <CssBaseline />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          flexGrow: 1,
-          m: 2,
-        }}
-      >
+      <Box sx={styles}>
         <Suspense fallback={<CircularProgress color="secondary" />}>
           <Time />
         </Suspense>

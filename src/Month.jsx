@@ -37,6 +37,7 @@ const Month = ({
               }
               isSelected={
                 day.num === selectedDay.num &&
+                day.day === selectedDay.day &&
                 day.month === selectedDay.month &&
                 day.year === selectedDay.year
               }
