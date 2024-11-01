@@ -45,7 +45,8 @@ const Calendar = () => {
                 if (
                   // Find he correct day to modify
                   day.num === selectedDate.day.num &&
-                  day.day === selectedDate.day.day
+                  day.day === selectedDate.day.day &&
+                  day.month === selectedDate.day.month
                 ) {
                   // While we're here at the correct day update SelectDate state with the new day so we can show the new appointment without clicking again.
                   setSelectedDate({
@@ -103,7 +104,8 @@ const Calendar = () => {
               days: oldMonth.days.map((day) => {
                 if (
                   day.num === selectedDate.day.num &&
-                  day.day === selectedDate.day.day
+                  day.day === selectedDate.day.day &&
+                  day.month === selectedDate.day.month
                 ) {
                   const newAppointments = day.appointments.filter(
                     (appointment) => appointment.id !== id

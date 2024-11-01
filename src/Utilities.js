@@ -99,7 +99,7 @@ export const CalendarMonth = (year, month) => {
 
   // Add the first dates of the next month
   for (let i = 1; i <= daysUntilSunday; i++) {
-    // If December -> the previous months dates are from the next year and not the mythical and rare 13th month.
+    // If December -> the previous months dates are from the next year.
     const verifiedMonth = month > 10 ? 0 : month + 1;
     const verifiedYear = month > 10 ? year + 1 : year;
 
