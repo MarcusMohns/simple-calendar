@@ -72,8 +72,8 @@ export const CalendarMonth = (year, month) => {
         num: prevMonthLastDate - i + 1,
         appointments: localMemory,
         day: DAYS[new Date(year, month - 1, prevMonthLastDate - i).getDay()],
-        month: month - 1,
-        year: year,
+        month: verifiedMonth,
+        year: verifiedYear,
         currentMonth: false,
       },
     ];
@@ -114,8 +114,8 @@ export const CalendarMonth = (year, month) => {
         num: i,
         appointments: localMemory,
         day: DAYS[new Date(year, month + 1, i - 1).getDay()],
-        month: month + 1,
-        year: year,
+        month: verifiedMonth,
+        year: verifiedYear,
         currentMonth: false,
       },
     ];
@@ -123,7 +123,7 @@ export const CalendarMonth = (year, month) => {
   return dates;
 };
 
-export const verifyMonthAndYear = (month, year) => {
+export const verifyMonthAndYear = (month, year = 2000) => {
   let verifiedMonth = month;
   let verifiedYear = year;
 

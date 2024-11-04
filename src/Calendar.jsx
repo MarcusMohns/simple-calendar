@@ -33,12 +33,13 @@ const Calendar = () => {
   };
 
   const saveAppointment = (newAppointment) => {
+    console.log(verifiedMonth);
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         // Check the selected day is part of the current month on screen or an adjacent one.
-        oldMonth.id === selectedDate.day.month || // 10
-        oldMonth.id === selectedDate.day.month + 1 ||
-        oldMonth.id === selectedDate.day.month - 1
+        oldMonth.id === verifyMonthAndYear(selectedDate.month + 1)[0] ||
+        oldMonth.id === verifyMonthAndYear(selectedDate.month)[0] ||
+        oldMonth.id === verifyMonthAndYear(selectedDate.month - 1)[0]
           ? {
               ...oldMonth,
               days: oldMonth.days.map((day) => {
@@ -46,7 +47,7 @@ const Calendar = () => {
                   // Find he correct day to modify
                   day.num === selectedDate.day.num &&
                   day.day === selectedDate.day.day &&
-                  day.month === selectedDate.day.month
+                  day.month === selectedDate.day.month // verified month? check
                 ) {
                   // While we're here at the correct day update SelectDate state with the new day so we can show the new appointment without clicking again.
                   setSelectedDate({
@@ -90,9 +91,9 @@ const Calendar = () => {
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         // Check the selected day is part of the current month on screen or an adjacent one.
-        oldMonth.id === selectedDate.day.month ||
-        oldMonth.id === selectedDate.day.month + 1 ||
-        oldMonth.id === selectedDate.day.month - 1
+        oldMonth.id === verifyMonthAndYear(selectedDate.month + 1)[0] ||
+        oldMonth.id === verifyMonthAndYear(selectedDate.month)[0] ||
+        oldMonth.id === verifyMonthAndYear(selectedDate.month - 1)[0]
           ? {
               ...oldMonth,
               days: oldMonth.days.map((day) => {
@@ -152,11 +153,11 @@ const Calendar = () => {
       const monthNum = verifiedYear === selectedDate.day.year ? -1 : 0;
       setSelectedDate({
         ...selectedDate,
-        day: {
-          ...selectedDate.day,
-          month: monthNum,
-          year: selectedDate.year + 1,
-        },
+        // day: {
+        //   ...selectedDate.day,
+        //   month: monthNum,
+        //   year: selectedDate.year + 1,
+        // },
         month: 0,
         year: selectedDate.year + 1,
       });
@@ -172,17 +173,38 @@ const Calendar = () => {
       const monthNum = verifiedYear === selectedDate.day.year ? 12 : 11;
       setSelectedDate({
         ...selectedDate,
-        day: {
-          ...selectedDate.day,
-          month: monthNum,
-          year: selectedDate.year - 1,
-        },
+        // day: {
+        //   ...selectedDate.day,
+        //   month: monthNum,
+        //   year: selectedDate.year - 1,
+        // },
         month: 11,
         year: selectedDate.year - 1,
       });
     }
   };
 
+  useEffect(() => {
+    if (selectedDate.month === verifiedMonth) {
+      setSelectedDate((oldDate) => ({
+        ...oldDate,
+        days: calendar[verifiedMonth].days.map(
+          (day) =>
+            day.num === selectedDate.day.num &&
+            day.day === selectedDate.day.day &&
+            day.month === selectedDate.day.month &&
+            day.year === selectedDate.day.year &&
+            day
+        ),
+      }));
+      // console.log(calendar[selectedDate.day.month], "day.month");
+      // setSelectedDate({...selectedDate, day: })¨
+      // MAP THROUGH AND FIND CORRECT DATE..
+      // console.log(calendar[selectedDate.month], "month");
+    }
+
+    //
+  }, [selectedDate.month]);
   useEffect(() => {
     // Generate new CalendarYear when selectedDate.year is changed
     setCalendar(CalendarYear(selectedDate.year));
