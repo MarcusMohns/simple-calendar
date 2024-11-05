@@ -28,12 +28,17 @@ const Calendar = () => {
     year: currYear,
   });
 
+  // Make sure selectedDate is within 0-11 range for our DayDateDisplay
+  const [verifiedMonth, verifiedYear] = verifyMonthAndYear(
+    selectedDate.day.month,
+    selectedDate.day.year
+  );
+
   const handleSelected = (dayObj) => {
     setSelectedDate((oldDate) => ({ ...oldDate, day: dayObj }));
   };
 
   const saveAppointment = (newAppointment) => {
-    console.log(verifiedMonth);
     setCalendar((oldCalendar) =>
       oldCalendar.map((oldMonth) =>
         // Check the selected day is part of the current month on screen or an adjacent one.
@@ -72,14 +77,8 @@ const Calendar = () => {
       )
     );
 
-    // Make sure we don't save to the 13th or -1st month
-    const [month, year] = verifyMonthAndYear(
-      selectedDate.day.month,
-      selectedDate.day.year
-    );
-
     // Save to localStorage
-    const itemKey = `${selectedDate.day.num}/${month}/${year}`;
+    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory =
       oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
@@ -123,13 +122,8 @@ const Calendar = () => {
       )
     );
 
-    // Make sure we don't try to delete an entry from the 13th or -1st month
-    const [month, year] = verifyMonthAndYear(
-      selectedDate.day.month,
-      selectedDate.day.year
-    );
     // Update local storage
-    const itemKey = `${selectedDate.day.num}/${month}/${year}`;
+    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
     const oldMemory = JSON.parse(localStorage.getItem(itemKey));
     const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
     // Remove item from memory if newMemory is empty
@@ -138,26 +132,14 @@ const Calendar = () => {
       : localStorage.removeItem(itemKey);
   };
 
-  // Make sure selectedDate is within 0-11 range for our DayDateDisplay
-  const [verifiedMonth, verifiedYear] = verifyMonthAndYear(
-    selectedDate.day.month,
-    selectedDate.day.year
-  );
-
   const nextMonth = () => {
     // If less than December add a month
     if (selectedDate.month < 11) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
     } else {
       // If December add a year and set month to January
-      const monthNum = verifiedYear === selectedDate.day.year ? -1 : 0;
       setSelectedDate({
         ...selectedDate,
-        // day: {
-        //   ...selectedDate.day,
-        //   month: monthNum,
-        //   year: selectedDate.year + 1,
-        // },
         month: 0,
         year: selectedDate.year + 1,
       });
@@ -170,14 +152,8 @@ const Calendar = () => {
       setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
     } else {
       // If January subtract a year and set to December
-      const monthNum = verifiedYear === selectedDate.day.year ? 12 : 11;
       setSelectedDate({
         ...selectedDate,
-        // day: {
-        //   ...selectedDate.day,
-        //   month: monthNum,
-        //   year: selectedDate.year - 1,
-        // },
         month: 11,
         year: selectedDate.year - 1,
       });
@@ -185,7 +161,7 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    if (selectedDate.month === verifiedMonth) {
+    selectedDate.month === verifiedMonth &&
       setSelectedDate((oldDate) => ({
         ...oldDate,
         days: calendar[verifiedMonth].days.map(
@@ -197,14 +173,10 @@ const Calendar = () => {
             day
         ),
       }));
-      // console.log(calendar[selectedDate.day.month], "day.month");
-      // setSelectedDate({...selectedDate, day: })¨
-      // MAP THROUGH AND FIND CORRECT DATE..
-      // console.log(calendar[selectedDate.month], "month");
-    }
 
     //
   }, [selectedDate.month]);
+
   useEffect(() => {
     // Generate new CalendarYear when selectedDate.year is changed
     setCalendar(CalendarYear(selectedDate.year));
