@@ -16,7 +16,7 @@ const themeOptions = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#fff",
+      main: "#2b2b2b",
       light: "#fff",
     },
     secondary: {
@@ -29,6 +29,38 @@ const themeOptions = createTheme({
     background: {
       default: "#333333",
       light: "#fff",
+    },
+    info: {
+      main: "#C2C2C2",
+      light: "#3a3a3a",
+    },
+  },
+});
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "light",
+    background: {
+      default: "#f7f5ff",
+    },
+    primary: {
+      main: "#000",
+    },
+    secondary: {
+      main: "#ffc670",
+      light: "#ffdaa2",
+      dark: "#ffae35",
+    },
+    success: {
+      main: "#5897c7",
+      light: "#7fa8c7",
+      dark: "#3588c7",
+    },
+    error: {
+      main: "#c44c4a",
+    },
+    info: {
+      main: "#C2C2C2",
     },
   },
 });
@@ -44,7 +76,7 @@ const styles = {
 
 function App() {
   return (
-    <ThemeProvider theme={themeOptions}>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Box sx={styles}>
         <Suspense fallback={<CircularProgress color="secondary" />}>
