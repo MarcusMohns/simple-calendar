@@ -26,7 +26,7 @@ const Footer = () => {
           }}
         >
           <Avatar sx={{ ml: "20px", mr: "10px" }}>M</Avatar>
-          <Typography sx={{ color: "#666" }}>
+          <Typography color="info">
             Created by Marcus M using MUI & React
           </Typography>
         </Stack>
