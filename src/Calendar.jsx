@@ -189,6 +189,7 @@ const Calendar = () => {
         spacing={2}
         sx={{
           mb: 4,
+          mt: { xs: 4, lg: 2 },
           width: { xs: "100%", lg: "50%" },
           justifyContent: "space-between",
         }}

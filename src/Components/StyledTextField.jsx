@@ -55,7 +55,10 @@ const StyledTextField = ({
     ) : (
       <>
         <FormControl>
-          <InputLabel id="event-icon-select-label" sx={{ top: "12px" }}>
+          <InputLabel
+            id="event-icon-select-label"
+            sx={{ top: "12px", left: "-2px" }}
+          >
             Icon
           </InputLabel>
           <Select
@@ -69,6 +72,10 @@ const StyledTextField = ({
             size="small"
             sx={{
               display: "block",
+              "& .MuiSvgIcon-root": {
+                top: "20px",
+                right: { xs: "0px", md: "5px" },
+              },
             }}
           >
             {ICONS.map((icon, idx) => (

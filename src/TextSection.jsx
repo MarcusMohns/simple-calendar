@@ -100,7 +100,7 @@ const TextSection = ({ saveAppointment }) => {
       <Button
         variant="contained"
         color="secondary"
-        sx={{ width: "25%" }}
+        sx={{ width: { xs: "100%", md: "50%", lg: "25%" } }}
         onClick={handleSubmit}
       >
         add
