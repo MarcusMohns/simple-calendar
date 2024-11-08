@@ -107,7 +107,7 @@ const lightTheme = createTheme({
       main: "#ffc670",
       light: "#ffdaa2",
       dark: "#ffae35",
-      highlight: "#e98e06",
+      highlight: "#fd8700",
     },
     success: {
       main: "#5897c7",
