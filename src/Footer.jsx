@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@mui/material/Divider";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -9,12 +8,9 @@ const Footer = () => {
     <div>
       <Stack
         direction="row"
-        divider={<Divider orientation="vertical" flexItem />}
         sx={{
-          justifyContent: "space-evenly",
-          alignItems: "center",
           width: "100%",
-          pb: 2,
+          mb: 2,
         }}
       >
         <Stack

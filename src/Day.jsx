@@ -25,7 +25,9 @@ const Day = ({ day, handleSelected, isSelected, isToday }) => {
           minHeight: { lg: "58px" },
           width: "100%",
           color: day.currentMonth ? "primary" : "#919191",
-          border: isSelected ? "3px solid #000000" : "3px solid transparent",
+          borderWidth: "5px",
+          borderStyle: "solid",
+          borderColor: isSelected ? "secondary.highlight" : "transparent",
         }}
         color={isToday ? "success" : "secondary"}
       >
@@ -35,3 +37,6 @@ const Day = ({ day, handleSelected, isSelected, isToday }) => {
   );
 };
 export default Day;
+
+// af9e9e86
+// 9c9c9ca0

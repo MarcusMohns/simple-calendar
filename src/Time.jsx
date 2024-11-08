@@ -29,7 +29,6 @@ const Time = () => {
         flexDirection: "column",
         alignItems: "center",
         width: "100%",
-        marginTop: "10px",
       }}
     >
       <Typography variant="h2">
