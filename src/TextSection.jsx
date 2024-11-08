@@ -1,15 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { Box } from "@mui/material";
-import { Stack } from "@mui/material";
 import StyledTextField from "./Components/StyledTextField";
 import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { TimePicker } from "@mui/x-date-pickers";
-import { renderTimeViewClock } from "@mui/x-date-pickers/timeViewRenderers";
 import Button from "@mui/material/Button";
 import { v4 as uuidv4 } from "uuid";
+import TimePickers from "./Components/TimePickers";
 
 const TextSection = ({ saveAppointment }) => {
   const [text, setText] = useState("");
@@ -58,45 +56,23 @@ const TextSection = ({ saveAppointment }) => {
         error={error}
         setError={setError}
       />
-      <Stack
-        spacing={{ xs: 1, md: 5 }}
-        direction="row"
-        sx={{ width: "100%", my: 1 }}
-      >
-        <StyledTextField
-          text={location}
-          setText={setLocation}
-          icon="location"
-          label={"Add a location"}
-          error={false}
+
+      <StyledTextField
+        text={location}
+        setText={setLocation}
+        icon="location"
+        label={"Add a location"}
+        error={false}
+      />
+      <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
+        <TimePickers
+          fromTime={fromTime}
+          setFromTime={setFromTime}
+          toTime={toTime}
+          setToTime={setToTime}
         />
-        <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
-          <TimePicker
-            label="From"
-            value={fromTime}
-            name="time"
-            onChange={(e) => setFromTime(e)}
-            referenceDate={dayjs("2022-04-17")}
-            viewRenderers={{
-              hours: renderTimeViewClock,
-              minutes: renderTimeViewClock,
-            }}
-            ampm={false}
-          />
-          <TimePicker
-            label="To"
-            value={toTime}
-            name="time"
-            onChange={(e) => setToTime(e)}
-            referenceDate={dayjs("2022-04-17")}
-            viewRenderers={{
-              hours: renderTimeViewClock,
-              minutes: renderTimeViewClock,
-            }}
-            ampm={false}
-          />
-        </LocalizationProvider>
-      </Stack>
+      </LocalizationProvider>
+
       <Button
         variant="contained"
         color="secondary"
