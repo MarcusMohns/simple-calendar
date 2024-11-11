@@ -24,12 +24,12 @@ const Day = ({ day, handleSelected, isSelected, isToday }) => {
           minWidth: { xs: "40px", lg: "56px" },
           minHeight: { lg: "58px" },
           width: "100%",
-          color: day.currentMonth ? "primary" : "#919191",
+          color: day.currentMonth ? "primary" : "primary.faded",
           borderWidth: "5px",
           borderStyle: "solid",
           borderColor: isSelected ? "secondary.highlight" : "transparent",
         }}
-        color={isToday ? "success" : "secondary"}
+        color={isToday ? "success" : day.currentMonth ? "secondary" : "info"}
       >
         {day.num}
       </Button>
