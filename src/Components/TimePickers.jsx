@@ -15,9 +15,9 @@ const TimePickers = memo(function TimePickers({
 }) {
   return (
     <Stack
-      spacing={{ xs: 1, md: 5 }}
+      spacing={{ xs: 1, md: 2 }}
       direction="row"
-      sx={{ width: "100%", my: 1 }}
+      sx={{ marginBottom: "23px", ml: 2 }}
     >
       <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
         <TimePicker

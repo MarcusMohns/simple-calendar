@@ -1,10 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import StyledTextField from "./Components/StyledTextField";
 import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import Button from "@mui/material/Button";
 import { v4 as uuidv4 } from "uuid";
 import TimePickers from "./Components/TimePickers";
@@ -56,22 +54,27 @@ const TextSection = ({ saveAppointment }) => {
         error={error}
         setError={setError}
       />
-
-      <StyledTextField
-        text={location}
-        setText={setLocation}
-        icon="location"
-        label={"Add a location"}
-        error={false}
-      />
-      <LocalizationProvider dateAdapter={AdapterDayjs} name="time">
+      <Stack
+        direction="row"
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <StyledTextField
+          text={location}
+          setText={setLocation}
+          icon="location"
+          label={"Add a location"}
+          error={false}
+        />
         <TimePickers
           fromTime={fromTime}
           setFromTime={setFromTime}
           toTime={toTime}
           setToTime={setToTime}
         />
-      </LocalizationProvider>
+      </Stack>
 
       <Button
         variant="contained"

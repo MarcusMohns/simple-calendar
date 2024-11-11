@@ -109,7 +109,6 @@ const StyledTextField = ({
           sx={{
             button: { paddingRight: "0px" },
             width: "100%",
-            marginLeft: "5px",
           }}
           slotProps={{
             input: {
