@@ -55,10 +55,10 @@ const TextSection = ({ saveAppointment }) => {
         setError={setError}
       />
       <Stack
-        direction="row"
         sx={{
           justifyContent: "center",
           alignItems: "center",
+          flexDirection: { xs: "col", sm: "row" },
         }}
       >
         <StyledTextField

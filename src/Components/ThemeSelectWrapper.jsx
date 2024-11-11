@@ -142,7 +142,7 @@ const ThemeSelectWrapper = ({ children }) => {
         sx={{
           minWidth: "100%",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: { xs: "center", sm: "flex-end" },
           p: 2,
         }}
         direction="row"
