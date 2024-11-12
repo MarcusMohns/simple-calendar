@@ -161,6 +161,7 @@ const Calendar = () => {
   };
 
   useEffect(() => {
+    // If selectedDate.day is part of one of the adjacent months and one of those months are selected, re-select that day in the new viewed month.
     selectedDate.month === verifiedMonth &&
       setSelectedDate((oldDate) => ({
         ...oldDate,

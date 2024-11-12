@@ -34,8 +34,8 @@ function App() {
         <Suspense fallback={<CircularProgress color="secondary" />}>
           <Calendar />
         </Suspense>
+        <Footer />
       </Box>
-      <Footer />
     </ThemeSelectWrapper>
   );
 }

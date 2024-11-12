@@ -35,6 +35,9 @@ export const MONTHS = [
 ];
 
 export const CalendarMonth = (year, month) => {
+  // Generate a month (including a few days from adjacent months depending on when the previous monday was and the next sunday is) -
+  // Also add appointments that were previously saved to localStorage
+
   const date = new Date(year, month);
 
   let dates = [];
@@ -124,13 +127,16 @@ export const CalendarMonth = (year, month) => {
 };
 
 export const verifyMonthAndYear = (month, year = 2000) => {
+  // Keep months within 0-11
   let verifiedMonth = month;
   let verifiedYear = year;
 
+  // 12th month is 1st of next year
   if (month > 11) {
     verifiedMonth = 0;
     verifiedYear = year + 1;
   }
+  // -1st month is the 12th of the previous year
   if (month < 0) {
     verifiedMonth = 11;
     verifiedYear = year - 1;
