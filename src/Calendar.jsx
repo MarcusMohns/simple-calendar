@@ -172,8 +172,6 @@ const Calendar = () => {
             day
         ),
       }));
-
-    //
   }, [selectedDate.month]);
 
   useEffect(() => {

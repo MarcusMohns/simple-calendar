@@ -13,7 +13,12 @@ const Month = ({
   currYear,
 }) => {
   return (
-    <Box sx={{ flexGrow: 1, maxWidth: { xs: "100%", lg: "50%" } }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        maxWidth: { xs: "100%", lg: "50%" },
+      }}
+    >
       <Grid container spacing={1} columns={7}>
         {DAYS.map((day) => (
           <Grid size={1} key={day} sx={{ textAlign: "center" }}>
