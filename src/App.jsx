@@ -1,6 +1,5 @@
-import CssBaseline from "@mui/material/CssBaseline";
 import { Suspense, lazy } from "react";
-import CircularProgress from "@mui/material/CircularProgress";
+import { CircularProgress, CssBaseline } from "@mui/material";
 import Box from "@mui/material/Box";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";

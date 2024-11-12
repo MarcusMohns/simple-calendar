@@ -5,9 +5,7 @@ import TextSection from "./TextSection";
 import SelectMonth from "./Components/SelectMonth";
 import SelectYear from "./Components/SelectYear";
 import DayDateDisplay from "./Components/DayDateDisplay";
-import Typography from "@mui/material/Typography";
-import CircularProgress from "@mui/material/CircularProgress";
-import Stack from "@mui/material/Stack";
+import { Stack, CircularProgress, Typography } from "@mui/material";
 
 const Month = lazy(() => import("./Month"));
 const Appointments = lazy(() => import("./Appointments"));

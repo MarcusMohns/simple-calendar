@@ -1,8 +1,7 @@
-import React from "react";
-import Typography from "@mui/material/Typography";
+import { React, useEffect, useState } from "react";
 import { WEEK } from "./Utilities";
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import Typography from "@mui/material/Typography";
 import DayDateDisplay from "./Components/DayDateDisplay";
 
 const Time = () => {
