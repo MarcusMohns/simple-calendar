@@ -1,14 +1,13 @@
 import * as React from "react";
-import { useState, useEffect, Suspense, lazy } from "react";
+import { useState, useEffect } from "react";
 import { CalendarYear, verifyMonthAndYear } from "./Utilities";
 import TextSection from "./TextSection";
 import SelectMonth from "./Components/SelectMonth";
 import SelectYear from "./Components/SelectYear";
 import DayDateDisplay from "./Components/DayDateDisplay";
-import { Stack, CircularProgress, Typography } from "@mui/material";
-
-const Month = lazy(() => import("./Month"));
-const Appointments = lazy(() => import("./Appointments"));
+import { Stack, Typography } from "@mui/material";
+import Month from "./Month";
+import Appointments from "./Appointments";
 
 const d = new Date();
 const currDay = d.getDate();
@@ -203,16 +202,14 @@ const Calendar = () => {
           setSelectedDate={setSelectedDate}
         />
       </Stack>
-      <Suspense fallback={<CircularProgress color="secondary" />}>
-        <Month
-          month={calendar[selectedDate.month]}
-          selectedDay={selectedDate.day}
-          handleSelected={handleSelected}
-          currDay={currDay}
-          currMonth={currMonth}
-          currYear={currYear}
-        />
-      </Suspense>
+      <Month
+        month={calendar[selectedDate.month]}
+        selectedDay={selectedDate.day}
+        handleSelected={handleSelected}
+        currDay={currDay}
+        currMonth={currMonth}
+        currYear={currYear}
+      />
       <TextSection saveAppointment={saveAppointment} />
       <Typography
         variant="subtitle1"
@@ -229,12 +226,10 @@ const Calendar = () => {
           year={verifiedYear}
         />
       </Typography>
-      <Suspense fallback={<CircularProgress color="secondary" />}>
-        <Appointments
-          appointments={selectedDate.day.appointments}
-          deleteAppointment={deleteAppointment}
-        />
-      </Suspense>
+      <Appointments
+        appointments={selectedDate.day.appointments}
+        deleteAppointment={deleteAppointment}
+      />
     </>
   );
 };

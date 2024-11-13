@@ -1,11 +1,11 @@
 import { Suspense, lazy } from "react";
-import { CircularProgress, CssBaseline } from "@mui/material";
-import Box from "@mui/material/Box";
+import { CssBaseline, Box } from "@mui/material";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Footer from "./Footer";
+import { TimeSkeleton, CalendarSkeleton } from "./Components/Skeletons";
 
 const Time = lazy(() => import("./Time"));
 const Calendar = lazy(() => import("./Calendar"));
@@ -27,10 +27,10 @@ function App() {
     <ThemeSelectWrapper>
       <CssBaseline />
       <Box sx={styles}>
-        <Suspense fallback={<CircularProgress color="secondary" />}>
+        <Suspense fallback={<TimeSkeleton />}>
           <Time />
         </Suspense>
-        <Suspense fallback={<CircularProgress color="secondary" />}>
+        <Suspense fallback={<CalendarSkeleton />}>
           <Calendar />
         </Suspense>
         <Footer />
