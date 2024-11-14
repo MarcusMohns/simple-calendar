@@ -127,10 +127,18 @@ const lightTheme = createTheme({
 });
 
 const ThemeSelectWrapper = ({ children }) => {
-  const [darkMode, setDarkMode] = useState(true);
+  // Get true or false for darkMode from localStorage, if empty set to true.
+  const darkModeData =
+    localStorage.getItem("Darkmode") !== null
+      ? JSON.parse(localStorage.getItem("Darkmode"))
+      : true;
 
+  const [darkMode, setDarkMode] = useState(darkModeData);
+
+  // Toggle between dark mode and lightmode and save to localStorage
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+    localStorage.setItem("Darkmode", JSON.stringify(!darkMode));
+    setDarkMode((oldDarkMode) => !oldDarkMode);
   };
 
   return (
