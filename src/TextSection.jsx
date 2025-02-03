@@ -11,7 +11,7 @@ const TextSection = ({ saveAppointment }) => {
   const [fromTime, setFromTime] = useState(dayjs());
   const [toTime, setToTime] = useState(dayjs());
   const [location, setLocation] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(text.length === 0);
 
   const handleSubmit = () => {
     if (text.length) {
@@ -25,7 +25,6 @@ const TextSection = ({ saveAppointment }) => {
       });
       setText("");
       setLocation("");
-      setError(false);
     } else {
       setError(true);
     }
@@ -37,7 +36,6 @@ const TextSection = ({ saveAppointment }) => {
         component: "form",
         display: "flex",
         flexDirection: "column",
-        width: { xs: "100%", lg: "50%" },
         m: 2,
         p: 2,
       }}
@@ -76,7 +74,8 @@ const TextSection = ({ saveAppointment }) => {
 
       <Button
         variant="contained"
-        color="secondary"
+        color="success"
+        disabled={error}
         sx={{ width: { xs: "100%", md: "50%", lg: "25%" } }}
         onClick={handleSubmit}
       >

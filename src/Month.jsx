@@ -16,7 +16,6 @@ const Month = ({
     <Box
       sx={{
         flexGrow: 1,
-        maxWidth: { xs: "100%", lg: "50%" },
       }}
     >
       <Grid container spacing={1} columns={7}>

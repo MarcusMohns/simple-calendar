@@ -5,7 +5,7 @@ import TextSection from "./TextSection";
 import SelectMonth from "./Components/SelectMonth";
 import SelectYear from "./Components/SelectYear";
 import DayDateDisplay from "./Components/DayDateDisplay";
-import { Stack, Typography } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import Month from "./Month";
 import Appointments from "./Appointments";
 
@@ -179,15 +179,22 @@ const Calendar = () => {
   }, [selectedDate.year]);
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: { xs: "100%", lg: "40%" },
+      }}
+    >
       <Stack
         direction="row"
         spacing={2}
         sx={{
           mb: 4,
           mt: { xs: 4, lg: 2 },
-          width: { xs: "100%", lg: "50%" },
           justifyContent: "space-between",
+          width: "100%",
         }}
       >
         <SelectMonth
@@ -211,26 +218,18 @@ const Calendar = () => {
         currYear={currYear}
       />
       <TextSection saveAppointment={saveAppointment} />
-      <Typography
-        variant="subtitle1"
-        sx={{
-          width: { xs: "100%", lg: "50%" },
-          borderTop: "1px solid grey",
-          pt: 3,
-        }}
-      >
-        <DayDateDisplay
-          day={selectedDate.day.day}
-          date={selectedDate.day.num}
-          month={verifiedMonth}
-          year={verifiedYear}
-        />
-      </Typography>
+
+      <DayDateDisplay
+        day={selectedDate.day.day}
+        date={selectedDate.day.num}
+        month={verifiedMonth}
+        year={verifiedYear}
+      />
       <Appointments
         appointments={selectedDate.day.appointments}
         deleteAppointment={deleteAppointment}
       />
-    </>
+    </Box>
   );
 };
 
