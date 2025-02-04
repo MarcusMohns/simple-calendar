@@ -1,7 +1,7 @@
 import React from "react";
-import Appointment from "./Appointment";
 import { TransitionGroup } from "react-transition-group";
 import { List, ListItem, Collapse } from "@mui/material";
+import Appointment from "./Components/Appointment";
 
 const Appointments = ({ appointments, deleteAppointment }) => {
   return (

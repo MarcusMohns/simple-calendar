@@ -1,8 +1,8 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid2";
-import Day from "./Day";
-import { DAYS } from "./Utilities";
+import Day from "./Components/Day";
+import { DAYS } from "../../Utilities";
 
 const Month = ({
   month,

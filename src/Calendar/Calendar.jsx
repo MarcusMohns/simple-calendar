@@ -1,13 +1,13 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { CalendarYear, verifyMonthAndYear } from "./Utilities";
-import TextSection from "./TextSection";
+import { CalendarYear, verifyMonthAndYear } from "../Utilities";
 import SelectMonth from "./Components/SelectMonth";
 import SelectYear from "./Components/SelectYear";
-import DayDateDisplay from "./Components/DayDateDisplay";
+import DayDateDisplay from "../Components/DayDateDisplay";
 import { Stack, Box } from "@mui/material";
-import Month from "./Month";
-import Appointments from "./Appointments";
+import Month from "./Month/Month";
+import Appointments from "./Appointments/Appointments";
+import InputAppointment from "./InputAppointment/InputAppointment";
 
 const d = new Date();
 const currDay = d.getDate();
@@ -218,7 +218,7 @@ const Calendar = () => {
         currMonth={currMonth}
         currYear={currYear}
       />
-      <TextSection saveAppointment={saveAppointment} />
+      <InputAppointment saveAppointment={saveAppointment} />
 
       <DayDateDisplay
         day={selectedDate.day.day}

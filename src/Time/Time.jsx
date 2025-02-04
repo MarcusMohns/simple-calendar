@@ -1,7 +1,7 @@
-import { React, useEffect, useState } from "react";
-import { WEEK } from "./Utilities";
+import { React, useEffect, useState, Suspense } from "react";
+import { WEEK } from "../Utilities";
 import { Box, Typography } from "@mui/material";
-import DayDateDisplay from "./Components/DayDateDisplay";
+import DayDateDisplay from "../Components/DayDateDisplay";
 
 const Time = () => {
   const [time, setTime] = useState(new Date());

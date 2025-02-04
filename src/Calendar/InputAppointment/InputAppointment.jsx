@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import TimePickers from "./Components/TimePickers";
 
-const TextSection = ({ saveAppointment }) => {
+const AddAppointment = ({ saveAppointment }) => {
   const [text, setText] = useState("");
   const [textImage, setTextImage] = useState(1);
   const [fromTime, setFromTime] = useState(dayjs());
@@ -85,4 +85,4 @@ const TextSection = ({ saveAppointment }) => {
   );
 };
 
-export default TextSection;
+export default AddAppointment;
