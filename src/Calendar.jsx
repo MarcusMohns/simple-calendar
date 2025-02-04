@@ -194,6 +194,7 @@ const Calendar = () => {
           mb: 4,
           mt: { xs: 4, lg: 2 },
           justifyContent: "space-between",
+          alignItems: "center",
           width: "100%",
         }}
       >
