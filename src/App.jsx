@@ -6,10 +6,12 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import Footer from "./Footer";
 import ThemeSelectWrapper from "./Components/ThemeSelectWrapper";
-import { TimeSkeleton, CalendarSkeleton } from "./Components/Skeletons";
+import TimeSkeleton from "./Time/Components/TimeSkeleton";
+import CalendarSkeleton from "./Calendar/Components/CalendarSkeleton";
+import Weather from "./Weather/Weather";
 
-const Time = lazy(() => import("./Time"));
-const Calendar = lazy(() => import("./Calendar"));
+const Time = lazy(() => import("./Time/Time"));
+const Calendar = lazy(() => import("./Calendar/Calendar"));
 
 const styles = {
   display: "flex",
@@ -31,6 +33,7 @@ function App() {
         <Suspense fallback={<CalendarSkeleton />}>
           <Calendar />
         </Suspense>
+        <Weather />
         <Footer />
       </Box>
     </ThemeSelectWrapper>
