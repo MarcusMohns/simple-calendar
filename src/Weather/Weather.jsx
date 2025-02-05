@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from "react";
 import getLocation from "./API/GetLocation";
-import getTemperature from "./API/getTemperature";
+import getWeather from "./API/getWeather";
+import weatherCodeGifs from "./API/weatherCodeGifs";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+
+import Accordion from "@mui/material/Accordion";
+import AccordionActions from "@mui/material/AccordionActions";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 
 const Weather = () => {
   const [location, setLocation] = useState(null);
@@ -44,27 +55,97 @@ const Weather = () => {
     },
   });
 
-  useEffect(() => {
+  const getAndSetLocation = () => {
     getLocation(setLocation);
-  }, []);
+  };
 
-  // useEffect(() => {
-  //   getTemperature(setWeather);
-  // }, [location]);
+  useEffect(() => {
+    if (location) {
+      // getWeather(setWeather,location);
+      console.log("getWeather is run!");
+    }
+  }, [location]);
 
   return (
-    <div>
-      {weather.current.temperature} cold!
-      {weather.current.weather_descriptions[0]} yees....
-      <img
-        // srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-        src={weather.current.weather_icons[0]}
-        alt={weather.current.weather_descriptions[0]}
-        loading="lazy"
-      />
-      {/* <button onClick={fetchTemperature}>Fetch Weather</button> */}
-      {/* <button onClick={getLocation}>Location</button> */}
-    </div>
+    <Accordion
+      defaultExpanded
+      sx={{
+        position: { lg: "absolute", xs: "static" },
+        right: "20px",
+        top: "110px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "greenSuccess.dark",
+        boxShadow: 10,
+        width: "330px",
+        mb: { lg: 0, xs: 10 },
+        p: 2,
+      }}
+    >
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="weather-panel-content"
+        id="weather-panel-header"
+        sx={{ width: "100%" }}
+      >
+        <Typography
+          component="span"
+          sx={{ width: "100px", textAlign: "center" }}
+        >
+          Weather 🌦️
+        </Typography>
+      </AccordionSummary>
+      <AccordionDetails sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography variant="caption" sx={{ textAlign: "center" }}>
+          {weather.location.name}, {weather.location.region},{" "}
+          {weather.location.country} 🚩
+        </Typography>
+        <Box
+          direction="row"
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            p: 2,
+            width: "100%",
+          }}
+        >
+          <Stack
+            direction={"column"}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography variant="caption" sx={{ fontSize: 33 }}>
+              {weather.current.temperature}°C
+            </Typography>
+            <img
+              src={weatherCodeGifs[weather.current.weather_code]}
+              alt={weather.current.weather_descriptions[0]}
+              loading="lazy"
+            />
+            {weather.current.weather_descriptions[0]}
+          </Stack>
+
+          <Stack spacing={2}>
+            <Typography sx={{ fontSize: "16px" }}>
+              🙋‍♀️ Feels like: {weather.current.feelslike}°C
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>
+              💦 Humidity: {weather.current.humidity}%
+            </Typography>
+            <Typography sx={{ fontSize: "16px" }}>
+              💨 Wind: {weather.current.wind_speed} km/h
+            </Typography>
+          </Stack>
+        </Box>
+        {/* <Typography variant="caption">https://icons8.com/icons</Typography> */}
+      </AccordionDetails>
+    </Accordion>
   );
 };
 

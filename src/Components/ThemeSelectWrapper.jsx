@@ -84,6 +84,11 @@ const darkTheme = createTheme({
     error: {
       main: "#e0605e",
     },
+    greenSuccess: {
+      main: "#2e7d32",
+      light: "#4caf50",
+      dark: "#1c5334",
+    },
 
     info: {
       main: "#2b2b2b",
