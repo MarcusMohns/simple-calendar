@@ -7,7 +7,7 @@ const Appointments = ({ appointments, deleteAppointment }) => {
   return (
     <List
       sx={{
-        width: { xs: "100%", lg: "50%" },
+        width: "100%",
         minHeight: "300px",
         padding: 1,
         margin: 2,
