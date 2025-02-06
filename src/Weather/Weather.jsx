@@ -37,10 +37,10 @@ const Weather = () => {
     <Accordion
       defaultExpanded
       sx={{
+        display: { lg: "flex", xs: "none" },
         position: { lg: "absolute", xs: "static" },
         right: "20px",
         top: "110px",
-        display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
@@ -108,7 +108,7 @@ const Weather = () => {
             }}
           >
             <Stack
-              direction={"column"}
+              direction="column"
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -145,7 +145,7 @@ const Weather = () => {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                position: { lg: "absolute", xs: "static" },
+                position: "absolute",
                 top: 0,
                 left: 0,
                 height: "100%",
