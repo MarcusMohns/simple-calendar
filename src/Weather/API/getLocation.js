@@ -1,13 +1,32 @@
-export const getLocation = async (setLocation) => {
-  // TODO make this function only run after a user has given permission  to access their location
-  const getLatLon = (position) => {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    setLocation({ latitude: lat, longitude: lon });
+const getLocation = async (setError, setLoading) => {
+  setLoading(true);
+
+  const options = {
+    enableHighAccuracy: false,
+    timeout: 5000,
+    maximumAge: 0,
   };
-  return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
-  }).then(getLatLon);
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+  const position = await new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(
+      resolve,
+      (error) => {
+        console.error("Error getting location:", error);
+        setError({ bool: true, message: error.message, code: error.code });
+        setLoading(false);
+      },
+      options
+    );
+  });
+
+  setError({ bool: false, message: "", code: 0 });
+  setLoading(false);
+
+  return {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+  };
 };
 
 export default getLocation;
