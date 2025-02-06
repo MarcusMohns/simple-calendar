@@ -1,5 +1,8 @@
 import React from "react";
-import { Avatar, Stack, Box, Typography } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 const Footer = () => {
   return (

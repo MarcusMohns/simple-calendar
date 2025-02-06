@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { MONTHS } from "../Utilities";
 
 const DayDateDisplay = ({ day = 1, date = 1, month = 1, year = 2000 }) => {

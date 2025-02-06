@@ -2,8 +2,10 @@ import * as React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import { ListItem, ListItemText, ListItemAvatar, Avatar } from "@mui/material";
-
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
 import EventIcon from "@mui/icons-material/Event";
 import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";

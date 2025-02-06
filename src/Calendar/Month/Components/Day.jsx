@@ -1,5 +1,7 @@
 import React from "react";
-import { Badge, Button } from "@mui/material";
+import Badge from "@mui/material/Badge";
+import Button from "@mui/material/Button";
+
 import { styled } from "@mui/material/styles";
 
 const StyledBadge = styled(Badge)(() => ({

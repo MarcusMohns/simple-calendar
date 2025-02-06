@@ -1,5 +1,7 @@
 import React from "react";
-import { Skeleton, Box, Stack } from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 export const CalendarSkeleton = () => (
   <Box sx={{ width: { xs: "100%", lg: "50%" }, mb: 5 }}>

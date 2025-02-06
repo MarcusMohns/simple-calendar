@@ -161,7 +161,6 @@ const Weather = () => {
                   onClick={handleLocation}
                   variant="contained"
                   color="success"
-                  loading={loading}
                 >
                   Set location 🚩
                 </Button>

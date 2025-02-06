@@ -1,7 +1,10 @@
 import * as React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useState } from "react";
-import { styled, Switch, Typography, Stack } from "@mui/material";
+import styled from "@mui/material/styles/styled";
+import Switch from "@mui/material/Switch";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,

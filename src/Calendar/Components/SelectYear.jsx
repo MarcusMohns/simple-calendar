@@ -1,5 +1,8 @@
 import { React, memo } from "react";
-import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 const SelectYear = memo(function Greeting({ selectedYear, setSelectedDate }) {
   const handleChange = (event) => {

@@ -1,16 +1,13 @@
 import React from "react";
-import {
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-  Tooltip,
-  IconButton,
-  Zoom,
-  Box,
-  TextField,
-} from "@mui/material";
-
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import Zoom from "@mui/material/Zoom";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import PlaceIcon from "@mui/icons-material/Place";
 import EventIcon from "@mui/icons-material/Event";
 import AirplanemodeActiveIcon from "@mui/icons-material/AirplanemodeActive";
