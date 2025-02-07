@@ -46,7 +46,7 @@ const StyledTextField = ({
 
   const SendTooltipIcon = () =>
     icon === "location" ? (
-      <Tooltip title="Location" placement="right" TransitionComponent={Zoom}>
+      <Tooltip title="Location" placement="right">
         <IconButton sx={{ cursor: "pointer" }}>
           <PlaceIcon />
         </IconButton>
@@ -54,28 +54,19 @@ const StyledTextField = ({
     ) : (
       <>
         <FormControl>
-          <InputLabel
-            id="event-icon-select-label"
-            sx={{ top: "12px", left: "-2px" }}
-          >
+          <InputLabel id="event-icon-select-label" sx={{ mt: "2px" }}>
             Icon
           </InputLabel>
           <Select
+            label="Icon"
             margin="none"
             id="event-icon-select"
             labelId="event-icon-select-label"
             value={textImage}
             onChange={handleSelectChange}
             name="event-icon-select"
-            variant="filled"
+            variant="outlined"
             size="small"
-            sx={{
-              display: "block",
-              "& .MuiSvgIcon-root": {
-                top: "20px",
-                right: { xs: "0px", md: "5px" },
-              },
-            }}
           >
             {ICONS.map((icon, idx) => (
               <MenuItem value={idx} key={`${idx + icon}`}>

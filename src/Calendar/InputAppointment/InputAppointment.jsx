@@ -13,7 +13,7 @@ const AddAppointment = ({ saveAppointment }) => {
   const [fromTime, setFromTime] = useState(dayjs());
   const [toTime, setToTime] = useState(dayjs());
   const [location, setLocation] = useState("");
-  const [error, setError] = useState(text.length === 0);
+  const [error, setError] = useState(false);
 
   const handleSubmit = () => {
     if (text.length) {
@@ -38,8 +38,10 @@ const AddAppointment = ({ saveAppointment }) => {
         component: "form",
         display: "flex",
         flexDirection: "column",
-        m: 2,
-        p: 2,
+        m: { xs: 0, s: 2 },
+        mt: { xs: 3, s: 0 },
+        mb: { xs: 3, s: 0 },
+        p: { xs: 0, s: 2 },
       }}
     >
       <StyledTextField
