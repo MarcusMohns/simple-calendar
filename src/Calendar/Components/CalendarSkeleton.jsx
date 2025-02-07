@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 
 export const CalendarSkeleton = () => (
-  <Box sx={{ width: { xs: "100%", lg: "50%" }, mb: 5 }}>
+  <Box sx={{ width: { xs: "100%", lg: "40%" }, mb: 5 }}>
     <Stack
       direction="row"
       spacing={2}
