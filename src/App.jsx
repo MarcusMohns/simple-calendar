@@ -9,8 +9,9 @@ import Footer from "./Footer";
 import ThemeSelectWrapper from "./Components/ThemeSelectWrapper";
 import TimeSkeleton from "./Time/Components/TimeSkeleton";
 import CalendarSkeleton from "./Calendar/Components/CalendarSkeleton";
-import Weather from "./Weather/Weather";
+import WeatherSkeleton from "./Weather/API/Components/WeatherSkeleton";
 
+const Weather = lazy(() => import("./Weather/Weather"));
 const Time = lazy(() => import("./Time/Time"));
 const Calendar = lazy(() => import("./Calendar/Calendar"));
 
@@ -20,7 +21,7 @@ const styles = {
   alignItems: "center",
   justifyContent: "center",
   flexGrow: 1,
-  m: 2,
+  m: { xs: 1, s: 2 },
 };
 
 function App() {
@@ -34,7 +35,9 @@ function App() {
         <Suspense fallback={<CalendarSkeleton />}>
           <Calendar />
         </Suspense>
-        <Weather />
+        <Suspense fallback={<WeatherSkeleton />}>
+          <Weather />
+        </Suspense>
         <Footer />
       </Box>
     </ThemeSelectWrapper>
