@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import getLocation from "./API/GetLocation";
 import getWeather from "./API/getWeather";
-import weatherCodeGifs from "./API/weatherCodeGifs";
+import weatherCodeImages from "./API/weatherCodeImages";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -36,16 +36,16 @@ const Weather = () => {
   return (
     <Accordion
       defaultExpanded
+      disableGutters
       sx={{
-        display: { lg: "flex", xs: "none" },
+        display: "flex",
         position: { lg: "absolute", xs: "static" },
         right: "20px",
         top: "110px",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "greenSuccess.dark",
-        boxShadow: 10,
+        backgroundColor: "altSuccess.dark",
         width: "330px",
         mb: { lg: 0, xs: 10 },
         "& .MuiCollapse-root": {
@@ -67,7 +67,7 @@ const Weather = () => {
         </Typography>
       </AccordionSummary>
       {error.bool ? (
-        <Alert severity="error" variant="filled">
+        <Alert severity="error" variant="filled" sx={{ borderRadius: 0 }}>
           <Stack direction="column">
             {error.code
               ? `Error Code ${error.code}: ${error.message}`
@@ -75,7 +75,7 @@ const Weather = () => {
             <Button
               onClick={handleLocation}
               loading={loading}
-              color="error"
+              color="altError"
               variant="contained"
               sx={{ mt: 2 }}
             >
@@ -88,6 +88,7 @@ const Weather = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
+            position: "relative",
             p: 2,
             px: 4,
             width: "100%",
@@ -118,10 +119,16 @@ const Weather = () => {
               <Typography variant="caption" sx={{ fontSize: 33 }}>
                 {weather.current.temperature}°C
               </Typography>
-              <img
-                src={weatherCodeGifs[weather.current.weather_code]}
+              <Box
+                component="img"
+                src={
+                  weather.current.is_day === "yes"
+                    ? weatherCodeImages[weather.current.weather_code].day
+                    : weatherCodeImages[weather.current.weather_code].night
+                }
                 alt={weather.current.weather_descriptions[0]}
                 loading="lazy"
+                sx={{ height: "48px", width: "48px" }}
               />
               {weather.current.weather_descriptions[0]}
             </Stack>
