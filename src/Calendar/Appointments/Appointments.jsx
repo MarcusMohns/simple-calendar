@@ -16,9 +16,9 @@ const Appointments = ({ appointments, deleteAppointment }) => {
       }}
     >
       {appointments.length ? (
-        <TransitionGroup>
+        <TransitionGroup component="ul">
           {appointments.map((appointment) => (
-            <Collapse key={appointment.id}>
+            <Collapse key={appointment.id} component="li">
               <Appointment
                 text={appointment.text}
                 textImage={appointment.textImage}

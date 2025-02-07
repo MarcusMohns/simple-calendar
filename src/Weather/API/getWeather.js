@@ -1,5 +1,4 @@
 const getWeather = async (setWeather, location, setError, setLoading) => {
-  console.log("shouldnt be running");
   const apiKey = "367d3745bcdf94c15724c9356956d5f3";
   const url = `https://api.weatherstack.com/current?access_key=${apiKey}&query=${location.latitude},${location.longitude}`;
   const options = {

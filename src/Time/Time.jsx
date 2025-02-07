@@ -33,7 +33,7 @@ const Time = () => {
       <Typography variant="h2">
         {time.getHours()}:{minutes()}:{seconds()}
       </Typography>
-      <Typography variant="subtitle1">
+      <Typography variant="subtitle1" component="div">
         <DayDateDisplay
           day={WEEK[time.getDay()]}
           date={time.getDate()}

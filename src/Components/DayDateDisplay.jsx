@@ -1,12 +1,10 @@
 import React from "react";
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import { MONTHS } from "../Utilities";
 
 const DayDateDisplay = ({ day = 1, date = 1, month = 1, year = 2000 }) => {
   return (
-    <Typography
-      component="div"
-      variant="subtitle1"
+    <Box
       sx={{
         width: "100%",
         borderTop: "1px solid grey",
@@ -14,7 +12,7 @@ const DayDateDisplay = ({ day = 1, date = 1, month = 1, year = 2000 }) => {
       }}
     >
       {day}, {MONTHS[month]} {date}, {year}
-    </Typography>
+    </Box>
   );
 };
 

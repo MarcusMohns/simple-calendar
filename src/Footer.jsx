@@ -10,6 +10,7 @@ const Footer = () => {
       sx={{
         width: "100%",
         mb: 2,
+        mt: 10,
         justifyContent: "flex-start",
       }}
     >
@@ -20,7 +21,7 @@ const Footer = () => {
         }}
       >
         <Avatar sx={{ ml: "20px", mr: "10px" }}>M</Avatar>
-        <Typography color="primary" variant="subtitle2">
+        <Typography color="primary" variant="subtitle2" component="div">
           Created by Marcus M using MUI & React
         </Typography>
       </Stack>
