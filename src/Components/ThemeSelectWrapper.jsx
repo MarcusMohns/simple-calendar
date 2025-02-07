@@ -5,6 +5,7 @@ import styled from "@mui/material/styles/styled";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import themes from ".././Themes";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -24,15 +25,15 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       },
       "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor: "#aab4be",
+        backgroundColor: themes.light.palette.info.light,
         ...theme.applyStyles("dark", {
-          backgroundColor: "#8796A5",
+          backgroundColor: themes.dark.palette.info.light,
         }),
       },
     },
   },
   "& .MuiSwitch-thumb": {
-    backgroundColor: "#2e7d32",
+    backgroundColor: themes.light.palette.success.dark,
     width: 32,
     height: 32,
     "&::before": {
@@ -49,93 +50,18 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       )}" d="M9.305 1.667V3.75h1.389V1.667h-1.39zm-4.707 1.95l-.982.982L5.09 6.072l.982-.982-1.473-1.473zm10.802 0L13.927 5.09l.982.982 1.473-1.473-.982-.982zM10 5.139a4.872 4.872 0 00-4.862 4.86A4.872 4.872 0 0010 14.862 4.872 4.872 0 0014.86 10 4.872 4.872 0 0010 5.139zm0 1.389A3.462 3.462 0 0113.471 10a3.462 3.462 0 01-3.473 3.472A3.462 3.462 0 016.527 10 3.462 3.462 0 0110 6.528zM1.665 9.305v1.39h2.083v-1.39H1.666zm14.583 0v1.39h2.084v-1.39h-2.084zM5.09 13.928L3.616 15.4l.982.982 1.473-1.473-.982-.982zm9.82 0l-.982.982 1.473 1.473.982-.982-1.473-1.473zM9.305 16.25v2.083h1.389V16.25h-1.39z"/></svg>')`,
     },
     ...theme.applyStyles("dark", {
-      backgroundColor: "#1c5334",
+      backgroundColor: themes.dark.palette.success.main,
     }),
   },
   "& .MuiSwitch-track": {
     opacity: 1,
-    backgroundColor: "#aab4be",
+    backgroundColor: themes.light.palette.info.main,
     borderRadius: 20 / 2,
     ...theme.applyStyles("dark", {
-      backgroundColor: "#8796A5",
+      backgroundColor: themes.dark.palette.info.light,
     }),
   },
 }));
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    background: {
-      default: "#333333",
-    },
-    primary: {
-      main: "#ffffff",
-      faded: "#ffffff81",
-    },
-    secondary: {
-      main: "#444444",
-      light: "#6e6e6e",
-      dark: "#2e2e2e",
-      highlight: "#9c9c9ca0",
-      faded1: "#ff4747",
-    },
-    success: {
-      // main: "#005577",
-      // light: "#0085b9",
-      // dark: "#003950",
-      main: "#2e7d32",
-      light: "#4caf50",
-      dark: "#1c5334",
-    },
-    error: {
-      main: "#e0605e",
-    },
-    greenSuccess: {
-      main: "#2e7d32",
-      light: "#4caf50",
-      dark: "#1c5334",
-    },
-
-    info: {
-      main: "#2b2b2b",
-      light: "#8b8b8b",
-      dark: "#1b1b1b",
-    },
-  },
-});
-
-const lightTheme = createTheme({
-  palette: {
-    mode: "light",
-    background: {
-      default: "#f7f5ff",
-    },
-    primary: {
-      main: "#000",
-      faded: "#0000007f",
-    },
-    secondary: {
-      main: "#ffc670",
-      light: "#ffdaa2",
-      dark: "#ffae35",
-      highlight: "#fd8700",
-    },
-
-    success: {
-      main: "#5897c7",
-      light: "#7fa8c7",
-      dark: "#3588c7",
-    },
-    error: {
-      main: "#c44c4a",
-    },
-    info: {
-      main: "#faddb2",
-      light: "#f8e5c9",
-      dark: "#f7cc8b",
-    },
-  },
-});
 
 const ThemeSelectWrapper = ({ children }) => {
   // Get true or false for darkMode from localStorage, if empty set to true.
@@ -153,7 +79,7 @@ const ThemeSelectWrapper = ({ children }) => {
   };
 
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={darkMode ? themes.dark : themes.light}>
       <Stack
         sx={{
           minWidth: "100%",
