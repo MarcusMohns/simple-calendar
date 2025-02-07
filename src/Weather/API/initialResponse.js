@@ -34,7 +34,7 @@ const initialResponse = {
     feelslike: 0,
     uv_index: 0,
     visibility: 9,
-    is_day: "no",
+    is_day: "yes",
   },
 };
 
