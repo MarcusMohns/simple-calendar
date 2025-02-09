@@ -43,6 +43,7 @@ const dark = createTheme({
       main: "#2b2b2b",
       light: "#8b8b8b",
       dark: "#1b1b1b",
+      grey: "#2b2b2b",
     },
   },
 });
@@ -55,6 +56,7 @@ const light = createTheme({
       default: "#f7f5ff",
     },
     primary: {
+      default: "#000",
       main: "#000",
       faded: "#636363",
     },
@@ -87,8 +89,9 @@ const light = createTheme({
 
     info: {
       main: "#faddb2",
-      light: "#f8e5c9",
+      light: "#ffebcd",
       dark: "#f7cc8b",
+      grey: "#ffc670",
     },
   },
 });

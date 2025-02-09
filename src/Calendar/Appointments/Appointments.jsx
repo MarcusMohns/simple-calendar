@@ -2,12 +2,13 @@ import React from "react";
 import { TransitionGroup } from "react-transition-group";
 import Appointment from "./Components/Appointment";
 import List from "@mui/material/List";
+import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import Collapse from "@mui/material/Collapse";
 
 const Appointments = ({ appointments, deleteAppointment }) => {
   return (
-    <List
+    <Box
       sx={{
         width: "100%",
         minHeight: "300px",
@@ -16,7 +17,10 @@ const Appointments = ({ appointments, deleteAppointment }) => {
       }}
     >
       {appointments.length ? (
-        <TransitionGroup component="ul">
+        <TransitionGroup
+          component="ul"
+          style={{ listStyle: "none inside none", paddingInlineStart: 0 }}
+        >
           {appointments.map((appointment) => (
             <Collapse key={appointment.id} component="li">
               <Appointment
@@ -34,7 +38,7 @@ const Appointments = ({ appointments, deleteAppointment }) => {
       ) : (
         <ListItem>No appointments or events</ListItem>
       )}
-    </List>
+    </Box>
   );
 };
 

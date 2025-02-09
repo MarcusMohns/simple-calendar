@@ -44,17 +44,21 @@ const Appointment = ({
   );
   const StyledListItemAvatar = (
     <ListItemAvatar>
-      <Avatar>{ICONS[textImage]}</Avatar>
+      <Avatar sx={{ backgroundColor: "info.light", color: "primary.default" }}>
+        {ICONS[textImage]}
+      </Avatar>
     </ListItemAvatar>
   );
 
   return (
     <ListItem
+      component="div"
       sx={{
         padding: 1,
         mt: 1,
         borderRadius: "2px",
-        backgroundColor: "#00000021",
+        backgroundColor: "info.grey",
+        boxShadow: 4,
       }}
       secondaryAction={StyledDeleteIcon}
     >
