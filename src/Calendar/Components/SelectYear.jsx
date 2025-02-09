@@ -36,10 +36,10 @@ const SelectYear = memo(function Greeting({ selectedYear, setSelectedDate }) {
         value={selectedYear}
         onChange={handleChange}
         MenuProps={{
+          disableScrollLock: true,
           sx: {
             "& .MuiMenu-paper": {
               maxHeight: 500,
-              border: "1px solid grey",
             },
           },
         }}

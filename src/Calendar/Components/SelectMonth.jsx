@@ -44,6 +44,9 @@ const SelectMonth = ({
         <InputLabel id="month-select-label">Month</InputLabel>
         <Select
           sx={{ fontSize: "1em" }}
+          MenuProps={{
+            disableScrollLock: true,
+          }}
           labelId="month-select-label"
           value={selectedMonth}
           label="Month"

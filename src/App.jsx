@@ -21,7 +21,7 @@ const styles = {
   alignItems: "center",
   justifyContent: "center",
   flexGrow: 1,
-  m: { xs: 1, s: 2 },
+  m: { xs: 1, sm: 2 },
 };
 
 function App() {

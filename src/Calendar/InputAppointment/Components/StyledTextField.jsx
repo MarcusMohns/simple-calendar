@@ -58,6 +58,9 @@ const StyledTextField = ({
             Icon
           </InputLabel>
           <Select
+            MenuProps={{
+              disableScrollLock: true,
+            }}
             label="Icon"
             margin="none"
             id="event-icon-select"
