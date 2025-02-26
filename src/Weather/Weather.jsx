@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import getLocation from "./API/GetLocation";
+import getLocation from "./API/getLocation";
 import getWeather from "./API/getWeather";
 import weatherCodeImages from "./API/weatherCodeImages";
 import Box from "@mui/material/Box";
