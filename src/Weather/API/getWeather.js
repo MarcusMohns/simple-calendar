@@ -1,5 +1,5 @@
 const getWeather = async (setWeather, location, setError, setLoading) => {
-  const weatherStackApiKey = process.env.WEATHERSTACK_API_KEY;
+  const weatherStackApiKey = process.env.REACT_APP_WEATHERSTACK_API_KEY;
   const url = `https://api.weatherstack.com/current?access_key=${weatherStackApiKey}&query=${location.latitude},${location.longitude}`;
   const options = {
     method: "GET",
