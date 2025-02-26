@@ -1,7 +1,6 @@
 import React from "react";
 import { TransitionGroup } from "react-transition-group";
 import Appointment from "./Components/Appointment";
-import List from "@mui/material/List";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import Collapse from "@mui/material/Collapse";
