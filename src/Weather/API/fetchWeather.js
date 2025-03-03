@@ -1,4 +1,4 @@
-const getWeather = async (setWeather, location, setError, setLoading) => {
+const fetchWeather = async (setWeather, location, setError, setLoading) => {
   const weatherstackApiKey = import.meta.env
     .VITE_REACT_APP_WEATHERSTACK_API_KEY;
 
@@ -21,4 +21,4 @@ const getWeather = async (setWeather, location, setError, setLoading) => {
   }
 };
 
-export default getWeather;
+export default fetchWeather;

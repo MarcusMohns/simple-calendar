@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import getLocation from "./API/getLocation";
-import getWeather from "./API/getWeather";
+import React, { useState } from "react";
+import getLngLat from "./API/getLngLat";
+import getWeather from "./API/fetchWeather";
 import weatherCodeImages from "./API/weatherCodeImages";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -15,24 +15,19 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 
 const Weather = () => {
-  const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(initialResponse);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ bool: false, message: "", code: 0 });
 
-  const handleLocation = async () => {
-    const lngLat = await getLocation(setError, setLoading);
-    setLocation(lngLat);
-  };
-
-  useEffect(() => {
-    // Update weather state every time location is changed
-    // Don't run on initial null value
-    if (location) {
-      getWeather(setWeather, location, setError, setLoading);
+  const getWeatherByLocation = async () => {
+    try {
+      const lngLat = await getLngLat(setError, setLoading);
+      getWeather(setWeather, lngLat, setError, setLoading);
+    } catch (error) {
+      console.error("Error retrieving location and weather data:", error);
+      setError({ bool: true, message: error.message, code: error.code });
     }
-  }, [location]);
-
+  };
   return (
     <Accordion
       defaultExpanded
@@ -73,7 +68,7 @@ const Weather = () => {
               ? `Error Code ${error.code}: ${error.message}`
               : `There was a problem getting the weather`}
             <Button
-              onClick={handleLocation}
+              onClick={getWeatherByLocation}
               loading={loading}
               color="altError"
               variant="contained"
@@ -145,7 +140,7 @@ const Weather = () => {
               </Typography>
             </Stack>
           </Box>
-          {!location && (
+          {weather.is_placeholder_data && (
             <Box
               sx={{
                 display: "flex",
@@ -165,7 +160,7 @@ const Weather = () => {
                 <CircularProgress color="inherit" fontSize={32} />
               ) : (
                 <Button
-                  onClick={handleLocation}
+                  onClick={getWeatherByLocation}
                   variant="contained"
                   color="success"
                 >

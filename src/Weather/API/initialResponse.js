@@ -1,4 +1,5 @@
 const initialResponse = {
+  is_placeholder_data: true,
   request: {
     type: "LatLon",
     query: "Lat 59.48 and Lon 17.90",

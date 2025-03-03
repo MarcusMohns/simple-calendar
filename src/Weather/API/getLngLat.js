@@ -1,4 +1,4 @@
-const getLocation = async (setError, setLoading) => {
+const getLngLat = async (setError, setLoading) => {
   setLoading(true);
 
   const options = {
@@ -29,4 +29,4 @@ const getLocation = async (setError, setLoading) => {
   };
 };
 
-export default getLocation;
+export default getLngLat;
