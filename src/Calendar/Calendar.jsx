@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { CalendarYear, verifyMonthAndYear } from "../Utilities";
 import SelectMonth from "./Components/SelectMonth";
 import SelectYear from "./Components/SelectYear";
@@ -14,123 +14,130 @@ const d = new Date();
 const currDay = d.getDate();
 const currMonth = d.getMonth();
 const currYear = d.getFullYear();
-const currCalendar = CalendarYear(currYear);
 
 const Calendar = () => {
-  const [calendar, setCalendar] = useState(currCalendar);
+  const currCalendar = useMemo(() => CalendarYear(currYear), [currYear]);
 
-  // SelectedDate
+  const [calendar, setCalendar] = useState(currCalendar);
   const [selectedDate, setSelectedDate] = useState({
-    day: calendar[currMonth].days[currDay],
+    day: calendar[currMonth].days[0],
     month: currMonth,
     year: currYear,
   });
 
+  const handleSelected = useCallback((dayObj) => {
+    setSelectedDate({ ...selectedDate, day: dayObj });
+  }, []);
+
   // Make sure selectedDate is within 0-11 range for our DayDateDisplay
-  const [verifiedMonth, verifiedYear] = verifyMonthAndYear(
-    selectedDate.day.month,
-    selectedDate.day.year
+  const [verifiedMonth, verifiedYear] = useMemo(
+    () => verifyMonthAndYear(selectedDate.day.month, selectedDate.day.year),
+    [selectedDate.day.month, selectedDate.day.year]
   );
 
-  const handleSelected = (dayObj) => {
-    setSelectedDate((oldDate) => ({ ...oldDate, day: dayObj }));
-  };
+  const saveAppointment = useCallback(
+    (newAppointment) => {
+      setCalendar((oldCalendar) =>
+        oldCalendar.map((oldMonth) =>
+          // Check the selected day is part of the current month on screen or an adjacent one.
+          oldMonth.id === verifyMonthAndYear(selectedDate.month + 1)[0] ||
+          oldMonth.id === verifyMonthAndYear(selectedDate.month)[0] ||
+          oldMonth.id === verifyMonthAndYear(selectedDate.month - 1)[0]
+            ? {
+                ...oldMonth,
+                days: oldMonth.days.map((day) => {
+                  if (
+                    // Find he correct day to modify
+                    day.num === selectedDate.day.num &&
+                    day.day === selectedDate.day.day &&
+                    day.month === selectedDate.day.month // verified month? check
+                  ) {
+                    // While we're here at the correct day update SelectDate state with the new day so we can show the new appointment without clicking again.
+                    setSelectedDate({
+                      ...selectedDate,
+                      day: {
+                        ...day,
+                        appointments: [...day.appointments, newAppointment],
+                      },
+                    });
 
-  const saveAppointment = (newAppointment) => {
-    setCalendar((oldCalendar) =>
-      oldCalendar.map((oldMonth) =>
-        // Check the selected day is part of the current month on screen or an adjacent one.
-        oldMonth.id === verifyMonthAndYear(selectedDate.month + 1)[0] ||
-        oldMonth.id === verifyMonthAndYear(selectedDate.month)[0] ||
-        oldMonth.id === verifyMonthAndYear(selectedDate.month - 1)[0]
-          ? {
-              ...oldMonth,
-              days: oldMonth.days.map((day) => {
-                if (
-                  // Find he correct day to modify
-                  day.num === selectedDate.day.num &&
-                  day.day === selectedDate.day.day &&
-                  day.month === selectedDate.day.month // verified month? check
-                ) {
-                  // While we're here at the correct day update SelectDate state with the new day so we can show the new appointment without clicking again.
-                  setSelectedDate({
-                    ...selectedDate,
-                    day: {
+                    // Return the modified day to our oldMonth object with the new appointment
+                    return {
                       ...day,
                       appointments: [...day.appointments, newAppointment],
-                    },
-                  });
+                    };
+                  } else {
+                    return day;
+                  }
+                }),
+              }
+            : oldMonth
+        )
+      );
 
-                  // Return the modified day to our oldMonth object with the new appointment
-                  return {
-                    ...day,
-                    appointments: [...day.appointments, newAppointment],
-                  };
-                } else {
-                  return day;
-                }
-              }),
-            }
-          : oldMonth
-      )
-    );
+      // Save to localStorage
+      const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
+      const oldMemory = JSON.parse(localStorage.getItem(itemKey));
+      const newMemory =
+        oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
 
-    // Save to localStorage
-    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
-    const oldMemory = JSON.parse(localStorage.getItem(itemKey));
-    const newMemory =
-      oldMemory !== null ? [...oldMemory, newAppointment] : [newAppointment];
+      localStorage.setItem(itemKey, JSON.stringify(newMemory));
+    },
+    [verifiedMonth, verifiedYear]
+  );
 
-    localStorage.setItem(itemKey, JSON.stringify(newMemory));
-  };
+  const deleteAppointment = useCallback(
+    (id) => {
+      setCalendar((oldCalendar) =>
+        oldCalendar.map((oldMonth) =>
+          // Check the selected day is part of the current month on screen or an adjacent one.
+          oldMonth.id === verifyMonthAndYear(selectedDate.month + 1)[0] ||
+          oldMonth.id === verifyMonthAndYear(selectedDate.month)[0] ||
+          oldMonth.id === verifyMonthAndYear(selectedDate.month - 1)[0]
+            ? {
+                ...oldMonth,
+                days: oldMonth.days.map((day) => {
+                  if (
+                    day.num === selectedDate.day.num &&
+                    day.day === selectedDate.day.day &&
+                    day.month === selectedDate.day.month
+                  ) {
+                    const newAppointments = day.appointments.filter(
+                      (appointment) => appointment.id !== id
+                    );
+                    setSelectedDate({
+                      ...selectedDate,
+                      day: { ...day, appointments: newAppointments },
+                    });
 
-  const deleteAppointment = (id) => {
-    setCalendar((oldCalendar) =>
-      oldCalendar.map((oldMonth) =>
-        // Check the selected day is part of the current month on screen or an adjacent one.
-        oldMonth.id === verifyMonthAndYear(selectedDate.month + 1)[0] ||
-        oldMonth.id === verifyMonthAndYear(selectedDate.month)[0] ||
-        oldMonth.id === verifyMonthAndYear(selectedDate.month - 1)[0]
-          ? {
-              ...oldMonth,
-              days: oldMonth.days.map((day) => {
-                if (
-                  day.num === selectedDate.day.num &&
-                  day.day === selectedDate.day.day &&
-                  day.month === selectedDate.day.month
-                ) {
-                  const newAppointments = day.appointments.filter(
-                    (appointment) => appointment.id !== id
-                  );
-                  setSelectedDate({
-                    ...selectedDate,
-                    day: { ...day, appointments: newAppointments },
-                  });
+                    return {
+                      ...day,
+                      appointments: newAppointments,
+                    };
+                  } else {
+                    return day;
+                  }
+                }),
+              }
+            : oldMonth
+        )
+      );
 
-                  return {
-                    ...day,
-                    appointments: newAppointments,
-                  };
-                } else {
-                  return day;
-                }
-              }),
-            }
-          : oldMonth
-      )
-    );
+      // Update local storage
+      const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
+      const oldMemory = JSON.parse(localStorage.getItem(itemKey));
+      const newMemory = oldMemory.filter(
+        (appointment) => appointment.id !== id
+      );
+      // Remove item from memory if newMemory is empty
+      newMemory.length
+        ? localStorage.setItem(itemKey, JSON.stringify(newMemory))
+        : localStorage.removeItem(itemKey);
+    },
+    [verifiedMonth, verifiedYear]
+  );
 
-    // Update local storage
-    const itemKey = `${selectedDate.day.num}/${verifiedMonth}/${verifiedYear}`;
-    const oldMemory = JSON.parse(localStorage.getItem(itemKey));
-    const newMemory = oldMemory.filter((appointment) => appointment.id !== id);
-    // Remove item from memory if newMemory is empty
-    newMemory.length
-      ? localStorage.setItem(itemKey, JSON.stringify(newMemory))
-      : localStorage.removeItem(itemKey);
-  };
-
-  const nextMonth = () => {
+  const nextMonth = useCallback(() => {
     // If less than December add a month
     if (selectedDate.month < 11) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month + 1 });
@@ -142,9 +149,9 @@ const Calendar = () => {
         year: selectedDate.year + 1,
       });
     }
-  };
+  }, []);
 
-  const previousMonth = () => {
+  const previousMonth = useCallback(() => {
     // If more than January subtract a month
     if (selectedDate.month > 0) {
       setSelectedDate({ ...selectedDate, month: selectedDate.month - 1 });
@@ -156,7 +163,7 @@ const Calendar = () => {
         year: selectedDate.year - 1,
       });
     }
-  };
+  }, []);
 
   useEffect(() => {
     // If selectedDate.day is part of one of the adjacent months and one of those months are selected, re-select that day in the new viewed month.
@@ -220,7 +227,6 @@ const Calendar = () => {
         currYear={currYear}
       />
       <InputAppointment saveAppointment={saveAppointment} />
-
       <DayDateDisplay
         day={selectedDate.day.day}
         date={selectedDate.day.num}
